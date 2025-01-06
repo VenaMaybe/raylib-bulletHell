@@ -78,5 +78,8 @@ void Player::update(float dt) {
 
 	pos = Vector2Add(pos, Vector2Scale(vel, dt));
 	DrawLineEx(pos, Vector2Add(pos, Vector2Scale(plToMouse, 100) ), 5, RAYWHITE);
+
+	// Dampening
+	vel = Vector2Scale(vel, 0.99f);
 	
 }
