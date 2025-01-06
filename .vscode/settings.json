@@ -1,0 +1,6 @@
+{
+	"cmake.sourceDirectory": "/home/vena/Dev/raylib-bulletHell1/game",
+	"files.associations": {
+		"iostream": "cpp"
+	}
+}
