@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "player.h"
+#include "gun.h"
 
 int main() {
 	const int screenWidth = 800;
@@ -19,6 +20,22 @@ int main() {
 	// create a player
 	Player player;
 
+	GunSpecificEx gunSpecific_Pistol;
+	Gun playerGun(
+		[&gunSpecific_Pistol](Gun& gun) { gunSpecific_Pistol.shoot(gun); },
+	/* Depends on this pointer & specific instance
+	   gunSpecific,shoot hasa a type pointer-to-member-function
+	   and thus needs an instance.
+
+	   We wrap it in a lambda to supply the instance,
+	   The lambda has the correct signature: void(Gun&)
+	   thus it is assigned to the callback
+	*/
+		player.getPos(),
+		player.getDir()
+	);
+
+
 	// Begin the frame
 	while (!WindowShouldClose()) {
 		// Draw
@@ -27,6 +44,9 @@ int main() {
 
 		float dt = GetFrameTime();
 		player.update(dt);
+		playerGun.update(dt);
+
+		//playerGun.render(); For debugging
 		player.render();
 
 
