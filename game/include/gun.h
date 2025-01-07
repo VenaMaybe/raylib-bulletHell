@@ -32,11 +32,11 @@ public:
 	void update(float dt);
 	void processClick();
 
-	Position* pos; // Always has to be attached to smt
+	Position* posBase; // Always has to be attached to smt
+	Position posMuzzle; // Distance from posBase in dir by some scalar, where bullets come from
 	Vector2* dir;
 
 	// copium temporary
-	int currentBullets = 0;
 	std::vector<Bullet> bullets;
 private:
 	std::function<void(Gun&)> onFire; // called everytime u click
@@ -48,16 +48,19 @@ Gun::Gun(
 		Vector2* dir 
 	): 
 		onFire(onFireCallback), // Pass in a function to describe onFire behavior
-		pos(pos),
-		dir(dir)	
+		posBase(pos),
+		dir(dir)
 {}; 
 
 void Gun::render() {
-	DrawLineEx(*pos, Vector2Add(*pos, Vector2Scale(*dir, 100) ), 5, GREEN);
+	DrawLineEx(*posBase, posMuzzle, 10, RAYWHITE);
 };
 
 // Updates all the bullets cuz I'm lazy
 void Gun::update(float dt) {
+	// Update the position of the Muzzle
+	posMuzzle = Vector2Add(*posBase, Vector2Scale(*dir, 16));
+
 	// Uh here cuz funnnn
 	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
 		processClick();
@@ -73,10 +76,6 @@ void Gun::update(float dt) {
 		std::remove_if(bullets.begin(), bullets.end(), [](const Bullet& b) { return b.markedForDeletion; }),
 		bullets.end()
 	);
-	int bulletsErased = it - bullets.begin();
-//	if (bulletsErased != 0)
-//		std::cout << "\t" << bulletsErased << "\n";
-	currentBullets -= bulletsErased;
 };
 
 // This should spawn the bullets and add to entity manager
@@ -91,7 +90,7 @@ struct GunSpecificEx {
 	// Specific to this gun
 	int maxBullets = 10;
 	float bulletSpeed = 100.;
-	float maxBulletAge = 20.;
+	float maxBulletAge = 3.;
 
 	//
 	void shoot(Gun& gun);
@@ -99,10 +98,12 @@ struct GunSpecificEx {
 
 void GunSpecificEx::shoot(Gun& gun) {
 	std::cout << "Shoot Clicked\n";
+
+	int currentBullets = gun.bullets.size();
+
 	// Can fire
-	if (gun.currentBullets < maxBullets) {
-		std::cout << "Bullet Added, current count: " << gun.currentBullets << "\n";
-		gun.bullets.emplace_back(*gun.pos, Vector2Scale(*gun.dir, bulletSpeed), maxBulletAge);
-		gun.currentBullets++;
+	if (currentBullets < maxBullets) {
+		std::cout << "Bullet Added, current count: " << currentBullets << "\n";
+		gun.bullets.emplace_back(gun.posMuzzle, Vector2Scale(*gun.dir, bulletSpeed), maxBulletAge);
 	}
 };

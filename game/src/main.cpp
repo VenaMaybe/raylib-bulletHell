@@ -46,8 +46,8 @@ int main() {
 		player.update(dt);
 		playerGun.update(dt);
 
-		//playerGun.render(); For debugging
 		player.render();
+		playerGun.render();
 
 
 		DrawFPS(10, 10);

@@ -40,7 +40,7 @@ Player::Player() : pos{100, 100}, vel{0, 0}, speedMult(150.) {}
 
 void Player::render() {
 	DrawCircleV(pos, 10., RAYWHITE);
-	DrawLineEx(pos, Vector2Add(pos, Vector2Scale(dir, 16) ), 10, RAYWHITE); // Debugging for now
+	//DrawLineEx(pos, Vector2Add(pos, Vector2Scale(dir, 100) ), 4, GREEN); // Debugging for now
 }
 
 void Player::update(float dt) {
@@ -51,7 +51,6 @@ void Player::update(float dt) {
 	dir = Vector2Normalize(Vector2Subtract(mousePos, pos));
 
 	if (IsKeyDown(KEY_W) || IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-		std::cout << "w pressed \n";
 		vel = Vector2Add(vel, Vector2Scale(dir, speedMult * dt)); // constant per sec <= scale by dt
 	} else {
 		// Dampening
