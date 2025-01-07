@@ -3,5 +3,8 @@
 	"files.associations": {
 		"iostream": "cpp",
 		"*.tcc": "cpp"
-	}
+	},
+	"cSpell.words": [
+		"WASD"
+	]
 }

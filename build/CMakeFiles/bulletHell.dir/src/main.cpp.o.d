@@ -176,6 +176,7 @@ CMakeFiles/bulletHell.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/istream.tcc \
  /home/vena/Dev/raylib-bulletHell1/game/include/player.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/com_comps.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/enemy.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/gun.h \
  /usr/include/c++/11/algorithm /usr/include/c++/11/utility \
  /usr/include/c++/11/bits/stl_relops.h \

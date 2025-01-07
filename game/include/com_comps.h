@@ -3,7 +3,7 @@
 #include "raylib.h"
 #include <iostream>
 
-void printVector2(Vector2 v) {
+inline void printVector2(Vector2 v) {
 	std::cout << v.x << "\t" << v.y << std::endl;
 }
 

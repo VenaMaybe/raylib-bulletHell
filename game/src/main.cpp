@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "player.h"
+#include "enemy.h"
 #include "gun.h"
 
 int main() {
@@ -16,6 +17,12 @@ int main() {
 	InitWindow(screenWidth, screenHeight, "Game");
 	SetTargetFPS(90);
 
+	// Create a vector of enemies
+    std::vector<Enemy> enemies = {
+        Enemy({100, 100}, {50, 50}, 20, RED),
+        Enemy({200, 200}, {50, 50}, 20, BLUE),
+        Enemy({300, 300}, {50, 50}, 20, GREEN)
+    };
 
 	// create a player
 	Player player;
@@ -48,6 +55,11 @@ int main() {
 
 		player.render();
 		playerGun.render();
+
+		for (Enemy& enemy : enemies) {
+            enemy.Update(dt);
+            enemy.Draw();
+        }
 
 
 		DrawFPS(10, 10);
