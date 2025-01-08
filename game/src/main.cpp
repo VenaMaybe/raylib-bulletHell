@@ -46,27 +46,105 @@ int main() {
 		enemy.focusPlayer(player.get());
 	}
 
+	//
+	//	Shader for trails
+	//
+
+	/* GOAL: Move all this to a rendering manager!!!
+	*/
+
+	// Load the final grabber
+	Shader trailShader = LoadShader(nullptr, "game/shaders/trailImage.fs");
+		int bufferLoc_Image = GetShaderLocation(trailShader, "bufferA");
+
+	Shader trailBufferA = LoadShader(nullptr, "game/shaders/trailBufferA.fs");
+		int selfLoc_BufferA = GetShaderLocation(trailBufferA, "bufferA");
+
+	int frame = 0;
+	Vector2 const resolutionScreen = { (float)screenWidth, (float)screenHeight };
+	RenderTexture2D bufferA_Texture2D_Ping = LoadRenderTexture(resolutionScreen.x, resolutionScreen.y);
+	RenderTexture2D bufferA_Texture2D_Pong = LoadRenderTexture(resolutionScreen.x, resolutionScreen.y);
+	RenderTexture2D inputToTrailShader = LoadRenderTexture(resolutionScreen.x, resolutionScreen.y);
+
+	Image whiteImage = GenImageColor(resolutionScreen.x, resolutionScreen.y, ORANGE);
+	Texture2D whiteTexture = LoadTextureFromImage(whiteImage);
+
+	UnloadImage(whiteImage);
+
 	// Begin the frame
 	while (!WindowShouldClose()) {
+		float dt = GetFrameTime();
+
+		player.get()->update(dt);	
+		playerGun.update(dt);	// Move this to the end of the loop for a cool gun wiggle
+
+		RenderTexture2D srcTex;
+		RenderTexture2D dstTex; // Destination
+
+		if (frame % 2 == 0) {
+			srcTex = bufferA_Texture2D_Ping;
+			dstTex = bufferA_Texture2D_Pong;
+		} else {
+			srcTex = bufferA_Texture2D_Pong;
+			dstTex = bufferA_Texture2D_Ping;
+		}
+
+		BeginTextureMode(inputToTrailShader);
+			ClearBackground(BLANK);
+			DrawCircleV({200, 200}, 100, RED);
+			// You can draw stuff in here
+		EndTextureMode();
+
+		// Render the buffer
+		BeginTextureMode(dstTex);
+		 	ClearBackground(BLACK);
+
+			if(!IsMouseButtonDown(MOUSE_BUTTON_EXTRA)) { // For debugging
+
+			BeginShaderMode(trailBufferA);	// Enable custom shader for next shapes
+				// Feed it back into itself
+				SetShaderValueTexture(trailBufferA, selfLoc_BufferA, srcTex.texture);
+
+				// Actually orange lol
+				DrawTexture(inputToTrailShader.texture, 0, 0, WHITE);
+			EndShaderMode();
+
+			}
+
+			// Draw after so that they're all darkened evenly
+			playerGun.renderBullets();
+		EndTextureMode();
+
+
 		// Draw
 		BeginDrawing();
-		ClearBackground(BLACK);
+			ClearBackground(BLACK);
 
-		float dt = GetFrameTime();
-		player.get()->update(dt);
-		playerGun.update(dt);
+			BeginShaderMode(trailShader);
+				SetShaderValueTexture(trailShader, bufferLoc_Image, dstTex.texture);
+				// Texture is getting drawn on
+				DrawTexture(whiteTexture, 0, 0, WHITE);
 
-		player.get()->render();
-		playerGun.render();
+		 	EndShaderMode();
 
-		for (Enemy& enemy : enemies) {
-            enemy.Update(dt);
-            enemy.Draw();
-        }
+			player.get()->render();
+			playerGun.render();
 
-		DrawFPS(10, 10);
+//			playerGun.renderBullets();
+
+
+//			player.get()->render();
+
+//			for (Enemy& enemy : enemies) {
+//				enemy.Update(dt);
+//				enemy.Draw();
+//			}
+
+			DrawFPS(10, 10);
 		EndDrawing();
 
+
+		frame++;
 	}
 
 	CloseWindow(); // Close the window

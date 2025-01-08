@@ -12,6 +12,12 @@ void Gun::render() {
 	DrawLineEx(getOwner()->getPos(), posMuzzle, 10, RAYWHITE);
 };
 
+void Gun::renderBullets() {
+	for (auto& bullet : bullets) {
+		bullet.render();
+	}
+}
+
 // Updates all the bullets cuz I'm lazy
 void Gun::update(float dt) {
 	// Update the position of the Muzzle
@@ -24,7 +30,6 @@ void Gun::update(float dt) {
 
 	for (auto& bullet : bullets) {
 		bullet.update(dt);
-		bullet.render();
 	}
 
 	// Remove those marked for deletion

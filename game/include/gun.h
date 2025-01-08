@@ -30,6 +30,7 @@ public:
 	); // Pass in a function to describe onFire behavior
 
 	void render();
+	void renderBullets();
 	void update(float dt);
 	void processClick();
 	std::shared_ptr<Entity> getOwner();
