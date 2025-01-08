@@ -20,6 +20,12 @@ Has a:
 
 */
 
+enum Controls {
+	WASD,
+	WASD_Soft,
+	Tank
+};
+
 class Player {
 public:
 	Player();
@@ -28,9 +34,11 @@ public:
 	Position* getPos();
 	Velocity* getVel();
 	Vector2* getDir();
+	Velocity getScaledVel(float dt);
 private:
-	const bool WASD = true;
-	float speedMult;
+	const Controls controlSystem = WASD_Soft;
+
+	float speedMult = 250.;
 	Position pos;
 	Velocity vel;
 	Vector2 dir;

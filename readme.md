@@ -1,7 +1,7 @@
 	Todo:
 
 Muzzle Shooting		- Done, scuffed-ish
-Use WASD
+Use WASD			- Done
 Add vel to bullets
 Shader for trails
 
