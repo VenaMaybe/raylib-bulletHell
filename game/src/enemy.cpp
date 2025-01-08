@@ -37,7 +37,7 @@ Position Enemy::GetPlayerPos() {
 		throw std::runtime_error("focusedPlayer pointer is null");
 	}
 
-    return *focusedPlayer->getPos();
+    return focusedPlayer->getPos();
 }
 
 // Draw the Enemy

@@ -1,9 +1,7 @@
 #pragma once
-
 #include "raylib.h"
-#include "raymath.h"
-#include <iostream>
 #include "com_comps.h"
+#include "entity.h"
 
 /* Outline -- Player Class
 
@@ -20,26 +18,17 @@ Has a:
 
 */
 
-enum Controls {
+enum class ControlTypes {
 	WASD,
 	WASD_Soft,
 	Tank
 };
 
-class Player {
+class Player : public Entity {
 public:
 	Player();
-	void render();
-	void update(float dt);
-	Position* getPos();
-	Velocity* getVel();
-	Vector2* getDir();
-	Velocity getScaledVel(float dt);
+	void render() override;
+	void update(float dt) override;
 private:
-	const Controls controlSystem = WASD_Soft;
-
-	float speedMult = 250.;
-	Position pos;
-	Velocity vel;
-	Vector2 dir;
+	ControlTypes controlSystem = ControlTypes::WASD_Soft;
 };

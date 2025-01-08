@@ -25,7 +25,7 @@ int main() {
     };
 
 	// create a player
-	Player player;
+	auto player = std::make_shared<Player>();
 
 	GunSpecificEx gunSpecific_Pistol;
 	Gun playerGun(
@@ -38,13 +38,12 @@ int main() {
 	   The lambda has the correct signature: void(Gun&)
 	   thus it is assigned to the callback
 	*/
-		player.getPos(),
-		player.getDir()
+		player
 	);
 
 	// Set all enemies to focus the player
 	for (Enemy& enemy : enemies) {
-		enemy.focusPlayer(&player);
+		enemy.focusPlayer(player.get());
 	}
 
 	// Begin the frame
@@ -54,10 +53,10 @@ int main() {
 		ClearBackground(BLACK);
 
 		float dt = GetFrameTime();
-		player.update(dt);
+		player.get()->update(dt);
 		playerGun.update(dt);
 
-		player.render();
+		player.get()->render();
 		playerGun.render();
 
 		for (Enemy& enemy : enemies) {

@@ -129,6 +129,30 @@ bulletHell/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/build
 .PHONY : bulletHell/fast
 
+src/bullet.o: src/bullet.cpp.o
+.PHONY : src/bullet.o
+
+# target to build an object file
+src/bullet.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/bullet.cpp.o
+.PHONY : src/bullet.cpp.o
+
+src/bullet.i: src/bullet.cpp.i
+.PHONY : src/bullet.i
+
+# target to preprocess a source file
+src/bullet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/bullet.cpp.i
+.PHONY : src/bullet.cpp.i
+
+src/bullet.s: src/bullet.cpp.s
+.PHONY : src/bullet.s
+
+# target to generate assembly for a file
+src/bullet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/bullet.cpp.s
+.PHONY : src/bullet.cpp.s
+
 src/enemy.o: src/enemy.cpp.o
 .PHONY : src/enemy.o
 
@@ -152,6 +176,30 @@ src/enemy.s: src/enemy.cpp.s
 src/enemy.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/enemy.cpp.s
 .PHONY : src/enemy.cpp.s
+
+src/gun.o: src/gun.cpp.o
+.PHONY : src/gun.o
+
+# target to build an object file
+src/gun.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/gun.cpp.o
+.PHONY : src/gun.cpp.o
+
+src/gun.i: src/gun.cpp.i
+.PHONY : src/gun.i
+
+# target to preprocess a source file
+src/gun.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/gun.cpp.i
+.PHONY : src/gun.cpp.i
+
+src/gun.s: src/gun.cpp.s
+.PHONY : src/gun.s
+
+# target to generate assembly for a file
+src/gun.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/gun.cpp.s
+.PHONY : src/gun.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -210,9 +258,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... bulletHell"
+	@echo "... src/bullet.o"
+	@echo "... src/bullet.i"
+	@echo "... src/bullet.s"
 	@echo "... src/enemy.o"
 	@echo "... src/enemy.i"
 	@echo "... src/enemy.s"
+	@echo "... src/gun.o"
+	@echo "... src/gun.i"
+	@echo "... src/gun.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

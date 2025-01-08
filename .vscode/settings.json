@@ -2,7 +2,8 @@
 	"cmake.sourceDirectory": "/home/vena/Dev/raylib-bulletHell1/game",
 	"files.associations": {
 		"iostream": "cpp",
-		"*.tcc": "cpp"
+		"*.tcc": "cpp",
+		"stdexcept": "cpp"
 	},
 	"cSpell.words": [
 		"WASD"

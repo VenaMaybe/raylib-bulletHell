@@ -3,9 +3,16 @@
 #include "raylib.h"
 #include <iostream>
 
-inline void printVector2(Vector2 v) {
-	std::cout << v.x << "\t" << v.y << std::endl;
-}
+// forward declaration
+struct Position;
+struct Velocity;
+using Direction = Vector2;
+
+// Just used to make constructors simpler
+using Pos = Position;
+using Vel = Velocity;
+using Dir = Direction;
+using Vec2 = Vector2;
 
 struct Position { // has a...
 	float x;
@@ -151,3 +158,8 @@ struct Velocity {
 		return *this;
 	}
 };
+
+// Shitty utility function
+inline void printVector2(Vector2 v) {
+	std::cout << v.x << "\t" << v.y << std::endl;
+}

@@ -1,6 +1,7 @@
-CMakeFiles/bulletHell.dir/src/main.cpp.o: \
- /home/vena/Dev/raylib-bulletHell1/game/src/main.cpp \
+CMakeFiles/bulletHell.dir/src/gun.cpp.o: \
+ /home/vena/Dev/raylib-bulletHell1/game/src/gun.cpp \
  /usr/include/stdc-predef.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/gun.h \
  /home/vena/Dev/raylib-bulletHell1/game/../raylib-5.5_linux_amd64/include/raylib.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
  /home/vena/Dev/raylib-bulletHell1/game/../raylib-5.5_linux_amd64/include/raymath.h \
@@ -87,11 +88,9 @@ CMakeFiles/bulletHell.dir/src/main.cpp.o: \
  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
- /usr/include/c++/11/tr1/riemann_zeta.tcc \
- /home/vena/Dev/raylib-bulletHell1/game/../raylib-5.5_linux_amd64/include/rlgl.h \
- /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
- /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
- /usr/include/c++/11/bits/stringfwd.h \
+ /usr/include/c++/11/tr1/riemann_zeta.tcc /usr/include/c++/11/iostream \
+ /usr/include/c++/11/ostream /usr/include/c++/11/ios \
+ /usr/include/c++/11/iosfwd /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/memoryfwd.h /usr/include/c++/11/bits/postypes.h \
  /usr/include/c++/11/cwchar /usr/include/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -173,14 +172,8 @@ CMakeFiles/bulletHell.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc \
- /home/vena/Dev/raylib-bulletHell1/game/include/player.h \
- /home/vena/Dev/raylib-bulletHell1/game/include/com_comps.h \
- /home/vena/Dev/raylib-bulletHell1/game/include/entity.h \
- /home/vena/Dev/raylib-bulletHell1/game/include/enemy.h \
- /home/vena/Dev/raylib-bulletHell1/game/include/gun.h \
- /usr/include/c++/11/algorithm /usr/include/c++/11/utility \
- /usr/include/c++/11/bits/stl_relops.h \
+ /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/algorithm \
+ /usr/include/c++/11/utility /usr/include/c++/11/bits/stl_relops.h \
  /usr/include/c++/11/bits/stl_algo.h \
  /usr/include/c++/11/bits/algorithmfwd.h \
  /usr/include/c++/11/bits/stl_heap.h \
@@ -216,4 +209,6 @@ CMakeFiles/bulletHell.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/entity.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/com_comps.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/bullet.h

@@ -69,10 +69,24 @@ include CMakeFiles/bulletHell.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/bulletHell.dir/flags.make
 
+CMakeFiles/bulletHell.dir/src/bullet.cpp.o: CMakeFiles/bulletHell.dir/flags.make
+CMakeFiles/bulletHell.dir/src/bullet.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/bullet.cpp
+CMakeFiles/bulletHell.dir/src/bullet.cpp.o: CMakeFiles/bulletHell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/bulletHell.dir/src/bullet.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bulletHell.dir/src/bullet.cpp.o -MF CMakeFiles/bulletHell.dir/src/bullet.cpp.o.d -o CMakeFiles/bulletHell.dir/src/bullet.cpp.o -c /home/vena/Dev/raylib-bulletHell1/game/src/bullet.cpp
+
+CMakeFiles/bulletHell.dir/src/bullet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bulletHell.dir/src/bullet.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vena/Dev/raylib-bulletHell1/game/src/bullet.cpp > CMakeFiles/bulletHell.dir/src/bullet.cpp.i
+
+CMakeFiles/bulletHell.dir/src/bullet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bulletHell.dir/src/bullet.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vena/Dev/raylib-bulletHell1/game/src/bullet.cpp -o CMakeFiles/bulletHell.dir/src/bullet.cpp.s
+
 CMakeFiles/bulletHell.dir/src/enemy.cpp.o: CMakeFiles/bulletHell.dir/flags.make
 CMakeFiles/bulletHell.dir/src/enemy.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/enemy.cpp
 CMakeFiles/bulletHell.dir/src/enemy.cpp.o: CMakeFiles/bulletHell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/bulletHell.dir/src/enemy.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/bulletHell.dir/src/enemy.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bulletHell.dir/src/enemy.cpp.o -MF CMakeFiles/bulletHell.dir/src/enemy.cpp.o.d -o CMakeFiles/bulletHell.dir/src/enemy.cpp.o -c /home/vena/Dev/raylib-bulletHell1/game/src/enemy.cpp
 
 CMakeFiles/bulletHell.dir/src/enemy.cpp.i: cmake_force
@@ -83,10 +97,24 @@ CMakeFiles/bulletHell.dir/src/enemy.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bulletHell.dir/src/enemy.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vena/Dev/raylib-bulletHell1/game/src/enemy.cpp -o CMakeFiles/bulletHell.dir/src/enemy.cpp.s
 
+CMakeFiles/bulletHell.dir/src/gun.cpp.o: CMakeFiles/bulletHell.dir/flags.make
+CMakeFiles/bulletHell.dir/src/gun.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/gun.cpp
+CMakeFiles/bulletHell.dir/src/gun.cpp.o: CMakeFiles/bulletHell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/bulletHell.dir/src/gun.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bulletHell.dir/src/gun.cpp.o -MF CMakeFiles/bulletHell.dir/src/gun.cpp.o.d -o CMakeFiles/bulletHell.dir/src/gun.cpp.o -c /home/vena/Dev/raylib-bulletHell1/game/src/gun.cpp
+
+CMakeFiles/bulletHell.dir/src/gun.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bulletHell.dir/src/gun.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vena/Dev/raylib-bulletHell1/game/src/gun.cpp > CMakeFiles/bulletHell.dir/src/gun.cpp.i
+
+CMakeFiles/bulletHell.dir/src/gun.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bulletHell.dir/src/gun.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vena/Dev/raylib-bulletHell1/game/src/gun.cpp -o CMakeFiles/bulletHell.dir/src/gun.cpp.s
+
 CMakeFiles/bulletHell.dir/src/main.cpp.o: CMakeFiles/bulletHell.dir/flags.make
 CMakeFiles/bulletHell.dir/src/main.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/main.cpp
 CMakeFiles/bulletHell.dir/src/main.cpp.o: CMakeFiles/bulletHell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/bulletHell.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/bulletHell.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bulletHell.dir/src/main.cpp.o -MF CMakeFiles/bulletHell.dir/src/main.cpp.o.d -o CMakeFiles/bulletHell.dir/src/main.cpp.o -c /home/vena/Dev/raylib-bulletHell1/game/src/main.cpp
 
 CMakeFiles/bulletHell.dir/src/main.cpp.i: cmake_force
@@ -100,7 +128,7 @@ CMakeFiles/bulletHell.dir/src/main.cpp.s: cmake_force
 CMakeFiles/bulletHell.dir/src/player.cpp.o: CMakeFiles/bulletHell.dir/flags.make
 CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/player.cpp
 CMakeFiles/bulletHell.dir/src/player.cpp.o: CMakeFiles/bulletHell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/bulletHell.dir/src/player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/bulletHell.dir/src/player.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bulletHell.dir/src/player.cpp.o -MF CMakeFiles/bulletHell.dir/src/player.cpp.o.d -o CMakeFiles/bulletHell.dir/src/player.cpp.o -c /home/vena/Dev/raylib-bulletHell1/game/src/player.cpp
 
 CMakeFiles/bulletHell.dir/src/player.cpp.i: cmake_force
@@ -113,19 +141,23 @@ CMakeFiles/bulletHell.dir/src/player.cpp.s: cmake_force
 
 # Object files for target bulletHell
 bulletHell_OBJECTS = \
+"CMakeFiles/bulletHell.dir/src/bullet.cpp.o" \
 "CMakeFiles/bulletHell.dir/src/enemy.cpp.o" \
+"CMakeFiles/bulletHell.dir/src/gun.cpp.o" \
 "CMakeFiles/bulletHell.dir/src/main.cpp.o" \
 "CMakeFiles/bulletHell.dir/src/player.cpp.o"
 
 # External object files for target bulletHell
 bulletHell_EXTERNAL_OBJECTS =
 
+bulletHell: CMakeFiles/bulletHell.dir/src/bullet.cpp.o
 bulletHell: CMakeFiles/bulletHell.dir/src/enemy.cpp.o
+bulletHell: CMakeFiles/bulletHell.dir/src/gun.cpp.o
 bulletHell: CMakeFiles/bulletHell.dir/src/main.cpp.o
 bulletHell: CMakeFiles/bulletHell.dir/src/player.cpp.o
 bulletHell: CMakeFiles/bulletHell.dir/build.make
 bulletHell: CMakeFiles/bulletHell.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable bulletHell"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable bulletHell"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/bulletHell.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -5,7 +5,9 @@
 #include <iostream>
 #include <algorithm>
 #include <functional>
+#include <memory>
 
+#include "entity.h"
 #include "com_comps.h"
 #include "bullet.h"
 
@@ -24,66 +26,22 @@ class Gun {
 public:
 	Gun(
 		std::function<void(Gun&)> onFireCallback,
-		Position* pos,
-		Vector2* dir
+		std::shared_ptr<Entity> ownedByEntity
 	); // Pass in a function to describe onFire behavior
 
 	void render();
 	void update(float dt);
 	void processClick();
+	std::shared_ptr<Entity> getOwner();
 
-	Position* posBase; // Always has to be attached to smt
 	Position posMuzzle; // Distance from posBase in dir by some scalar, where bullets come from
-	Vector2* dir;
 
 	// copium temporary
 	std::vector<Bullet> bullets;
 private:
+	std::weak_ptr<Entity> owner;
 	std::function<void(Gun&)> onFire; // called everytime u click
 };
-
-Gun::Gun(
-		std::function<void(Gun&)> onFireCallback,
-		Position* pos,
-		Vector2* dir 
-	): 
-		onFire(onFireCallback), // Pass in a function to describe onFire behavior
-		posBase(pos),
-		dir(dir)
-{}; 
-
-void Gun::render() {
-	DrawLineEx(*posBase, posMuzzle, 10, RAYWHITE);
-};
-
-// Updates all the bullets cuz I'm lazy
-void Gun::update(float dt) {
-	// Update the position of the Muzzle
-	posMuzzle = Vector2Add(*posBase, Vector2Scale(*dir, 16));
-
-	// Uh here cuz funnnn
-	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
-		processClick();
-	}
-
-	for (auto& bullet : bullets) {
-		bullet.update(dt);
-		bullet.render();
-	}
-
-	// Remove those marked for deletion
-	auto it = bullets.erase(
-		std::remove_if(bullets.begin(), bullets.end(), [](const Bullet& b) { return b.markedForDeletion; }),
-		bullets.end()
-	);
-};
-
-// This should spawn the bullets and add to entity manager
-void Gun::processClick() {
-	if (onFire) { onFire(*this); }
-	else { std::cout << "Uh oh\n"; }
-};
-
 
 // Holds the implementation of the callback + specifics for a gun type
 struct GunSpecificEx {
@@ -94,16 +52,4 @@ struct GunSpecificEx {
 
 	//
 	void shoot(Gun& gun);
-};
-
-void GunSpecificEx::shoot(Gun& gun) {
-	std::cout << "Shoot Clicked\n";
-
-	int currentBullets = gun.bullets.size();
-
-	// Can fire
-	if (currentBullets < maxBullets) {
-		std::cout << "Bullet Added, current count: " << currentBullets << "\n";
-		gun.bullets.emplace_back(gun.posMuzzle, Vector2Scale(*gun.dir, bulletSpeed), maxBulletAge);
-	}
 };
