@@ -7,27 +7,25 @@
 class Enemy {
 public:
     // Constructor
-    Enemy(Vector2 startPosition, Vector2 startVelocity, float startRadius, Color startColor);
-
-    // Update the Enemy's position
- 
+    Enemy(Position startPosition, Velocity startVelocity, float startRadius, Color startColor);
 
     // Draw the Enemy
     void Draw() const;
     void Update(float deltaTime);
     // Setters and Getters
-    void SetPosition(Vector2 newPosition);
-    Vector2 GetPosition() const;
+    void SetPosition(Position newPosition);
+    Position GetPosition() const;
     void ChangeDirection();
     void UpdateMovement();
-
-	// Pick the player to focus on
-	void focusPlayer(Player* focusedPlayer);
-	Vector2 GetPlayerPos();
+    
+    // Pick the player to focus on
+    void focusPlayer(Player* focusedPlayer);
+    Position GetPlayerPos();
+    void ChangeColor( Color color);
 
 private:
-    Vector2 position;
-    Vector2 velocity;
+    Position position;
+    Velocity velocity;
     float speed;
     float radius;
     Color color;
@@ -36,7 +34,6 @@ private:
     float engageTolerance;
     float movementChangeCounter;
     std::string movementState;
-
-	// Store a pointer to the focused player
-	Player* focusedPlayer;
+    // Store a pointer to the focused player
+    Player* focusedPlayer;
 };

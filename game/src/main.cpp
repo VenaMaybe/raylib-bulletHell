@@ -42,6 +42,10 @@ int main() {
 		player.getDir()
 	);
 
+	// Set all enemies to focus the player
+	for (Enemy& enemy : enemies) {
+		enemy.focusPlayer(&player);
+	}
 
 	// Begin the frame
 	while (!WindowShouldClose()) {
@@ -60,7 +64,6 @@ int main() {
             enemy.Update(dt);
             enemy.Draw();
         }
-
 
 		DrawFPS(10, 10);
 		EndDrawing();

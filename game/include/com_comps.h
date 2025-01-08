@@ -11,6 +11,15 @@ struct Position { // has a...
 	float x;
 	float y;
 
+	// Default constructor
+	Position() : x(0.), y(0.) {}
+
+	// Default constructor with inputs
+	Position(float x, float y) : x(x), y(y) {};
+
+	// Constructor to convert
+	Position(const Vector2& vec) : x(vec.x), y(vec.y) {}
+
 	operator Vector2() const {
 		return {x, y};
 	}
@@ -20,6 +29,12 @@ struct Position { // has a...
 		this->y = otherVec.y;
 		return *this;
 	}
+
+	// Overload call operator
+	void operator()(const Vector2& otherVec) {
+		this->x = otherVec.x;
+		this->y = otherVec.y;
+	}
 };
 
 // Practice with operator overloading again
@@ -28,6 +43,9 @@ struct Velocity {
 	float dy;
 
 	// Default constructor
+	Velocity() : dx(0.), dy(0.) {}
+
+	// Default constructor with inputs
 	Velocity(float dx, float dy) : dx(dx), dy(dy) {};
 
 	// Constructor to convert

@@ -14,6 +14,10 @@ void Player::update(float dt) {
 	// Get vector from player to mouse
 	dir = Vector2Normalize(Vector2Subtract(mousePos, pos));
 
+	if (WASD) {
+		/* code */
+	}
+	
 	if (IsKeyDown(KEY_W) || IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
 		vel = Vector2Add(vel, Vector2Scale(dir, speedMult * dt)); // constant per sec <= scale by dt
 	} else {
