@@ -23,7 +23,8 @@ void Player::update(float dt) {
 		if(IsKeyDown(KEY_D)) (vel.dx = 1);
 
 		vel = Vector2Normalize(vel);
-	} else if (controlSystem == ControlTypes::WASD_Soft) {
+		
+	} else if (controlSystem == ControlTypes::WASD_Soft) { // default
 		Velocity targetVel(0, 0);
 
 		if(IsKeyDown(KEY_W)) (targetVel.dy = -1);
@@ -36,10 +37,6 @@ void Player::update(float dt) {
 		// Smoothing approach the targetVel
 		float accel = 10 * dt;
 		vel += (targetVel - vel) * accel;
-
-		// Eh not needed
-		//float drag = 0.9;
-		//vel *= drag;
 		
 	} else if (controlSystem == ControlTypes::Tank) {
 		if (IsKeyDown(KEY_W) || IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {

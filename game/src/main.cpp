@@ -108,7 +108,7 @@ int main() {
 			EndShaderMode(); }
 			// Draw onto the destination so that they're all darkened evenly
 			playerGun.renderBullets();
-			renderEnemies(dt);
+//			renderEnemies(dt);
 		EndTextureMode();
 		EndBlendMode();
 
@@ -117,7 +117,6 @@ int main() {
 			ClearBackground(BLACK);
 
 			DrawCircleV({200, 500}, 100, RED);
-			playerGun.render();
 
 			BeginShaderMode(trailShader);
 				SetShaderValueTexture(trailShader, bufferLoc_Image, dstTex.texture);
@@ -125,8 +124,8 @@ int main() {
 				DrawTexture(whiteTexture, 0, 0, ORANGE);
 		 	EndShaderMode();
 
-			playerGun.renderBullets();
 			player.get()->render();
+			playerGun.render();
 
 			DrawFPS(10, 10);
 		EndDrawing();

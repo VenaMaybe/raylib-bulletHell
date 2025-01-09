@@ -30,3 +30,9 @@ void main() {
 	// Output to itself
 	finalColor = vec4(prior.rgb, prior.a);
 }
+
+/**
+ *	Pass in dt later as a uniform so not frame dependent
+ *
+ *
+ */
