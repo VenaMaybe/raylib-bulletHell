@@ -97,19 +97,19 @@ CMakeFiles/bulletHell.dir/src/enemy.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bulletHell.dir/src/enemy.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vena/Dev/raylib-bulletHell1/game/src/enemy.cpp -o CMakeFiles/bulletHell.dir/src/enemy.cpp.s
 
-CMakeFiles/bulletHell.dir/src/entMan.cpp.o: CMakeFiles/bulletHell.dir/flags.make
-CMakeFiles/bulletHell.dir/src/entMan.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/entMan.cpp
-CMakeFiles/bulletHell.dir/src/entMan.cpp.o: CMakeFiles/bulletHell.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/bulletHell.dir/src/entMan.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bulletHell.dir/src/entMan.cpp.o -MF CMakeFiles/bulletHell.dir/src/entMan.cpp.o.d -o CMakeFiles/bulletHell.dir/src/entMan.cpp.o -c /home/vena/Dev/raylib-bulletHell1/game/src/entMan.cpp
+CMakeFiles/bulletHell.dir/src/entityManager.cpp.o: CMakeFiles/bulletHell.dir/flags.make
+CMakeFiles/bulletHell.dir/src/entityManager.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/entityManager.cpp
+CMakeFiles/bulletHell.dir/src/entityManager.cpp.o: CMakeFiles/bulletHell.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vena/Dev/raylib-bulletHell1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/bulletHell.dir/src/entityManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bulletHell.dir/src/entityManager.cpp.o -MF CMakeFiles/bulletHell.dir/src/entityManager.cpp.o.d -o CMakeFiles/bulletHell.dir/src/entityManager.cpp.o -c /home/vena/Dev/raylib-bulletHell1/game/src/entityManager.cpp
 
-CMakeFiles/bulletHell.dir/src/entMan.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bulletHell.dir/src/entMan.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vena/Dev/raylib-bulletHell1/game/src/entMan.cpp > CMakeFiles/bulletHell.dir/src/entMan.cpp.i
+CMakeFiles/bulletHell.dir/src/entityManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/bulletHell.dir/src/entityManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vena/Dev/raylib-bulletHell1/game/src/entityManager.cpp > CMakeFiles/bulletHell.dir/src/entityManager.cpp.i
 
-CMakeFiles/bulletHell.dir/src/entMan.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bulletHell.dir/src/entMan.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vena/Dev/raylib-bulletHell1/game/src/entMan.cpp -o CMakeFiles/bulletHell.dir/src/entMan.cpp.s
+CMakeFiles/bulletHell.dir/src/entityManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/bulletHell.dir/src/entityManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vena/Dev/raylib-bulletHell1/game/src/entityManager.cpp -o CMakeFiles/bulletHell.dir/src/entityManager.cpp.s
 
 CMakeFiles/bulletHell.dir/src/gun.cpp.o: CMakeFiles/bulletHell.dir/flags.make
 CMakeFiles/bulletHell.dir/src/gun.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/gun.cpp
@@ -157,7 +157,7 @@ CMakeFiles/bulletHell.dir/src/player.cpp.s: cmake_force
 bulletHell_OBJECTS = \
 "CMakeFiles/bulletHell.dir/src/bullet.cpp.o" \
 "CMakeFiles/bulletHell.dir/src/enemy.cpp.o" \
-"CMakeFiles/bulletHell.dir/src/entMan.cpp.o" \
+"CMakeFiles/bulletHell.dir/src/entityManager.cpp.o" \
 "CMakeFiles/bulletHell.dir/src/gun.cpp.o" \
 "CMakeFiles/bulletHell.dir/src/main.cpp.o" \
 "CMakeFiles/bulletHell.dir/src/player.cpp.o"
@@ -167,7 +167,7 @@ bulletHell_EXTERNAL_OBJECTS =
 
 bulletHell: CMakeFiles/bulletHell.dir/src/bullet.cpp.o
 bulletHell: CMakeFiles/bulletHell.dir/src/enemy.cpp.o
-bulletHell: CMakeFiles/bulletHell.dir/src/entMan.cpp.o
+bulletHell: CMakeFiles/bulletHell.dir/src/entityManager.cpp.o
 bulletHell: CMakeFiles/bulletHell.dir/src/gun.cpp.o
 bulletHell: CMakeFiles/bulletHell.dir/src/main.cpp.o
 bulletHell: CMakeFiles/bulletHell.dir/src/player.cpp.o

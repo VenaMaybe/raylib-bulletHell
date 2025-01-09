@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "entMan.h"
+#include "entityManager.h"
 #include "gun.h"
 #include <vector>
 #include "bullet.h"
@@ -98,9 +98,9 @@ void EntityManager::updateEntities(float dt) {
 
 void EntityManager::initializeEntities() {
 	std::vector<Enemy> tempEnemies = {
-		Enemy({100, 100}, {50, 50}, 20, RED),
-		Enemy({200, 200}, {50, 50}, 20, BLUE),
-		Enemy({300, 300}, {50, 50}, 20, GREEN)
+		Enemy({100, 100}, {40, 40}, 20, RED),
+		Enemy({200, 200}, {40, 40}, 20, BLUE),
+		Enemy({300, 300}, {40, 40}, 20, GREEN)
 	};
 
 	for (auto& enemy : tempEnemies) {

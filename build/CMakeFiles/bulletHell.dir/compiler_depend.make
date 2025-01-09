@@ -396,15 +396,13 @@ CMakeFiles/bulletHell.dir/src/enemy.cpp.o: /home/vena/Dev/raylib-bulletHell1/gam
   /usr/include/c++/11/tr1/modified_bessel_func.tcc \
   /usr/include/c++/11/tr1/poly_hermite.tcc \
   /usr/include/c++/11/tr1/poly_laguerre.tcc \
-  /usr/include/c++/11/tr1/riemann_zeta.tcc \
-  /usr/include/c++/11/cassert \
-  /usr/include/assert.h
+  /usr/include/c++/11/tr1/riemann_zeta.tcc
 
-CMakeFiles/bulletHell.dir/src/entMan.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/entMan.cpp \
+CMakeFiles/bulletHell.dir/src/entityManager.cpp.o: /home/vena/Dev/raylib-bulletHell1/game/src/entityManager.cpp \
   /usr/include/stdc-predef.h \
   /home/vena/Dev/raylib-bulletHell1/raylib-5.5_linux_amd64/include/raylib.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
-  /home/vena/Dev/raylib-bulletHell1/game/include/entMan.h \
+  /home/vena/Dev/raylib-bulletHell1/game/include/entityManager.h \
   /home/vena/Dev/raylib-bulletHell1/game/include/player.h \
   /home/vena/Dev/raylib-bulletHell1/game/include/com_comps.h \
   /usr/include/c++/11/iostream \
@@ -1126,7 +1124,7 @@ CMakeFiles/bulletHell.dir/src/main.cpp.o: /home/vena/Dev/raylib-bulletHell1/game
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
-  /home/vena/Dev/raylib-bulletHell1/game/include/entMan.h \
+  /home/vena/Dev/raylib-bulletHell1/game/include/entityManager.h \
   /home/vena/Dev/raylib-bulletHell1/game/include/player.h \
   /home/vena/Dev/raylib-bulletHell1/game/include/com_comps.h \
   /home/vena/Dev/raylib-bulletHell1/game/include/entity.h \
@@ -1403,10 +1401,6 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 
 /usr/include/c++/11/bits/atomic_base.h:
 
-/usr/include/c++/11/bits/shared_ptr_atomic.h:
-
-/usr/include/c++/11/ext/concurrence.h:
-
 /usr/include/c++/11/bits/cxxabi_forced.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
@@ -1456,6 +1450,8 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 /usr/include/pthread.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
+
+/usr/include/c++/11/ext/concurrence.h:
 
 /usr/include/c++/11/bits/ios_base.h:
 
@@ -1534,8 +1530,6 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 /usr/include/c++/11/bits/string_view.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-
-/home/vena/Dev/raylib-bulletHell1/game/src/entMan.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
@@ -1657,8 +1651,6 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 
 /usr/include/c++/11/tr1/poly_laguerre.tcc:
 
-/usr/include/assert.h:
-
 /usr/include/c++/11/bit:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
@@ -1686,8 +1678,6 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 /usr/include/c++/11/typeinfo:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
-
-/home/vena/Dev/raylib-bulletHell1/game/include/entMan.h:
 
 /usr/include/c++/11/bits/functexcept.h:
 
@@ -1835,8 +1825,6 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 
 /usr/include/x86_64-linux-gnu/bits/math-vector.h:
 
-/usr/include/c++/11/cassert:
-
 /usr/include/c++/11/bits/stl_algo.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
@@ -1859,6 +1847,8 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
+/home/vena/Dev/raylib-bulletHell1/game/src/entityManager.cpp:
+
 /usr/include/c++/11/bits/specfun.h:
 
 /usr/include/c++/11/limits:
@@ -1870,6 +1860,12 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 /usr/include/c++/11/tr1/legendre_function.tcc:
 
 /usr/include/c++/11/tr1/riemann_zeta.tcc:
+
+/home/vena/Dev/raylib-bulletHell1/game/include/entityManager.h:
+
+/usr/include/c++/11/vector:
+
+/usr/include/c++/11/bits/align.h:
 
 /usr/include/c++/11/bits/stl_relops.h:
 
@@ -1907,10 +1903,6 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 
 /usr/include/c++/11/bits/erase_if.h:
 
-/usr/include/c++/11/vector:
-
-/usr/include/c++/11/bits/align.h:
-
 /usr/include/c++/11/bits/stl_uninitialized.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
@@ -1924,3 +1916,5 @@ CMakeFiles/bulletHell.dir/src/player.cpp.o: /home/vena/Dev/raylib-bulletHell1/ga
 /usr/include/c++/11/memory:
 
 /usr/include/c++/11/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/11/bits/shared_ptr_atomic.h:

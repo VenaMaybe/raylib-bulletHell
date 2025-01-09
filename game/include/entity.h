@@ -11,9 +11,14 @@ public:
 	virtual void update(float dt) = 0;
 	virtual Position getPos() const;
 	virtual Velocity getVel() const;
-	virtual Velocity getScaledVel() const;
 	virtual Direction getDir() const;
-//protected:
+	virtual Velocity getScaledVel() const;
+	virtual float getSpeed() const;
+	virtual void setPos(const Position &pos);
+	virtual void setVel(const Velocity &vel);
+	virtual void setDir(const Direction &dir);
+	virtual void setSpeed(float speed);
+protected:
 // Every entity has to have these
 	Position pos;
 	Velocity vel;
@@ -26,21 +31,10 @@ inline Entity::Entity(Position p, Velocity v, float speed, Direction d)
 
 inline Position  Entity::getPos() const 		{ return pos; }
 inline Velocity  Entity::getVel() const 		{ return vel; }
-inline Velocity  Entity::getScaledVel() const 	{ return vel * speed;}
 inline Direction Entity::getDir() const 		{ return dir; }
-
-/* NOT USING RIGHT NOW
-// Mixin for entities with direction, i.e. not static entities
-struct HasDirection {
-	HasDirection(Vector2 d);
-	virtual ~HasDirection() = default;
-	virtual Vector2 getDir();
-protected:
-	Vector2 dir;
-};
-
-inline HasDirection::HasDirection(Vector2 d)
-	: dir(d) {}
-
-inline Vector2 HasDirection::getDir() { return dir; }
-*/
+inline Velocity  Entity::getScaledVel() const 	{ return vel * speed;}
+inline float Entity::getSpeed() const 			{ return speed; }
+inline void Entity::setPos(const Position &pos) { this->pos = pos; }
+inline void Entity::setVel(const Velocity &vel) { this->vel = vel; }
+inline void Entity::setDir(const Direction &dir){ this->dir = dir; }
+inline void Entity::setSpeed(float speed) 		{ this->speed = speed; }

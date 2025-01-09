@@ -46,6 +46,5 @@ void Player::update(float dt) {
 			vel = Vector2Scale(vel, 0.99);
 		}
 	}
-	
 	pos = Vector2Add(pos, Vector2Scale(vel, speed * dt));
 }

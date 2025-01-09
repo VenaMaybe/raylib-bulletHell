@@ -10,7 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/vena/Dev/raylib-bulletHell1/game/src/bullet.cpp" "CMakeFiles/bulletHell.dir/src/bullet.cpp.o" "gcc" "CMakeFiles/bulletHell.dir/src/bullet.cpp.o.d"
   "/home/vena/Dev/raylib-bulletHell1/game/src/enemy.cpp" "CMakeFiles/bulletHell.dir/src/enemy.cpp.o" "gcc" "CMakeFiles/bulletHell.dir/src/enemy.cpp.o.d"
-  "/home/vena/Dev/raylib-bulletHell1/game/src/entMan.cpp" "CMakeFiles/bulletHell.dir/src/entMan.cpp.o" "gcc" "CMakeFiles/bulletHell.dir/src/entMan.cpp.o.d"
+  "/home/vena/Dev/raylib-bulletHell1/game/src/entityManager.cpp" "CMakeFiles/bulletHell.dir/src/entityManager.cpp.o" "gcc" "CMakeFiles/bulletHell.dir/src/entityManager.cpp.o.d"
   "/home/vena/Dev/raylib-bulletHell1/game/src/gun.cpp" "CMakeFiles/bulletHell.dir/src/gun.cpp.o" "gcc" "CMakeFiles/bulletHell.dir/src/gun.cpp.o.d"
   "/home/vena/Dev/raylib-bulletHell1/game/src/main.cpp" "CMakeFiles/bulletHell.dir/src/main.cpp.o" "gcc" "CMakeFiles/bulletHell.dir/src/main.cpp.o.d"
   "/home/vena/Dev/raylib-bulletHell1/game/src/player.cpp" "CMakeFiles/bulletHell.dir/src/player.cpp.o" "gcc" "CMakeFiles/bulletHell.dir/src/player.cpp.o.d"
