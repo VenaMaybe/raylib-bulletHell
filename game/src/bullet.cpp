@@ -4,12 +4,12 @@ Bullet::Bullet(Position pos, Velocity vel, float maxAge) : pos(pos), vel(vel), m
 Bullet::Bullet(Position pos, Vector2 velV, float maxAge) : pos(pos), vel(velV), maxAge(maxAge) {};
 
 void Bullet::render() {
-	DrawCircleV(pos, 5, color);
+	DrawCircleV(pos, radius, colorInit);
 }
 
 void Bullet::update(float dt) {
 	age += dt;
-	color = ColorLerp(color, BLUE, .001);
+	colorInit = ColorLerp(colorInit, colorFinal, .001);
 
 	// std::cout << "Age: " << age << ", MaxAge: " << maxAge << "\n";
 	if (age > maxAge) {

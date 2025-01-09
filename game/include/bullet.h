@@ -17,5 +17,7 @@ public:
 
 private:
 	float age = 0;
-	Color color = RED;
+	float radius = 5;
+	Color colorInit = RED;
+	Color colorFinal = BLUE;
 };

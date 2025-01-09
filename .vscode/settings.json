@@ -3,7 +3,8 @@
 	"files.associations": {
 		"iostream": "cpp",
 		"*.tcc": "cpp",
-		"stdexcept": "cpp"
+		"stdexcept": "cpp",
+		"random": "cpp"
 	},
 	"cSpell.words": [
 		"WASD"

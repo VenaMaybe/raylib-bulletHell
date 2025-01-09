@@ -91,57 +91,53 @@ int main() {
 
 		BeginTextureMode(inputToTrailShader);
 			ClearBackground(BLANK);
-			DrawCircleV({200, 200}, 100, RED);
-			// You can draw stuff in here
+			// You can't draw stuff in here
+			// DrawCircleV({200, 200}, 100, RED); testing!!
 		EndTextureMode();
 
 		// Render the buffer
+		BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
 		BeginTextureMode(dstTex);
-		 	ClearBackground(BLACK);
+		 	ClearBackground(BLANK);
 
 			if(!IsMouseButtonDown(MOUSE_BUTTON_EXTRA)) { // For debugging
-
 			BeginShaderMode(trailBufferA);	// Enable custom shader for next shapes
 				// Feed it back into itself
 				SetShaderValueTexture(trailBufferA, selfLoc_BufferA, srcTex.texture);
 
 				// Actually orange lol
-				DrawTexture(inputToTrailShader.texture, 0, 0, WHITE);
-			EndShaderMode();
+				DrawTexture(inputToTrailShader.texture, 0, 0, ORANGE);
+			EndShaderMode(); }
 
-			}
+			playerGun.renderBullets();
 
 			// Draw after so that they're all darkened evenly
-			playerGun.renderBullets();
 		EndTextureMode();
-
+		EndBlendMode();
 
 		// Draw
 		BeginDrawing();
 			ClearBackground(BLACK);
 
-			BeginShaderMode(trailShader);
-				SetShaderValueTexture(trailShader, bufferLoc_Image, dstTex.texture);
-				// Texture is getting drawn on
-				DrawTexture(whiteTexture, 0, 0, WHITE);
-
-		 	EndShaderMode();
-
-			player.get()->render();
+			DrawCircleV({200, 500}, 100, RED);
 			playerGun.render();
 
-//			playerGun.renderBullets();
+			BeginShaderMode(trailShader);
+				SetShaderValueTexture(trailShader, bufferLoc_Image, dstTex.texture);
+				// Texture the shader is getting drawn on
+				DrawTexture(whiteTexture, 0, 0, ORANGE);
+		 	EndShaderMode();
 
-
-//			player.get()->render();
-
-//			for (Enemy& enemy : enemies) {
-//				enemy.Update(dt);
-//				enemy.Draw();
-//			}
+			playerGun.renderBullets();
+			player.get()->render();
+			for (Enemy& enemy : enemies) {
+				enemy.Update(dt);
+				enemy.Draw();
+			}
 
 			DrawFPS(10, 10);
 		EndDrawing();
+
 
 
 		frame++;
