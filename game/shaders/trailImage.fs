@@ -23,8 +23,4 @@ void main() {
     vec4 bufferA = texture(bufferA, uv);
 
     finalColor = bufferA;
-
-//	finalColor = vec4(uv.x, uv.y, 0., 1.);
-//	finalColor = vec4(0., 0., 1., uv.x);
-//	finalColor = vec4(bufferA.rgb, uv.x);
 }

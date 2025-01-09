@@ -24,6 +24,14 @@ int main() {
         Enemy({300, 300}, {50, 50}, 20, GREEN)
     };
 
+	// temporary lambda cuz I'm lazy
+	auto renderEnemies = [&enemies](float dt) {
+		for (Enemy& enemy : enemies) {
+			enemy.Update(dt);
+			enemy.Draw();
+		}
+	};
+
 	// create a player
 	auto player = std::make_shared<Player>();
 
@@ -50,8 +58,7 @@ int main() {
 	//	Shader for trails
 	//
 
-	/* GOAL: Move all this to a rendering manager!!!
-	*/
+	/* GOAL: Move all this to a rendering manager!!! */
 
 	// Load the final grabber
 	Shader trailShader = LoadShader(nullptr, "game/shaders/trailImage.fs");
@@ -64,7 +71,6 @@ int main() {
 	Vector2 const resolutionScreen = { (float)screenWidth, (float)screenHeight };
 	RenderTexture2D bufferA_Texture2D_Ping = LoadRenderTexture(resolutionScreen.x, resolutionScreen.y);
 	RenderTexture2D bufferA_Texture2D_Pong = LoadRenderTexture(resolutionScreen.x, resolutionScreen.y);
-	RenderTexture2D inputToTrailShader = LoadRenderTexture(resolutionScreen.x, resolutionScreen.y);
 
 	Image whiteImage = GenImageColor(resolutionScreen.x, resolutionScreen.y, ORANGE);
 	Texture2D whiteTexture = LoadTextureFromImage(whiteImage);
@@ -78,7 +84,8 @@ int main() {
 		player.get()->update(dt);	
 		playerGun.update(dt);	// Move this to the end of the loop for a cool gun wiggle
 
-		RenderTexture2D srcTex;
+		// Ping pong buffer
+		RenderTexture2D srcTex; // Source
 		RenderTexture2D dstTex; // Destination
 
 		if (frame % 2 == 0) {
@@ -89,29 +96,19 @@ int main() {
 			dstTex = bufferA_Texture2D_Ping;
 		}
 
-		BeginTextureMode(inputToTrailShader);
-			ClearBackground(BLANK);
-			// You can't draw stuff in here
-			// DrawCircleV({200, 200}, 100, RED); testing!!
-		EndTextureMode();
-
 		// Render the buffer
-		BeginBlendMode(BLEND_ALPHA_PREMULTIPLY);
+		BeginBlendMode(BLEND_ALPHA_PREMULTIPLY); // Blending mode so alpha doesn't get fucked
 		BeginTextureMode(dstTex);
 		 	ClearBackground(BLANK);
 
 			if(!IsMouseButtonDown(MOUSE_BUTTON_EXTRA)) { // For debugging
 			BeginShaderMode(trailBufferA);	// Enable custom shader for next shapes
-				// Feed it back into itself
-				SetShaderValueTexture(trailBufferA, selfLoc_BufferA, srcTex.texture);
-
-				// Actually orange lol
-				DrawTexture(inputToTrailShader.texture, 0, 0, ORANGE);
+				// Feed it back into itself, it auto reads to bufferA
+				DrawTexture(srcTex.texture, 0, 0, ORANGE);
 			EndShaderMode(); }
-
+			// Draw onto the destination so that they're all darkened evenly
 			playerGun.renderBullets();
-
-			// Draw after so that they're all darkened evenly
+			renderEnemies(dt);
 		EndTextureMode();
 		EndBlendMode();
 
@@ -130,16 +127,9 @@ int main() {
 
 			playerGun.renderBullets();
 			player.get()->render();
-			for (Enemy& enemy : enemies) {
-				enemy.Update(dt);
-				enemy.Draw();
-			}
 
 			DrawFPS(10, 10);
 		EndDrawing();
-
-
-
 		frame++;
 	}
 
