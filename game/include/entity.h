@@ -13,7 +13,7 @@ public:
 	virtual Velocity getVel() const;
 	virtual Velocity getScaledVel() const;
 	virtual Direction getDir() const;
-protected:
+//protected:
 // Every entity has to have these
 	Position pos;
 	Velocity vel;

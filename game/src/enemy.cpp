@@ -7,25 +7,24 @@
 
 // Constructor
 Enemy::Enemy(Position startPosition, Velocity startVelocity, float startRadius, Color startColor)
-    :   position(startPosition),
-        velocity(startVelocity), 
+    :   Entity(startPosition, startVelocity, 200.0f, startVelocity),
         radius(startRadius), 
         color(startColor), 
-        speed(100), 
         engageRange(200), 
         inRange(false), 
         engageTolerance(50), 
         movementChangeCounter(0), 
-        movementState("ccw")
+        movementState("ccw"),
+        markedForDeletion(false)
     {}
 
 // Update the Enemy's position based on its velocity
-void Enemy::Update(float deltaTime) {
+void Enemy::update(float deltaTime) {
     UpdateMovement();
     ChangeDirection();
-    //move
-    position.x += velocity.dx * deltaTime;
-    position.y += velocity.dy * deltaTime;
+    //move 
+        pos.x +=  getScaledVel().dx * deltaTime;
+        pos.y += getScaledVel().dy * deltaTime;
 }
 
 void Enemy::focusPlayer(Player* focusedPlayer) {
@@ -37,16 +36,21 @@ Position Enemy::GetPlayerPos() {
 		throw std::runtime_error("focusedPlayer pointer is null");
 	}
 
+//    Player* playerPtr = dynamic_cast<Player*>(focusedPlayer);
+//    if (playerPtr == nullptr) {
+//        throw std::runtime_error("focusedPlayer is not a Player stupid");
+//    }
+
     return focusedPlayer->getPos();
 }
 
 // Draw the Enemy
-void Enemy::Draw() const {
-    DrawCircleV(position, radius, color);
+void Enemy::render()  {
+    DrawCircleV(pos, radius, color);
 }
 
 void Enemy::UpdateMovement() {
-    float dist = Vector2Distance(GetPlayerPos(), position);
+    float dist = Vector2Distance(GetPlayerPos(), pos);
     if (dist > engageRange + engageTolerance) {
         movementState = "in";
     }
@@ -61,24 +65,27 @@ void Enemy::UpdateMovement() {
 void Enemy::ChangeDirection() {
     // chase mouse 
     Position playerPos = GetPlayerPos();
-    float dx = playerPos.x - position.x;
-    float dy = playerPos.y - position.y;
+    float dx = playerPos.x - pos.x;
+    float dy = playerPos.y - pos.y;
     float angle =  atan2(dy, dx);
     Vector2 angleVector;
     angleVector.x = cos(angle);
     angleVector.y = sin(angle);
+    
     if (movementState == "in") {
-        velocity = Velocity(angleVector.x * speed, angleVector.y * speed);
+        vel = Velocity(angleVector.x, angleVector.y);
     }
     if (movementState == "out") {
-        velocity = Velocity(-angleVector.x * speed, -angleVector.y * speed);
+        vel = Velocity(-angleVector.x , -angleVector.y );
     }
     if (movementState == "cw") {
-        velocity = Velocity(angleVector.y * speed, -angleVector.x * speed);
+        vel = Velocity(angleVector.y , -angleVector.x );
     }
     if (movementState == "ccw") {
-        velocity = Velocity(-angleVector.y * speed, angleVector.x * speed);
+        vel = Velocity(-angleVector.y , angleVector.x );
     }
+    
+
 }
 
 // Setters and Getters

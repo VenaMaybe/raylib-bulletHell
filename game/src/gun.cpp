@@ -2,21 +2,23 @@
 
 Gun::Gun(
 		std::function<void(Gun&)> onFireCallback,
-		std::shared_ptr<Entity> ownedByEntity
+		std::shared_ptr<Entity> ownedByEntity,
+		std::vector<Bullet>* bullets
 	): 
 		onFire(onFireCallback), // Pass in a function to describe onFire behavior
-		owner(ownedByEntity)
+		owner(ownedByEntity),
+		bullets(bullets)
 {}; 
 
 void Gun::render() {
 	DrawLineEx(getOwner()->getPos(), posMuzzle, 10, RAYWHITE);
 };
 
-void Gun::renderBullets() {
-	for (auto& bullet : bullets) {
-		bullet.render();
-	}
-}
+// void Gun::renderBullets() {
+// 	for (auto& bullet : bullets) {
+// 		bullet.render();
+// 	}
+// }
 
 // Updates all the bullets cuz I'm lazy
 void Gun::update(float dt) {
@@ -28,15 +30,15 @@ void Gun::update(float dt) {
 		processClick();
 	}
 
-	for (auto& bullet : bullets) {
-		bullet.update(dt);
-	}
+	// for (auto& bullet : bullets) {
+	// 	bullet.update(dt);
+	// }
 
-	// Remove those marked for deletion
-	bullets.erase(
-		std::remove_if(bullets.begin(), bullets.end(), [](const Bullet& b) { return b.markedForDeletion; }),
-		bullets.end()
-	);
+	// // Remove those marked for deletion
+	// bullets.erase(
+	// 	std::remove_if(bullets.begin(), bullets.end(), [](const Bullet& b) { return b.markedForDeletion; }),
+	// 	bullets.end()
+	// );
 };
 
 // This should spawn the bullets and add to entity manager
@@ -60,12 +62,12 @@ std::shared_ptr<Entity> Gun::getOwner() {
 void GunSpecificEx::shoot(Gun& gun) {
 	std::cout << "Shoot Clicked\n";
 
-	int currentBullets = gun.bullets.size();
+	int currentBullets = gun.bullets->size();
 
 	// Can fire
 	if (currentBullets < maxBullets) {
 		std::cout << "Bullet Added, current count: " << currentBullets << "\n";
-		gun.bullets.emplace_back(
+		gun.bullets->emplace_back(
 			gun.posMuzzle,
 			(gun.getOwner()->getDir() * bulletSpeed) + (gun.getOwner()->getScaledVel()),
 			maxBulletAge

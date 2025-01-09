@@ -26,7 +26,8 @@ class Gun {
 public:
 	Gun(
 		std::function<void(Gun&)> onFireCallback,
-		std::shared_ptr<Entity> ownedByEntity
+		std::shared_ptr<Entity> ownedByEntity,
+		std::vector<Bullet>* bullets
 	); // Pass in a function to describe onFire behavior
 
 	void render();
@@ -38,7 +39,7 @@ public:
 	Position posMuzzle; // Distance from posBase in dir by some scalar, where bullets come from
 
 	// copium temporary
-	std::vector<Bullet> bullets;
+	std::vector<Bullet>* bullets;
 private:
 	std::weak_ptr<Entity> owner;
 	std::function<void(Gun&)> onFire; // called everytime u click

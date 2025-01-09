@@ -1,30 +1,31 @@
 #pragma once
 #include "raylib.h"
 #include <string>
-
+#include "entity.h"
 #include "player.h"
+#include "com_comps.h"
 
-class Enemy {
+class Enemy : public Entity {
 public:
     // Constructor
     Enemy(Position startPosition, Velocity startVelocity, float startRadius, Color startColor);
 
     // Draw the Enemy
-    void Draw() const;
-    void Update(float deltaTime);
+    void render();
+    void update(float deltaTime);
     // Setters and Getters
     void SetPosition(Position newPosition);
     Position GetPosition() const;
     void ChangeDirection();
     void UpdateMovement();
-    
     // Pick the player to focus on
     void focusPlayer(Player* focusedPlayer);
     Position GetPlayerPos();
     void ChangeColor( Color color);
-
-private:
     Position position;
+    bool markedForDeletion;
+private:
+    
     Velocity velocity;
     float speed;
     float radius;

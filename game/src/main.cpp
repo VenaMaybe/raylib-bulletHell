@@ -3,13 +3,36 @@
 #include "rlgl.h"
 
 #include <iostream>
+#include "entMan.h"
 #include "player.h"
 #include "enemy.h"
 #include "gun.h"
 
+// void tempInitEntities(class std::shared_ptr<Player> player) {
+// 	// Create a vector of enemies
+// 	std::vector<Enemy> enemies = {
+// 		Enemy({100, 100}, {50, 50}, 20, RED),
+// 		Enemy({200, 200}, {50, 50}, 20, BLUE),
+// 		Enemy({300, 300}, {50, 50}, 20, GREEN)
+// 	};
+
+// 	// temporary lambda cuz I'm lazy
+// 	auto renderEnemies = [&enemies](float dt) {
+// 		for (Enemy& enemy : enemies) {
+// 			enemy.Update(dt);
+// 			enemy.Draw();
+// 		}
+// 	};
+
+// 	// Set all enemies to focus the player
+// 	for (Enemy& enemy : enemies) {
+// 		enemy.focusPlayer(player.get());
+// 	}
+// }
+
 int main() {
 	const int screenWidth = 800;
-    const int screenHeight = 600;
+	const int screenHeight = 600;
 	Vector2 screenRes = { (float)screenWidth, (float)screenHeight };
 
 	// Initialize the window and set up raylib
@@ -17,27 +40,21 @@ int main() {
 	InitWindow(screenWidth, screenHeight, "Game");
 	SetTargetFPS(90);
 
-	// Create a vector of enemies
-    std::vector<Enemy> enemies = {
-        Enemy({100, 100}, {50, 50}, 20, RED),
-        Enemy({200, 200}, {50, 50}, 20, BLUE),
-        Enemy({300, 300}, {50, 50}, 20, GREEN)
-    };
+	EntityManager em;
 
-	// temporary lambda cuz I'm lazy
-	auto renderEnemies = [&enemies](float dt) {
-		for (Enemy& enemy : enemies) {
-			enemy.Update(dt);
-			enemy.Draw();
-		}
-	};
 
 	// create a player
 	auto player = std::make_shared<Player>();
 
+	// create a specific gun
 	GunSpecificEx gunSpecific_Pistol;
+
+	// create a gun of type pistol
 	Gun playerGun(
 		[&gunSpecific_Pistol](Gun& gun) { gunSpecific_Pistol.shoot(gun); },
+		player, 
+		&em.getBullets()
+	);
 	/* Depends on this pointer & specific instance
 	   gunSpecific,shoot hasa a type pointer-to-member-function
 	   and thus needs an instance.
@@ -46,13 +63,14 @@ int main() {
 	   The lambda has the correct signature: void(Gun&)
 	   thus it is assigned to the callback
 	*/
-		player
-	);
 
-	// Set all enemies to focus the player
-	for (Enemy& enemy : enemies) {
-		enemy.focusPlayer(player.get());
-	}
+//	tempInitEntities(player);
+
+	player->getPos();
+
+	em.focusPlayer(player.get());
+	em.focusGun(&playerGun);
+	em.initializeEntities();
 
 	//
 	//	Shader for trails
@@ -81,8 +99,11 @@ int main() {
 	while (!WindowShouldClose()) {
 		float dt = GetFrameTime();
 
-		player.get()->update(dt);	
-		playerGun.update(dt);	// Move this to the end of the loop for a cool gun wiggle
+//		player.get()->update(dt);	
+//		playerGun.update(dt);	// Move this to the end of the loop for a cool gun wiggle
+
+		// Player, Gun, Bullet, Enemy
+		em.updateEntities(dt);
 
 		// Ping pong buffer
 		RenderTexture2D srcTex; // Source
@@ -107,7 +128,10 @@ int main() {
 				DrawTexture(srcTex.texture, 0, 0, ORANGE);
 			EndShaderMode(); }
 			// Draw onto the destination so that they're all darkened evenly
-			playerGun.renderBullets();
+			em.renderBullets();
+			em.renderEnemies();
+
+//			playerGun.renderBullets();
 //			renderEnemies(dt);
 		EndTextureMode();
 		EndBlendMode();
@@ -124,8 +148,11 @@ int main() {
 				DrawTexture(whiteTexture, 0, 0, ORANGE);
 		 	EndShaderMode();
 
-			player.get()->render();
-			playerGun.render();
+			em.renderPlayer();
+
+
+//			player.get()->render();
+//			playerGun.render();
 
 			DrawFPS(10, 10);
 		EndDrawing();

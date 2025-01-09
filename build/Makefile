@@ -177,6 +177,30 @@ src/enemy.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/enemy.cpp.s
 .PHONY : src/enemy.cpp.s
 
+src/entMan.o: src/entMan.cpp.o
+.PHONY : src/entMan.o
+
+# target to build an object file
+src/entMan.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/entMan.cpp.o
+.PHONY : src/entMan.cpp.o
+
+src/entMan.i: src/entMan.cpp.i
+.PHONY : src/entMan.i
+
+# target to preprocess a source file
+src/entMan.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/entMan.cpp.i
+.PHONY : src/entMan.cpp.i
+
+src/entMan.s: src/entMan.cpp.s
+.PHONY : src/entMan.s
+
+# target to generate assembly for a file
+src/entMan.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bulletHell.dir/build.make CMakeFiles/bulletHell.dir/src/entMan.cpp.s
+.PHONY : src/entMan.cpp.s
+
 src/gun.o: src/gun.cpp.o
 .PHONY : src/gun.o
 
@@ -264,6 +288,9 @@ help:
 	@echo "... src/enemy.o"
 	@echo "... src/enemy.i"
 	@echo "... src/enemy.s"
+	@echo "... src/entMan.o"
+	@echo "... src/entMan.i"
+	@echo "... src/entMan.s"
 	@echo "... src/gun.o"
 	@echo "... src/gun.i"
 	@echo "... src/gun.s"
