@@ -11,17 +11,6 @@
 #include "com_comps.h"
 #include "bullet.h"
 
-/* Outline -- Gun Class
-
-render()	--- Renders gun (from player in direction)
-
-Has a:
-	gun implementation 		--- on click callback // decouple firing logic from gun class
-	list of bullet types	--- vector of used bullets, (oft 1)
-	number of bullets		
-
-*/
-
 class Gun {
 public:
 	Gun(
@@ -49,8 +38,11 @@ private:
 struct GunSpecificEx {
 	// Specific to this gun
 	int maxBullets = 10;
-	float bulletSpeed = 100.;
-	float maxBulletAge = 3.;
+	float bulletSpeed = 100;
+	float maxBulletAge = 3;
+	float percentOfOwnerVelocity = 0.5;
+	float recoilPercent = 2;
+
 
 	//
 	void shoot(Gun& gun);

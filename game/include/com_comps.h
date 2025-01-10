@@ -14,6 +14,18 @@ using Vel = Velocity;
 using Dir = Direction;
 using Vec2 = Vector2;
 
+// Lerp between two vectors -- oops already implemented 
+//void mixVectorsByReference(Vector2& v1, Vector2& v2, float percentOfFirst) {
+//	v1.x = (1 - t) * v1.x + t * v2.x;
+//	v1.y = (1 - t) * v1.y + t * v2.y;
+//}
+
+// Shitty utility function
+inline void printVector2(Vector2 v) {
+	std::cout << v.x << "\t" << v.y << std::endl;
+}
+
+// Practice with operator overloading again
 struct Position { // has a...
 	float x;
 	float y;
@@ -85,7 +97,6 @@ struct Position { // has a...
 	}
 };
 
-// Practice with operator overloading again
 struct Velocity {
 	float dx;
 	float dy;
@@ -157,9 +168,10 @@ struct Velocity {
 		dy -= other.dy;
 		return *this;
 	}
+
+	// Unary operator overload, inverts velocity direction
+	Velocity operator-() const {
+		return Velocity(-dx, -dy);
+	} 
 };
 
-// Shitty utility function
-inline void printVector2(Vector2 v) {
-	std::cout << v.x << "\t" << v.y << std::endl;
-}

@@ -1,7 +1,7 @@
 #include "bullet.h"
 
 Bullet::Bullet(Position pos, Velocity vel, float maxAge) : pos(pos), vel(vel), maxAge(maxAge) {};
-Bullet::Bullet(Position pos, Vector2 velV, float maxAge) : pos(pos), vel(velV), maxAge(maxAge) {};
+Bullet::Bullet(Position pos, Vector2 velV, float maxAge) : pos(pos), vel(velV), maxAge(maxAge) {}; // also old and lame
 
 void Bullet::render() {
 	DrawCircleV(pos, radius, colorInit);

@@ -14,7 +14,6 @@ public:
 	void render();
 	void update(float deltaTime);
 	// Setters and Getters
-	void SetPosition(Position pos);
 	void ChangeDirection();
 	void UpdateMovement();
 	// Pick the player to focus on

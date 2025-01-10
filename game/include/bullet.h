@@ -5,7 +5,7 @@
 struct Bullet {
 public:
 	Bullet(Position pos, Velocity vel, float maxAge);
-	Bullet(Position pos, Vector2 velV, float maxAge);
+	Bullet(Position pos, Vector2 velV, float maxAge); // lame and old
 
 	void render();
 	void update(float dt);
