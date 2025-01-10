@@ -17,14 +17,12 @@ inline AudioBit::AudioBit(const char* audioFile) {
 
 inline AudioBit::~AudioBit() {
 	// mindbogglingly horrible but fix later with smart pointers
-	
-
-//	UnloadSound(soundToPlay);
+	UnloadSound(soundToPlay);
 }
 
 inline void AudioBit::playSound() {
 	PlaySound(soundToPlay);
-}
+} 
 
 //
 //

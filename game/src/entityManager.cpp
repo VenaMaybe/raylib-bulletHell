@@ -15,9 +15,14 @@ void EntityManager::setPlayerGun(Gun* gun){
 	this->playerGun = gun; 
 }
 
-void EntityManager::addEnemy(Enemy& enemy) {
-	enemy.focusPlayer(player);
-	enemies.push_back(enemy);
+void EntityManager::addEnemy(std::unique_ptr<Enemy> enemy) {
+	enemies.push_back(std::move(enemy));
+
+	// Move player focus logic somewhere else
+
+	enemies.back()->focusPlayer(player);
+//	enemy.focusPlayer(player);
+//	enemies.push_back(enemy);
 }
 
 std::vector<Bullet>&  EntityManager::getBullets() {
@@ -38,7 +43,7 @@ void EntityManager::renderPlayer() {
 
 void EntityManager::renderEnemies() {
 	for (auto& enemy : enemies) {
-		enemy.render();
+		enemy->render();
 	}
 }
 
@@ -47,8 +52,8 @@ void EntityManager::deleteEntitiesMarked() {
 		std::remove_if(
 			enemies.begin(),
 			enemies.end(),
-			[](const Enemy& enemy) {
-				return enemy.markedForDeletion;
+			[](const std::unique_ptr<Enemy>& enemy) {
+				return enemy->markedForDeletion;
 			}
 		),
 		enemies.end()
@@ -70,16 +75,17 @@ void EntityManager::updateEntities(float dt) {
 	player->update(dt);
 	playerGun->update(dt);
 	
+	// This is really bad, eventually use grid partitioning for better performance
 	for (auto& bullet : bullets) {
 		bullet.update(dt);
 		for (auto& enemy : enemies) {
-			checkCollide(bullet, enemy);
+			checkCollide(bullet, *enemy);
 		}
 	}
 
 	if (!enemies.empty()) {
 		for (auto& enemy : enemies) {
-			enemy.update(dt);
+			enemy->update(dt);
 		}
 	} else {
 		std::cout << "Enemies vector is empty!" << std::endl;
@@ -97,18 +103,23 @@ void EntityManager::updateEntities(float dt) {
 }
 
 void EntityManager::initializeEntities() {
-	std::vector<Enemy> tempEnemies = {
-		Enemy({100, 100}, {40, 40}, 20, RED),
-		Enemy({200, 200}, {40, 40}, 20, BLUE),
-		Enemy({300, 300}, {40, 40}, 20, GREEN)
-	};
+	addEnemy(std::make_unique<Enemy>(Pos(100, 100), Vel(40, 40), 20, RED));
 
-	for (auto& enemy : tempEnemies) {
-		addEnemy(enemy);
-	}
+	// std::vector<Enemy> tempEnemies = {
+	// 	Enemy({100, 100}, {40, 40}, 20, RED),
+	// 	Enemy({200, 200}, {40, 40}, 20, BLUE),
+	// 	Enemy({300, 300}, {40, 40}, 20, GREEN)
+	// };
+
+	// for (auto& enemy : tempEnemies) {
+	// 	addEnemy(enemy);
+	// }
 }
 
-void spawnEnemies(){}
+// Not using this rn
+// void spawnEnemies(){}
+
+// This should not do more than checking collisions, right now it does
 
 void EntityManager::checkCollide(Bullet& bullet, Enemy& enemy){
 	Position enemyPos = enemy.getPos();

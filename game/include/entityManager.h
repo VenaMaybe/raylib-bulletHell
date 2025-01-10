@@ -2,8 +2,9 @@
 
 #include "raylib.h"
 #include <vector>
+#include <memory>
+
 #include "com_comps.h"
-// #include "entity.h"
 #include "player.h"
 #include "enemy.h"
 #include "gun.h"
@@ -18,10 +19,12 @@ public:
 	void updateEntities(float dt);
 	void deleteEntitiesMarked();
 
-	void checkCollide(Bullet& bullet, Enemy& enemy);
-	void spawnEnemies();
+	void addEnemy(std::unique_ptr<Enemy> enemy);
+//	void spawnEnemies();
+
+	// void checkCollide(const Bullet& bullet, const Enemy& enemy);
+	void checkCollide(Bullet& bullet, Enemy& enemy);	// Todo: Make this const & use smart ptrs
 	std::vector<Bullet>& getBullets();
-	void addEnemy(Enemy& enemy);
 
 	void renderBullets();
 	void renderPlayer();
@@ -33,5 +36,5 @@ private:
 	Player* player;
 	Gun* playerGun;
 	std::vector<Bullet> bullets;
-	std::vector<Enemy> enemies;
+	std::vector<std::unique_ptr<Enemy>> enemies;
 };

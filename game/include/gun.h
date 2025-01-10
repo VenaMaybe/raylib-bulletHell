@@ -39,7 +39,7 @@ private:
 struct GunSpecificEx {
 	// Specific to this gun
 	int maxBullets = 10;
-	float bulletSpeed = 100;
+	float bulletSpeed = 1000;
 	float maxBulletAge = 3;
 	float percentOfOwnerVelocity = 0.5;
 	float recoilPercent = 2;
