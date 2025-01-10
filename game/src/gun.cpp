@@ -43,6 +43,8 @@ std::shared_ptr<Entity> Gun::getOwner() {
 //	Specific
 //
 
+GunSpecificEx::GunSpecificEx(): gunSound("game/sounds/gunEx1.wav") {};
+
 void GunSpecificEx::shoot(Gun& gun) {
 	std::cout << "Shoot Clicked\n";
 
@@ -52,6 +54,7 @@ void GunSpecificEx::shoot(Gun& gun) {
 	// Can fire
 	if (currentBullets < maxBullets) {
 		std::cout << "Bullet Added, current count: " << currentBullets << "\n";
+		gunSound.playSound();
 		Velocity bulletVel = (owner->getDir()) + (owner->getVel() * percentOfOwnerVelocity);
 		Velocity playerVelDueToRecoil(0, 0);
 		// Some percent of the velocity goes into the player

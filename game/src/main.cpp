@@ -16,16 +16,17 @@ int main() {
 	// Initialize the window and set up raylib
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 	InitWindow(screenWidth, screenHeight, "Game");
+	InitAudioDevice();
 	SetTargetFPS(90);
 
 	// Entity Manager
 	EntityManager em;
 
 	// create a player
-	auto player = std::make_shared<Player>();
+	auto player = std::make_shared<Player>();	// should be moved to em
 
 	// create a specific gun
-	GunSpecificEx gunSpecific_Pistol;
+	GunSpecificEx gunSpecific_Pistol;	// should be moved to em,, all stuff below too
 
 	// create a gun of type pistol
 	Gun playerGun(
@@ -42,8 +43,8 @@ int main() {
 	   thus it is assigned to the callback
 	*/
 
-	em.focusPlayer(player.get());
-	em.focusGun(&playerGun);
+	em.setPlayer(player.get());
+	em.setPlayerGun(&playerGun);
 	em.initializeEntities();
 
 	//
@@ -119,11 +120,11 @@ int main() {
 		frame++;
 	}
 
-//	UnloadShader(trailShader);
-//	UnloadShader(trailBufferA);
-//	UnloadRenderTexture(bufferA_Texture2D_Ping);
-//	UnloadRenderTexture(bufferA_Texture2D_Pong);
-//	UnloadTexture(whiteTexture);
+	UnloadShader(trailShader);
+	UnloadShader(trailBufferA);
+	UnloadRenderTexture(bufferA_Texture2D_Ping);
+	UnloadRenderTexture(bufferA_Texture2D_Pong);
+	UnloadTexture(whiteTexture);
 
 	CloseWindow(); // Close the window
 	return 0;

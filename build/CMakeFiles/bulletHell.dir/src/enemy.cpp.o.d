@@ -131,7 +131,6 @@ CMakeFiles/bulletHell.dir/src/enemy.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/11/bits/charconv.h \
  /usr/include/c++/11/bits/basic_string.tcc \
- /home/vena/Dev/raylib-bulletHell1/game/include/entity.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/com_comps.h \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/exception \
@@ -155,6 +154,8 @@ CMakeFiles/bulletHell.dir/src/enemy.cpp.o: \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
+ /home/vena/Dev/raylib-bulletHell1/game/include/audioBit.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/entity.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/player.h \
  /home/vena/Dev/raylib-bulletHell1/game/../raylib-5.5_linux_amd64/include/raymath.h \
  /usr/include/c++/11/math.h /usr/include/c++/11/cmath /usr/include/math.h \

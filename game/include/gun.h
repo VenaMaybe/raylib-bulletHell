@@ -9,6 +9,7 @@
 
 #include "entity.h"
 #include "com_comps.h"
+#include "audioBit.h"
 #include "bullet.h"
 
 class Gun {
@@ -42,6 +43,8 @@ struct GunSpecificEx {
 	float maxBulletAge = 3;
 	float percentOfOwnerVelocity = 0.5;
 	float recoilPercent = 2;
+	AudioBit gunSound;
+	GunSpecificEx();
 
 
 	//

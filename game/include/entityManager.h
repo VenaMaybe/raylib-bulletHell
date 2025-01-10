@@ -1,19 +1,20 @@
 #pragma once
 
 #include "raylib.h"
-#include "player.h"
-#include "gun.h"
-#include "enemy.h"
-#include "bullet.h"
-#include "com_comps.h"
 #include <vector>
-#include "entity.h"
+#include "com_comps.h"
+// #include "entity.h"
+#include "player.h"
+#include "enemy.h"
+#include "gun.h"
+#include "bullet.h"
 
 class EntityManager {
 public:
 	EntityManager();
-	void focusPlayer(Player* player);
-	void focusGun(Gun* gun);
+
+	void setPlayer(Player* player);
+	void setPlayerGun(Gun* gun);
 	void updateEntities(float dt);
 	void deleteEntitiesMarked();
 
@@ -30,7 +31,7 @@ public:
 
 private:
 	Player* player;
-	Gun* gun;
+	Gun* playerGun;
 	std::vector<Bullet> bullets;
 	std::vector<Enemy> enemies;
 };

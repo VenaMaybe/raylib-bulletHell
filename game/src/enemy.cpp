@@ -15,7 +15,8 @@ Enemy::Enemy(Position startPosition, Velocity startVelocity, float startRadius, 
 		engageTolerance(50), 
 		movementChangeCounter(0), 
 		movementState("ccw"),
-		markedForDeletion(false)
+		markedForDeletion(false),
+		enemyHit("game/sounds/enemyHit1.wav")
 	{}
 
 // Update the Enemy's position based on its velocity
@@ -78,6 +79,10 @@ void Enemy::ChangeDirection() {
 	if (movementState == "ccw") {
 		vel = Velocity(-angleVector.y , angleVector.x );
 	}
+}
+
+void Enemy::playHitSound() {
+	enemyHit.playSound();
 }
 
 // Setters and Getters

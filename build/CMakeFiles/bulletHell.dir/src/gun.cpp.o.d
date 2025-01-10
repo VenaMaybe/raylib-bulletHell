@@ -211,4 +211,5 @@ CMakeFiles/bulletHell.dir/src/gun.cpp.o: \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/entity.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/com_comps.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/audioBit.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/bullet.h

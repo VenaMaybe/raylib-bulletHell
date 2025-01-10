@@ -161,7 +161,9 @@
 				9,
 				10,
 				11,
-				12
+				12,
+				13,
+				14
 			]
 		}
 	],
@@ -205,12 +207,22 @@
 		},
 		{
 			"backtrace" : 1,
+			"path" : "include/audioBit.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
 			"path" : "include/bullet.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"path" : "include/com_comps.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "include/command.h",
 			"sourceGroupIndex" : 1
 		},
 		{

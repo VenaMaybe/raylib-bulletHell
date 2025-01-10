@@ -7,12 +7,12 @@
 #include <iostream>
 EntityManager::EntityManager() {}
 
-void EntityManager::focusPlayer(Player* player) {
+void EntityManager::setPlayer(Player* player) {
 	this->player = player;
 }
 
-void EntityManager::focusGun(Gun* gun){
-	this->gun = gun; 
+void EntityManager::setPlayerGun(Gun* gun){
+	this->playerGun = gun; 
 }
 
 void EntityManager::addEnemy(Enemy& enemy) {
@@ -33,7 +33,7 @@ void EntityManager::renderBullets() {
 // Rename later
 void EntityManager::renderPlayer() {
 	player->render();
-	gun->render();
+	playerGun->render();
 }
 
 void EntityManager::renderEnemies() {
@@ -68,7 +68,7 @@ void EntityManager::deleteEntitiesMarked() {
 
 void EntityManager::updateEntities(float dt) {
 	player->update(dt);
-	gun->update(dt);
+	playerGun->update(dt);
 	
 	for (auto& bullet : bullets) {
 		bullet.update(dt);
@@ -116,5 +116,6 @@ void EntityManager::checkCollide(Bullet& bullet, Enemy& enemy){
 //	std::cout << dist << std::endl;
 	if( dist < 20 ){
 		bullet.markedForDeletion = true;
+		enemy.playHitSound();
 	}
 }

@@ -175,9 +175,15 @@ CMakeFiles/bulletHell.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
  /home/vena/Dev/raylib-bulletHell1/game/include/entityManager.h \
- /home/vena/Dev/raylib-bulletHell1/game/include/player.h \
+ /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/bits/stl_bvector.h \
+ /usr/include/c++/11/bits/vector.tcc \
  /home/vena/Dev/raylib-bulletHell1/game/include/com_comps.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/player.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/entity.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/enemy.h \
+ /home/vena/Dev/raylib-bulletHell1/game/include/audioBit.h \
  /home/vena/Dev/raylib-bulletHell1/game/include/gun.h \
  /usr/include/c++/11/algorithm /usr/include/c++/11/utility \
  /usr/include/c++/11/bits/stl_relops.h \
@@ -198,11 +204,7 @@ CMakeFiles/bulletHell.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/node_handle.h \
  /usr/include/c++/11/bits/unordered_map.h \
- /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/vector \
- /usr/include/c++/11/bits/stl_uninitialized.h \
- /usr/include/c++/11/bits/stl_vector.h \
- /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc \
+ /usr/include/c++/11/bits/erase_if.h \
  /usr/include/c++/11/pstl/execution_defs.h /usr/include/c++/11/memory \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
@@ -216,5 +218,4 @@ CMakeFiles/bulletHell.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
  /usr/include/c++/11/backward/auto_ptr.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
- /home/vena/Dev/raylib-bulletHell1/game/include/bullet.h \
- /home/vena/Dev/raylib-bulletHell1/game/include/enemy.h
+ /home/vena/Dev/raylib-bulletHell1/game/include/bullet.h

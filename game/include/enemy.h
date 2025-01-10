@@ -1,9 +1,11 @@
 #pragma once
 #include "raylib.h"
 #include <string>
+
+#include "com_comps.h"
+#include "audioBit.h"
 #include "entity.h"
 #include "player.h"
-#include "com_comps.h"
 
 class Enemy : public Entity {
 public:
@@ -13,16 +15,16 @@ public:
 	// Draw the Enemy
 	void render();
 	void update(float deltaTime);
-	// Setters and Getters
 	void ChangeDirection();
 	void UpdateMovement();
+	void playHitSound();
 	// Pick the player to focus on
 	void focusPlayer(Player* focusedPlayer);
 	Position GetPlayerPos();
 	void ChangeColor( Color color);
 	bool markedForDeletion;
+
 private:
-	
 	float radius;
 	Color color;
 	float engageRange;
@@ -32,4 +34,5 @@ private:
 	std::string movementState;
 	// Store a pointer to the focused player
 	Player* focusedPlayer;
+	AudioBit enemyHit;
 };
