@@ -24,6 +24,8 @@ public:
 	void ChangeColor( Color color);
 	bool markedForDeletion;
 
+	float getRadius() const;
+
 private:
 	float radius;
 	Color color;

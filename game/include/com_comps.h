@@ -39,10 +39,7 @@ struct Position { // has a...
 	// Constructor to convert
 	Position(const Vector2& vec) : x(vec.x), y(vec.y) {}
 
-	operator Vector2() const {
-		return {x, y};
-	}
-
+	// Overload assignment operator
 	Position& operator=(const Vector2& other) {
 		this->x = other.x;
 		this->y = other.y;
@@ -55,46 +52,25 @@ struct Position { // has a...
 		this->y = other.y;
 	}
 
-	// Generic comparisons
-	bool operator==(const Position& other) const  {
-		return x == other.x && y == other.y;
-	}
+	// Overload conversion operator
+	operator Vector2() const { return {x, y}; }
 
-	bool operator!=(const Position& other) const  {
-		return !(*this == other); // Just the not
-	}
+	// Generic comparisons
+	bool operator==(const Position& other) const { return x == other.x && y == other.y; }
+	bool operator!=(const Position& other) const { return !(*this == other); }
 
 	// Scale it by a float scalar
-	Position operator*(float scalar) const {
-		return Position(x * scalar, y * scalar);
-	}
-
-	Position& operator*=(float scalar) {
-		x *= scalar;
-		y *= scalar;
-		return *this;
-	}
+	Position operator*(float scalar) const { return Position(x * scalar, y * scalar); }
+	Position& operator*=(float scalar);
 
 	// Common operations bla bla
-	Position operator+(const Position other) const {
-		return Position(x + other.x, y + other.y);
-	}
+	Position operator+(const Position other) const { return Position(x + other.x, y + other.y); }
+	Position operator-(const Position other) const { return Position(x - other.x, y - other.y); }
 
-	Position& operator+=(const Position& other) {
-		x += other.x;
-		y += other.y;
-		return *this;
-	}
-
-	Position operator-(const Position other) const {
-		return Position(x - other.x, y - other.y);
-	}
-
-	Position& operator-=(const Position& other) {
-		x -= other.x;
-		y -= other.y;
-		return *this;
-	}
+	// Useful
+	Position& operator+=(const Position& other);
+	Position& operator+=(const Velocity& other);
+	Position& operator-=(const Position& other);
 };
 
 struct Velocity {
@@ -148,7 +124,7 @@ struct Velocity {
 		return *this;
 	}
 
-	// Common operations bla bla
+	// Common operations bla bla, lazy, move these to cpp later
 	Velocity operator+(const Velocity other) const {
 		return Velocity(dx + other.dx, dy + other.dy);
 	}

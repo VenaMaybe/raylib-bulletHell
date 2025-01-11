@@ -48,7 +48,7 @@ GunSpecificEx::GunSpecificEx(): gunSound("game/sounds/gunEx1.wav") {};
 void GunSpecificEx::shoot(Gun& gun) {
 	std::cout << "Shoot Clicked\n";
 
-	int currentBullets = gun.bullets->size();
+	const int& currentBullets = gun.bullets->size();
 	const auto& owner = gun.getOwner();
 
 	// Can fire
@@ -65,9 +65,10 @@ void GunSpecificEx::shoot(Gun& gun) {
 
 		// Add the bullet to be simulated to list of bullets
 		gun.bullets->emplace_back(
-			gun.posMuzzle,				// Spawn Location
-			bulletVel * bulletSpeed,	// Velocity
-			maxBulletAge				// Duration of Bullet
+			gun.posMuzzle,	// Spawn Location
+			bulletVel,		// Velocity
+			bulletSpeed,	// Speed of bullet
+			maxBulletAge	// Duration of Bullet
 		);
 	}
 };

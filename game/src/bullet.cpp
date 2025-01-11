@@ -1,7 +1,9 @@
 #include "bullet.h"
 
-Bullet::Bullet(Position pos, Velocity vel, float maxAge) : pos(pos), vel(vel), maxAge(maxAge) {};
-Bullet::Bullet(Position pos, Vector2 velV, float maxAge) : pos(pos), vel(velV), maxAge(maxAge) {}; // also old and lame
+Bullet::Bullet(Position pos, Velocity vel, float speed, float maxAge) 
+	:	Entity(pos, vel, speed, vel),
+		maxAge(maxAge) 
+	{}
 
 void Bullet::render() {
 	DrawCircleV(pos, radius, colorInit);
@@ -17,8 +19,21 @@ void Bullet::update(float dt) {
 		std::cout << "Bullet marked for deletion\n";
 	}
 
-	pos.x += vel.dx * dt;
-	pos.y += vel.dy * dt;
+	pos += vel * speed * dt;
+}
 
-	// pos += vel * dt;
+void Bullet::markForDeletion() {
+	markedForDeletion = true;
+}
+
+bool Bullet::isMarkedForDeletion() const {
+	return markedForDeletion;
+}
+
+void Bullet::setMaxAge(float maxAge) {
+	this->maxAge = maxAge;
+}
+
+float Bullet::getMaxAge() const {
+	return maxAge;
 }

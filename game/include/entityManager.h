@@ -20,10 +20,7 @@ public:
 	void deleteEntitiesMarked();
 
 	void addEnemy(std::unique_ptr<Enemy> enemy);
-//	void spawnEnemies();
-
-	// void checkCollide(const Bullet& bullet, const Enemy& enemy);
-	void checkCollide(Bullet& bullet, Enemy& enemy);	// Todo: Make this const & use smart ptrs
+	bool checkCollide(const Bullet& bullet, const Enemy& enemy) const;
 	std::vector<Bullet>& getBullets();
 
 	void renderBullets();

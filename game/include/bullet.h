@@ -1,21 +1,23 @@
 #pragma once
 
 #include "com_comps.h"
+#include "entity.h"
 
-struct Bullet {
+struct Bullet : Entity{
 public:
-	Bullet(Position pos, Velocity vel, float maxAge);
-	Bullet(Position pos, Vector2 velV, float maxAge); // lame and old
+	Bullet(Position pos, Velocity vel, float speed, float maxAge);
+	void render() override;
+	void update(float dt) override;
 
-	void render();
-	void update(float dt);
+	void markForDeletion();
+	bool isMarkedForDeletion() const;
 
-	Position pos;
-	Velocity vel;
-	float maxAge;
-	bool markedForDeletion = false;
+	void setMaxAge(float maxAge);
+	float getMaxAge() const;
 
 private:
+	float maxAge;
+	bool markedForDeletion = false;
 	float age = 0;
 	float radius = 5;
 	Color colorInit = RED;

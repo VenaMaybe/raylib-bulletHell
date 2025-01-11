@@ -41,7 +41,7 @@ struct GunSpecificEx {
 	int maxBullets = 10;
 	float bulletSpeed = 1000;
 	float maxBulletAge = 3;
-	float percentOfOwnerVelocity = 0.5;
+	float percentOfOwnerVelocity = 0.15; // Todo: Change this based on speed of bullet!!!
 	float recoilPercent = 2;
 	AudioBit gunSound;
 	GunSpecificEx();

@@ -17,15 +17,10 @@ void EntityManager::setPlayerGun(Gun* gun){
 
 void EntityManager::addEnemy(std::unique_ptr<Enemy> enemy) {
 	enemies.push_back(std::move(enemy));
-
-	// Move player focus logic somewhere else
-
 	enemies.back()->focusPlayer(player);
-//	enemy.focusPlayer(player);
-//	enemies.push_back(enemy);
 }
 
-std::vector<Bullet>&  EntityManager::getBullets() {
+std::vector<Bullet>& EntityManager::getBullets() {
 	return bullets;
 }
 
@@ -64,7 +59,7 @@ void EntityManager::deleteEntitiesMarked() {
 			bullets.begin(),
 			bullets.end(),
 			[](const Bullet& bullet) {
-				return bullet.markedForDeletion;
+				return bullet.isMarkedForDeletion();
 			}
 		),
 		bullets.end()
@@ -76,10 +71,15 @@ void EntityManager::updateEntities(float dt) {
 	playerGun->update(dt);
 	
 	// This is really bad, eventually use grid partitioning for better performance
+	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
 	for (auto& bullet : bullets) {
 		bullet.update(dt);
 		for (auto& enemy : enemies) {
-			checkCollide(bullet, *enemy);
+			if (checkCollide(bullet, *enemy)) {
+				// Mark the bullet hitting for deletion
+				bullet.markForDeletion();
+				enemy->playHitSound();
+			}
 		}
 	}
 
@@ -93,40 +93,14 @@ void EntityManager::updateEntities(float dt) {
 
 	// Deletes all the entities that have been marked for deletion
 	deleteEntitiesMarked();
-	
-	/*
-	collisions:
-	for enemy:
-	for bullet in gun, check collision with the enemy;
-	*/
-
 }
 
 void EntityManager::initializeEntities() {
 	addEnemy(std::make_unique<Enemy>(Pos(100, 100), Vel(40, 40), 20, RED));
-
-	// std::vector<Enemy> tempEnemies = {
-	// 	Enemy({100, 100}, {40, 40}, 20, RED),
-	// 	Enemy({200, 200}, {40, 40}, 20, BLUE),
-	// 	Enemy({300, 300}, {40, 40}, 20, GREEN)
-	// };
-
-	// for (auto& enemy : tempEnemies) {
-	// 	addEnemy(enemy);
-	// }
+	addEnemy(std::make_unique<Enemy>(Pos(200, 200), Vel(40, 40), 20, BLUE));
+	addEnemy(std::make_unique<Enemy>(Pos(300, 300), Vel(40, 40), 20, GREEN));
 }
 
-// Not using this rn
-// void spawnEnemies(){}
-
-// This should not do more than checking collisions, right now it does
-
-void EntityManager::checkCollide(Bullet& bullet, Enemy& enemy){
-	Position enemyPos = enemy.getPos();
-	float dist = Vector2Distance(bullet.pos, enemyPos);
-//	std::cout << dist << std::endl;
-	if( dist < 20 ){
-		bullet.markedForDeletion = true;
-		enemy.playHitSound();
-	}
+bool EntityManager::checkCollide(const Bullet& bullet, const Enemy& enemy) const {
+	return CheckCollisionPointCircle(bullet.getPos(), enemy.getPos(), enemy.getRadius());
 }

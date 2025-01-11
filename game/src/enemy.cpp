@@ -89,3 +89,7 @@ void Enemy::playHitSound() {
 void Enemy::ChangeColor(Color color) {
 	this->color = color;
 }
+
+float Enemy::getRadius() const {
+	return radius;
+};
