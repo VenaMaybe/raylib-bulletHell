@@ -105,49 +105,21 @@ struct Velocity {
 	}
 
 	// Generic comparisons
-	bool operator==(const Velocity& other) const  {
-		return dx == other.dx && dy == other.dy;
-	}
-
-	bool operator!=(const Velocity& other) const  {
-		return !(*this == other); // Just the not
-	}
+	bool operator==(const Velocity& other) const { return dx == other.dx && dy == other.dy; }
+	bool operator!=(const Velocity& other) const { return !(*this == other); }
 
 	// Scale it by a float scalar
-	Velocity operator*(float scalar) const {
-		return Velocity(dx * scalar, dy * scalar);
-	}
-
-	Velocity& operator*=(float scalar) {
-		dx *= scalar;
-		dy *= scalar;
-		return *this;
-	}
+	Velocity operator*(float scalar) const { return Velocity(dx * scalar, dy * scalar); }
+	Velocity& operator*=(float scalar);
 
 	// Common operations bla bla, lazy, move these to cpp later
-	Velocity operator+(const Velocity other) const {
-		return Velocity(dx + other.dx, dy + other.dy);
-	}
-
-	Velocity& operator+=(const Velocity& other) {
-		dx += other.dx;
-		dy += other.dy;
-		return *this;
-	}
-
-	Velocity operator-(const Velocity other) const {
-		return Velocity(dx - other.dx, dy - other.dy);
-	}
-
-	Velocity& operator-=(const Velocity& other) {
-		dx -= other.dx;
-		dy -= other.dy;
-		return *this;
-	}
-
+	Velocity operator+(const Velocity other) const { return Velocity(dx + other.dx, dy + other.dy); }
+	Velocity operator-(const Velocity other) const { return Velocity(dx - other.dx, dy - other.dy); }
 	// Unary operator overload, inverts velocity direction
-	Velocity operator-() const {
-		return Velocity(-dx, -dy);
-	} 
+	Velocity operator-() const { return Velocity(-dx, -dy); } 
+
+	// Useful
+	Velocity& operator+=(const Velocity& other);
+	Velocity& operator-=(const Velocity& other);
 };
 
