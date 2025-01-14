@@ -35,7 +35,7 @@ void Player::update(float dt) {
 		targetVel = Vector2Normalize(targetVel);
 
 		// Smoothing approach the targetVel
-		float accel = 10 * dt;
+		float accel = 10 * dt;	// Move this into base class?
 		vel += (targetVel - vel) * accel;
 		
 	} else if (controlSystem == ControlTypes::Tank) {

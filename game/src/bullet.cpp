@@ -15,7 +15,7 @@ void Bullet::update(float dt) {
 
 	// std::cout << "Age: " << age << ", MaxAge: " << maxAge << "\n";
 	if (age > maxAge) {
-		markedForDeletion = true;
+		markForDeletion();
 		std::cout << "Bullet marked for deletion\n";
 	}
 

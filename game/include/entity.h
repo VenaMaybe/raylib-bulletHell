@@ -38,3 +38,5 @@ inline void Entity::setPos(const Position &pos) { this->pos = pos; }
 inline void Entity::setVel(const Velocity &vel) { this->vel = vel; }
 inline void Entity::setDir(const Direction &dir){ this->dir = dir; }
 inline void Entity::setSpeed(float speed) 		{ this->speed = speed; }
+
+// Make a child class EntityWithAcceleration that inherits from this class 
