@@ -15,11 +15,10 @@
 class Gun {
 public:
 	Gun(
-//		std::function<void(Gun&)> onFireCallback,
 		std::unique_ptr<IGunBehavior> behavior,
 		std::shared_ptr<Entity> ownedByEntity,
 		std::vector<Bullet>* bullets
-	); // Pass in a function to describe onFire behavior
+	);
 
 	void render();
 	void renderBullets();
@@ -35,25 +34,4 @@ private:
 
 	// Polymorphic pointer to the chosen behavior
 	std::unique_ptr<IGunBehavior> gunBehavior;
-
-	// Before, was just straight up a dogged callback lol
-	// std::function<void(Gun&)> onFire; // called everytime u click
 };
-
-/*
-
-// Holds the implementation of the callback + specifics for a gun type
-struct GunSpecificEx {
-	// Specific to this gun
-	int maxBullets = 10;
-	float bulletSpeed = 1000;
-	float maxBulletAge = 3;
-	float percentOfOwnerVelocity = 0.15; // Todo: Change this based on speed of bullet!!!
-	float recoilPercent = 2;
-	AudioBit gunSound;
-	GunSpecificEx();
-	//
-	void shoot(Gun& gun);
-};
-
-*/

@@ -27,25 +27,7 @@ int main() {
 
 	// create a specific gun
 	auto gunBehavior = std::make_unique<PistolBehavior>();
-	Gun  playerGun(std::move(gunBehavior), player, &em.getBullets());
-
-	
-//	GunSpecificEx gunSpecific_Pistol;	// should be moved to em,, all stuff below too
-
-	// create a gun of type pistol
-//	Gun playerGun(
-//		[&gunSpecific_Pistol](Gun& gun) { gunSpecific_Pistol.shoot(gun); },
-//		player, 
-//		&em.getBullets()
-//	);
-	/* Depends on this pointer & specific instance
-	   gunSpecific,shoot hasa a type pointer-to-member-function
-	   and thus needs an instance.
-
-	   We wrap it in a lambda to supply the instance,
-	   The lambda has the correct signature: void(Gun&)
-	   thus it is assigned to the callback
-	*/
+	Gun playerGun(std::move(gunBehavior), player, &em.getBullets());
 
 	em.setPlayer(player.get());
 	em.setPlayerGun(&playerGun);
@@ -56,10 +38,7 @@ int main() {
 	//
 
 	/* GOAL: Move all this to a rendering manager!!! */
-
-
-
-
+	// Have a flag if something is to be rendered with a trail or not
 
 	// Load the final grabber
 	Shader trailShader = LoadShader(nullptr, "game/shaders/trailImage.fs");

@@ -1,13 +1,13 @@
 #include "gun.h"
 
 Gun::Gun(
-//		std::function<void(Gun&)> onFireCallback,
 		std::unique_ptr<IGunBehavior> behavior,
 		std::shared_ptr<Entity> ownedByEntity,
 		std::vector<Bullet>* bullets
 	):
-//		onFire(onFireCallback), // Pass in a function to describe onFire behavior
-		gunBehavior(std::move(behavior)), //
+		gunBehavior(std::move(behavior)), 
+			// behavior is now empty and its contents are moved into gunBehavior
+			// without std::move, the compiler tries to copy behavior but std::unique_ptr isn't copyable
 		owner(ownedByEntity),
 		bullets(bullets)
 {}; 
@@ -36,13 +36,6 @@ void Gun::processClick() {
 	}
 }
 
-
-// Old version with a callback
-// void Gun::processClick() {
-// 	if (onFire) { onFire(*this); }
-// 	else { std::cout << "Uh oh\n"; }
-// };
-
 std::shared_ptr<Entity> Gun::getOwner() {
 	auto ownerPtr = owner.lock();
 	if (!ownerPtr) {
@@ -50,41 +43,3 @@ std::shared_ptr<Entity> Gun::getOwner() {
 	}
 	return ownerPtr;
 }
-
-//
-//	Specific
-//
-
-/*
-
-GunSpecificEx::GunSpecificEx(): gunSound("game/sounds/gunEx1.wav") {};
-
-void GunSpecificEx::shoot(Gun& gun) {
-	std::cout << "Shoot Clicked\n";
-
-	const int& currentBullets = gun.bullets->size();
-	const auto& owner = gun.getOwner();
-
-	// Can fire
-	if (currentBullets < maxBullets) {
-		std::cout << "Bullet Added, current count: " << currentBullets << "\n";
-		gunSound.playSound();
-		Velocity bulletVel = (owner->getDir()) + (owner->getVel() * percentOfOwnerVelocity);
-		Velocity playerVelDueToRecoil(0, 0);
-		// Some percent of the velocity goes into the player
-		playerVelDueToRecoil = -Velocity(Vector2Lerp(playerVelDueToRecoil, bulletVel, recoilPercent));
-
-		// Add the recoil to the player's velocity
-		owner->setVel((owner->getVel() + playerVelDueToRecoil));
-
-		// Add the bullet to be simulated to list of bullets
-		gun.bullets->emplace_back(
-			gun.posMuzzle,	// Spawn Location
-			bulletVel,		// Velocity
-			bulletSpeed,	// Speed of bullet
-			maxBulletAge	// Duration of Bullet
-		);
-	}
-};
-
-*/
