@@ -7,7 +7,8 @@ Shader for trails	- Done
 Recoil				- Done
 Added sound effects	- Done, scuffed destructor
 Fix sound effects	- Done, made entity manager use smart pointers
-Fix trail gaps		- Do: by filling with spline between pts
+Fix trail gaps		- Done, by filling with spline between pts
+
 
 
 	Thoughts:

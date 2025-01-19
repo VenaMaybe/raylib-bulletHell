@@ -73,14 +73,15 @@ void EntityManager::updateEntities(float dt) {
 	// This is really bad, eventually use grid partitioning for better performance
 	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
 	for (auto& bullet : bullets) {
-		bullet.update(dt);
 		for (auto& enemy : enemies) {
 			if (checkCollide(bullet, *enemy)) {
 				// Mark the bullet hitting for deletion
 				bullet.markForDeletion();
+				bullet.setPos(enemy->getPos()); // Update pos so line segment drawn correctly
 				enemy->playHitSound();
 			}
 		}
+		bullet.update(dt);
 	}
 
 	if (!enemies.empty()) {

@@ -14,8 +14,12 @@ public:
 
 	void setMaxAge(float maxAge);
 	float getMaxAge() const;
+	
+	void setPriorPos(Pos pos);
+	Position getPriorPos() const; // Returns pos 1 tick ago
 
 private:
+	Position priorPos;
 	float maxAge;
 	bool markedForDeletion = false;
 	float age = 0;
