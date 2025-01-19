@@ -95,7 +95,7 @@ void EntityManager::updateEntities(float dt) {
 			enemy->update(dt);
 		}
 	} else {
-		std::cout << "Enemies vector is empty!" << std::endl;
+		// std::cout << "Enemies vector is empty!" << std::endl;
 	}
 
 	// Deletes all the entities that have been marked for deletion

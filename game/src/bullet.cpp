@@ -14,6 +14,7 @@ void Bullet::render() {
 }
 
 void Bullet::update(float dt) {
+	setDir(vel); // Not sure if needed
 	setPriorPos(pos);
 	age += dt;
 

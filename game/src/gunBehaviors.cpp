@@ -26,17 +26,19 @@ ZigzagBulletBehavior::ZigzagBulletBehavior() {
 		float speed = bullet.getSpeed();
 		float timeAccumulator = bullet.getAge();
 
-		float zigzagOffset = sin(timeAccumulator * 100.f) * 10.f;
+		float zigzagOffset = sin( ( timeAccumulator * 10.f ) + (PI/2) ) * 1.f;
 
 		Dir dir = bullet.getDir();
 		Vel orthogonal = Vel(dir.y, -dir.x);
 
+		std::cout << zigzagOffset << "\n";
+
 		orthogonal *= zigzagOffset;
-		vel *= 0.1;
+		vel *= 0.2;
 
-		printVector2(orthogonal);
+		// printVector2(orthogonal);
 
-		bullet.setPos(pos + ( ( orthogonal + vel ) ) * speed * dt );
+		bullet.setPos(pos + ( ( vel + orthogonal ) ) * speed * dt );
 	};
 }
 

@@ -37,7 +37,7 @@ inline Velocity  Entity::getScaledVel() const 	{ return vel * speed;}
 inline float Entity::getSpeed() const 			{ return speed; }
 inline void Entity::setPos(const Position &pos) { this->pos = pos; }
 inline void Entity::setVel(const Velocity &vel) { this->vel = vel; }
-inline void Entity::setDir(const Direction &dir){ this->dir = dir; }
+inline void Entity::setDir(const Direction &dir){ this->dir = Vector2Normalize(dir); }
 inline void Entity::setSpeed(float speed) 		{ this->speed = speed; }
 
 
