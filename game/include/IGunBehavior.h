@@ -1,18 +1,10 @@
+// Implementation of a Strategy Pattern from https://en.wikipedia.org/wiki/Strategy_pattern
 #pragma once
 #include <memory>
-#include <functional>
+#include "IBulletBehavior.h"
 
 // Forward Declaration of Gun
 class Gun;
-
-// Forward Declaration of Bullet
-class Bullet;
-
-// Implementation of a Strategy Pattern from https://en.wikipedia.org/wiki/Strategy_pattern
-
-
-
-// Sort of like sub behaviors:
 
 // Define behavior on reload, e.g. Reload 2 at a time
 class IReloadBehavior {
@@ -35,21 +27,6 @@ public:
 
 	// Reloads the ammo
 	virtual void reloadAmmo(Gun& gun) = 0;
-};
-
-// Define behavior of the bullet fired, e.g. bullet velocity and max bullet age
-class IBulletBehavior {
-public:
-	virtual ~IBulletBehavior() = default;
-
-	// Get bullet behavior, returns a function with inputs bullet and dt
-	virtual std::function<void(Bullet&, float)> getBehaviorFunction() const = 0;
-
-	// An identification method
-	virtual const char* name() const { return behaviorName; }
-
-protected:
-	const char* behaviorName;
 };
 
 // Define behavior due to firing, e.g. recoil and sound effect?

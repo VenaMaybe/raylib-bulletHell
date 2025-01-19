@@ -1,50 +1,8 @@
 #include "gun.h"
 #include "gunBehaviors.h"
-#include "raymath.h"
 #include <iostream>
 
-StraightBulletBehavior::StraightBulletBehavior() {
-	behaviorName = "StraightBulletBehavior";
-	behavior = [](Bullet& bullet, float dt) {
-		Pos pos = bullet.getPos();
-		Vel vel = bullet.getVel();
-		float speed = bullet.getSpeed();
 
-		bullet.setPos(pos + ( vel * speed * dt ) );
-	};
-}
-
-std::function<void(Bullet&, float)> StraightBulletBehavior::getBehaviorFunction() const {
-	return behavior;
-}
-
-ZigzagBulletBehavior::ZigzagBulletBehavior() {
-	behaviorName = "ZigzagBulletBehavior";
-	behavior = [](Bullet& bullet, float dt) {
-		Pos pos = bullet.getPos();
-		Vel vel = bullet.getVel();
-		float speed = bullet.getSpeed();
-		float timeAccumulator = bullet.getAge();
-
-		float zigzagOffset = sin( ( timeAccumulator * 10.f ) + (PI/2) ) * 1.f;
-
-		Dir dir = bullet.getDir();
-		Vel orthogonal = Vel(dir.y, -dir.x);
-
-		std::cout << zigzagOffset << "\n";
-
-		orthogonal *= zigzagOffset;
-		vel *= 0.2;
-
-		// printVector2(orthogonal);
-
-		bullet.setPos(pos + ( ( vel + orthogonal ) ) * speed * dt );
-	};
-}
-
-std::function<void(Bullet&, float)> ZigzagBulletBehavior::getBehaviorFunction() const {
-	return behavior;
-}
 
 /////////////////////////////////////////
 
@@ -110,13 +68,15 @@ void PistolBehavior::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) {
 		playerVelDueToRecoil = -Velocity(Vector2Lerp(playerVelDueToRecoil, bulletVel, recoilPercent));
 		owner->setVel((owner->getVel() + playerVelDueToRecoil)); // Add the recoil to the player's velocity
 
+		std::cout << bulletBehavior.getBulletSpeed() << "\t" << bulletBehavior.getMaxBulletAge() << std::endl;
+
 		// Add the bullet to be simulated to list of bullets
 		gun.bullets->emplace_back(
 			gun.posMuzzle,	// Spawn Location
 			bulletVel,		// Velocity
-			bulletSpeed,	// Speed of bullet
-			maxBulletAge,	// Duration of Bullet
-			bulletBehavior.getBehaviorFunction()
+			bulletBehavior.getBulletSpeed(),		// Speed of bullet
+			bulletBehavior.getMaxBulletAge(),		// Duration of Bullet
+			bulletBehavior.getBehaviorFunction()	// Callback to define behavior
 		);
 	}
 }

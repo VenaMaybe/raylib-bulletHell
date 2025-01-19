@@ -1,5 +1,7 @@
 #include "gun.h"
 
+#include "bulletBehaviors.h"
+
 Gun::Gun(
 		std::unique_ptr<IGunBehavior> gunBehavior,
 		std::shared_ptr<Entity> ownedByEntity,
