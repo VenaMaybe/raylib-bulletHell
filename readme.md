@@ -10,6 +10,17 @@ Fix sound effects	- Done, made entity manager use smart pointers
 Fix trail gaps		- Done, by filling with spline between pts
 
 
+Fix Gun Structure
+Add raylib ImGui from: https://github.com/raylib-extras/rlImGui
+Bullet Magazine
+Make bullet's percentOfOwnerVelocity depend on speed of bullet too
+Fix Window Resizing / ShaderTextureResizing
+
+	Todo Jaguar:
+Enemies Shooting Things
+Enemies Hp + Dying
+Player Hp
+
 
 	Thoughts:
 

@@ -1,11 +1,13 @@
 #include "gun.h"
 
 Gun::Gun(
-		std::function<void(Gun&)> onFireCallback,
+//		std::function<void(Gun&)> onFireCallback,
+		std::unique_ptr<IGunBehavior> behavior,
 		std::shared_ptr<Entity> ownedByEntity,
 		std::vector<Bullet>* bullets
-	): 
-		onFire(onFireCallback), // Pass in a function to describe onFire behavior
+	):
+//		onFire(onFireCallback), // Pass in a function to describe onFire behavior
+		gunBehavior(std::move(behavior)), //
 		owner(ownedByEntity),
 		bullets(bullets)
 {}; 
@@ -27,9 +29,19 @@ void Gun::update(float dt) {
 
 // This should spawn the bullets and add to entity manager
 void Gun::processClick() {
-	if (onFire) { onFire(*this); }
-	else { std::cout << "Uh oh\n"; }
-};
+	if (gunBehavior) {
+		gunBehavior->shoot(*this); // Shoot itself
+	} else {
+		throw std::runtime_error("Gun shot that doesn't have behavior");
+	}
+}
+
+
+// Old version with a callback
+// void Gun::processClick() {
+// 	if (onFire) { onFire(*this); }
+// 	else { std::cout << "Uh oh\n"; }
+// };
 
 std::shared_ptr<Entity> Gun::getOwner() {
 	auto ownerPtr = owner.lock();
@@ -42,6 +54,8 @@ std::shared_ptr<Entity> Gun::getOwner() {
 //
 //	Specific
 //
+
+/*
 
 GunSpecificEx::GunSpecificEx(): gunSound("game/sounds/gunEx1.wav") {};
 
@@ -72,3 +86,5 @@ void GunSpecificEx::shoot(Gun& gun) {
 		);
 	}
 };
+
+*/

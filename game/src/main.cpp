@@ -6,6 +6,7 @@
 #include "player.h"
 #include "enemy.h"
 #include "gun.h"
+#include "gunBehaviors.h"
 
 int main() {
 	const int screenWidth = 800;
@@ -25,14 +26,18 @@ int main() {
 	auto player = std::make_shared<Player>();	// should be moved to em
 
 	// create a specific gun
-	GunSpecificEx gunSpecific_Pistol;	// should be moved to em,, all stuff below too
+	auto gunBehavior = std::make_unique<PistolBehavior>();
+	Gun  playerGun(std::move(gunBehavior), player, &em.getBullets());
+
+	
+//	GunSpecificEx gunSpecific_Pistol;	// should be moved to em,, all stuff below too
 
 	// create a gun of type pistol
-	Gun playerGun(
-		[&gunSpecific_Pistol](Gun& gun) { gunSpecific_Pistol.shoot(gun); },
-		player, 
-		&em.getBullets()
-	);
+//	Gun playerGun(
+//		[&gunSpecific_Pistol](Gun& gun) { gunSpecific_Pistol.shoot(gun); },
+//		player, 
+//		&em.getBullets()
+//	);
 	/* Depends on this pointer & specific instance
 	   gunSpecific,shoot hasa a type pointer-to-member-function
 	   and thus needs an instance.
