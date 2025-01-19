@@ -11,16 +11,19 @@
 #include "com_comps.h"
 #include "bullet.h"
 #include "IGunBehavior.h"
+#include "IBulletBehavior.h"
+#include "IAmmoBehavior.h"
 #include "gunBehaviors.h"
 
 class Gun {
 public:
 	Gun( // Eventually change this to using a builder/factory pattern
 		std::unique_ptr<IGunBehavior> gunBehavior,
+		std::unique_ptr<IBulletBehavior> bulletBehavior,
+		std::unique_ptr<IAmmoBehavior> ammoBehavior,
 		std::shared_ptr<Entity> ownedByEntity,
 		std::vector<Bullet>* bullets,
-		std::unique_ptr<IReloadBehavior> reloadBehavior = nullptr,
-		std::unique_ptr<IAmmoBehavior> ammoBehavior = nullptr
+		std::unique_ptr<IReloadBehavior> reloadBehavior = nullptr	// Has a default behavior?
 	);
 
 	void render();
@@ -44,6 +47,7 @@ private:
 	std::weak_ptr<Entity> owner;
 	// Polymorphic pointer to the chosen behavior
 	std::unique_ptr<IGunBehavior> gunBehavior;
+	std::unique_ptr<IBulletBehavior> bulletBehavior;
 	std::unique_ptr<IReloadBehavior> reloadBehavior;
 	std::unique_ptr<IAmmoBehavior> ammoBehavior;
 };

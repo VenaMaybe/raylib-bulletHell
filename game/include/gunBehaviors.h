@@ -2,18 +2,6 @@
 #include "IGunBehavior.h"
 #include "audioBit.h"
 
-
-//
-// Ammo Behaviors
-//
-
-class UnlimitedAmmoBehavior : public IAmmoBehavior {
-public:
-	bool canFire(const Gun& gun) const override;
-	void consumeAmmo(Gun& gun) override;
-	void reloadAmmo(Gun& gun) override;
-};
-
 //
 // Gun Behaviors
 //
@@ -39,7 +27,7 @@ public:
 	void shoot(Gun& gun, const IBulletBehavior& bulletBehavior) override;
 
 private:
-	int maxBullets = 10;					// Ammo Behavior
+//	int maxBullets = 10;					// Ammo Behavior
 
 //	float bulletSpeed = 1000.f;				// Bullet Behavior
 //	float maxBulletAge = 3.f;				// Bullet Behavior

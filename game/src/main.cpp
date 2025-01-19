@@ -7,6 +7,8 @@
 #include "enemy.h"
 #include "gun.h"
 #include "gunBehaviors.h"
+#include "bulletBehaviors.h"
+#include "ammoBehaviors.h"
 
 int main() {
 	const int screenWidth = 800;
@@ -27,11 +29,19 @@ int main() {
 
 	// create a specific gun
 	auto gunBehavior = std::make_unique<PistolBehavior>();
-	Gun playerGun(std::move(gunBehavior), player, &em.getBullets());
+	auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>();
+	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
+	Gun playerGun(
+		std::move(gunBehavior),
+		std::move(bulletBehavior), 
+		std::move(ammoBehavior),
+		player, 
+		&em.getBullets()
+	);
 
 	em.setPlayer(player.get());
 	em.setPlayerGun(&playerGun);
-//	em.initializeEntities();
+	em.initializeEntities();
 
 	//
 	//	Shader for trails
