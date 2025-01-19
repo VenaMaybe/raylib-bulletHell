@@ -11,13 +11,16 @@
 #include "com_comps.h"
 #include "bullet.h"
 #include "IGunBehavior.h"
+#include "gunBehaviors.h"
 
 class Gun {
 public:
-	Gun(
-		std::unique_ptr<IGunBehavior> behavior,
+	Gun( // Eventually change this to using a builder/factory pattern
+		std::unique_ptr<IGunBehavior> gunBehavior,
 		std::shared_ptr<Entity> ownedByEntity,
-		std::vector<Bullet>* bullets
+		std::vector<Bullet>* bullets,
+		std::unique_ptr<IReloadBehavior> reloadBehavior = nullptr,
+		std::unique_ptr<IAmmoBehavior> ammoBehavior = nullptr
 	);
 
 	void render();
@@ -26,12 +29,21 @@ public:
 	void processClick(); // This should take in a command
 	std::shared_ptr<Entity> getOwner();
 
+	// Getters for the behaviors
+	IGunBehavior* getGunBehavior() const;
+	IReloadBehavior* getReloadBehavior() const;
+	IAmmoBehavior* getAmmoBehavior() const;
+
 	Position posMuzzle; // Distance from posBase in dir by some scalar, where bullets come from
+	
+	// TODO: Bullets themselves should be a component later lol
 	std::vector<Bullet>* bullets;
 
 private:
+	// entity that owns the gun
 	std::weak_ptr<Entity> owner;
-
 	// Polymorphic pointer to the chosen behavior
 	std::unique_ptr<IGunBehavior> gunBehavior;
+	std::unique_ptr<IReloadBehavior> reloadBehavior;
+	std::unique_ptr<IAmmoBehavior> ammoBehavior;
 };

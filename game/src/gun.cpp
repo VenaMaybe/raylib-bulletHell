@@ -1,15 +1,19 @@
 #include "gun.h"
 
 Gun::Gun(
-		std::unique_ptr<IGunBehavior> behavior,
+		std::unique_ptr<IGunBehavior> gunBehavior,
 		std::shared_ptr<Entity> ownedByEntity,
-		std::vector<Bullet>* bullets
+		std::vector<Bullet>* bullets,
+		std::unique_ptr<IReloadBehavior> reloadBehavior,
+		std::unique_ptr<IAmmoBehavior> ammoBehavior
 	):
-		gunBehavior(std::move(behavior)), 
+		gunBehavior(std::move(gunBehavior)), 
 			// behavior is now empty and its contents are moved into gunBehavior
 			// without std::move, the compiler tries to copy behavior but std::unique_ptr isn't copyable
 		owner(ownedByEntity),
-		bullets(bullets)
+		bullets(bullets),
+		reloadBehavior(std::move(reloadBehavior)),
+		ammoBehavior(std::move(ammoBehavior))
 {}; 
 
 void Gun::render() {
@@ -29,8 +33,13 @@ void Gun::update(float dt) {
 
 // This should spawn the bullets and add to entity manager
 void Gun::processClick() {
+
+	ZigzagBulletBehavior meow;
+
+	std::cout << "Using Bullet Behavior: " <<  meow.name() << std::endl;
+
 	if (gunBehavior) {
-		gunBehavior->shoot(*this); // Shoot itself
+		gunBehavior->shoot(*this, meow); // Shoot itself
 	} else {
 		throw std::runtime_error("Gun shot that doesn't have behavior");
 	}
@@ -43,3 +52,7 @@ std::shared_ptr<Entity> Gun::getOwner() {
 	}
 	return ownerPtr;
 }
+
+IGunBehavior* Gun::getGunBehavior() const { return gunBehavior.get(); }
+IReloadBehavior* Gun::getReloadBehavior() const { return reloadBehavior.get(); }
+IAmmoBehavior* Gun::getAmmoBehavior() const { return ammoBehavior.get(); }

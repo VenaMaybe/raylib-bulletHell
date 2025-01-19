@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "raymath.h"
 #include "com_comps.h"
 
 // Abstract class for all Entities
@@ -27,11 +28,11 @@ protected:
 };
 
 inline Entity::Entity(Position p, Velocity v, float speed, Direction d)
-	: pos(p), vel(v), speed(speed), dir(d) {}
+	: pos(p), vel(v), speed(speed), dir(Vector2Normalize(d)) {}
 
 inline Position  Entity::getPos() const 		{ return pos; }
 inline Velocity  Entity::getVel() const 		{ return vel; }
-inline Direction Entity::getDir() const 		{ return dir; }
+inline Direction Entity::getDir() const 		{ return dir; } // Normalized Direction
 inline Velocity  Entity::getScaledVel() const 	{ return vel * speed;}
 inline float Entity::getSpeed() const 			{ return speed; }
 inline void Entity::setPos(const Position &pos) { this->pos = pos; }
