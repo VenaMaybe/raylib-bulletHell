@@ -27,16 +27,19 @@ Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color star
 
 // Update the Enemy's position based on its velocity
 void Enemy::update(float deltaTime) {
+	// Get mouse pos
+//	Position mousePos = GetMousePosition();
+
+	// Get vector from player to mouse
+//	dir = Vector2Normalize(Vector2Subtract(mousePos, pos));
+
+	setDir(vel);
+
 	//move 
 	pos.x += getScaledVel().dx * deltaTime;
 	pos.y += getScaledVel().dy * deltaTime;
 
-	// Set the direction
-	setDir(getVel());
-
 	ownedGun->update(deltaTime);
-//	std::cout << "meow MEELEKJFHGLKSDFHG\n";
-
 }
 
 void Enemy::avoidEnemy(Enemy* other){
@@ -125,13 +128,6 @@ void Enemy::hitBy(Bullet other){
 }
 
 void Enemy::giveGun(std::shared_ptr<Gun> gunToBeGiven) {
-
 	// Try doing std::move() later
 	ownedGun = gunToBeGiven;
-
-//	if(ownedGun.expired()) {
-//		std::cout << "RAAAAAAAAAAAAAAAA\n";
-//	}
-
-	std::cout << gunToBeGiven->posMuzzle.x << std::endl;
 }

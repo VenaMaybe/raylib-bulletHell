@@ -75,21 +75,16 @@ void EntityManager::deleteEntitiesMarked() {
 }
 
 void EntityManager::giveEnemiesAGun() {
-
-	std::cout << "\t\tMEOWMEOWMEOWMEWMO\n";
-
-
-
 	for (auto& enemy : enemies) {
 		// create a specific gun
 		auto gunBehavior = std::make_unique<SingleShotShooting>();
-		auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>();
-		auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
+		auto bulletBehavior = std::make_unique<StraightBulletBehavior>();
+		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
 
 		gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
 
-		gunBehavior->addEffect(std::make_unique<RecoilEffect>(2.f));
-		gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>());
+		gunBehavior->addEffect(std::make_unique<RecoilEffect>(1.f));
+//		gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>()); // Gets really annoying cuz happening all at once
 
 
 		std::shared_ptr<Gun> gunForEnemies = std::make_shared<Gun>(
@@ -115,8 +110,10 @@ void EntityManager::updateEntities(float dt) {
 	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
 	for (auto& bullet : bullets) {
 		for (auto& enemy : enemies) {
-			if (checkCollide(bullet, *enemy)) {
+			if (checkCollide(bullet, *enemy) && !bullet.isShooter(enemy.get())) {
 				// Mark the bullet hitting for deletion
+
+				// Enemies getting hit by their own bullets
 				bullet.markForDeletion();
 				
 				bullet.setPos(enemy->getPos()); // Update pos so line segment drawn correctly

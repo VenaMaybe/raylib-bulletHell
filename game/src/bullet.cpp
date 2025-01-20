@@ -4,7 +4,8 @@ Bullet::Bullet(Position pos, Velocity vel, float speed, float maxAge,
 			std::function<void(Bullet&, float)> behavior) 
 	:	Entity(pos, vel, speed, vel),
 		maxAge(maxAge),
-		behavior(std::move(behavior))
+		behavior(std::move(behavior)),
+		priorPos(pos)
 	{
 		currentColor = currentColor;
 	}
@@ -12,7 +13,6 @@ Bullet::Bullet(Position pos, Velocity vel, float speed, float maxAge,
 void Bullet::render() {
 	DrawCircleV(pos, radius, currentColor);
 	DrawSplineSegmentLinear(pos, priorPos, radius, currentColor);
-
 }
 
 void Bullet::update(float dt) {
@@ -60,3 +60,18 @@ void Bullet::setPriorPos(Pos pos) {
 Position Bullet::getPriorPos() const {
 	return priorPos;
 }
+
+
+void Bullet::setShooter(Entity* shooter) {
+	this->shooter = shooter;
+}
+
+bool Bullet::isShooter(Entity* shooterInQuestion) {
+	if (!shooter) {
+		return false;
+	}
+
+	return (shooter == shooterInQuestion) ? true : false;
+}
+
+

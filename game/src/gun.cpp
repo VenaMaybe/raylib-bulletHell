@@ -19,34 +19,32 @@ Gun::Gun(
 {}
 
 void Gun::render() {
-	DrawCircleV(getOwner()->getPos(), 30, BROWN);
+	// DrawCircleV(getOwner()->getPos(), 30, BROWN); // For Debugging
 	DrawLineEx(getOwner()->getPos(), posMuzzle, 10, RAYWHITE);
 
 
-//	// Lmao Eventually move this somewhere else
-//
-//	AmmoInfo ammoInfo = ammoBehavior->getAmmoInfo();
-//	Position drawPos {0 , 30};
-//	Position offset {0, 12};
-//
-//	for (const auto& info : ammoInfo) {
-//		DrawText(info.ammoTypeName.c_str(), drawPos.x, drawPos.y, 10, RAYWHITE);
-//		drawPos += offset;
-//
-//		std::string ammoCount = std::to_string(info.currentAmmo) + "/" + std::to_string(info.maxAmmo);
-//		DrawText(ammoCount.c_str(), drawPos.x, drawPos.y, 10, RAYWHITE);
-//		drawPos += offset;
-//	}
-//
-//	DrawText("[R-Mouse] shoot", drawPos.x, drawPos.y, 10, RAYWHITE);
-//	drawPos += offset;
-//	DrawText("[R] reload", drawPos.x, drawPos.y, 10, RAYWHITE);
-//	drawPos += offset;
-//	DrawText("[WASD] move", drawPos.x, drawPos.y, 10, RAYWHITE);
-//	drawPos += offset;
-//	DrawText("[Esc] close", drawPos.x, drawPos.y, 10, RAYWHITE);
+	// Lmao Eventually move this somewhere else
 
+	AmmoInfo ammoInfo = ammoBehavior->getAmmoInfo();
+	Position drawPos {0, 30};
+	Position offset {0, 12};
 
+	for (const auto& info : ammoInfo) {
+		DrawText(info.ammoTypeName.c_str(), drawPos.x, drawPos.y, 10, RAYWHITE);
+		drawPos += offset;
+
+		std::string ammoCount = std::to_string(info.currentAmmo) + "/" + std::to_string(info.maxAmmo);
+		DrawText(ammoCount.c_str(), drawPos.x, drawPos.y, 10, RAYWHITE);
+		drawPos += offset;
+	}
+
+	DrawText("[R-Mouse] shoot", drawPos.x, drawPos.y, 10, RAYWHITE);
+	drawPos += offset;
+	DrawText("[R] reload", drawPos.x, drawPos.y, 10, RAYWHITE);
+	drawPos += offset;
+	DrawText("[WASD] move", drawPos.x, drawPos.y, 10, RAYWHITE);
+	drawPos += offset;
+	DrawText("[Esc] close", drawPos.x, drawPos.y, 10, RAYWHITE);
 }
 
 // Updates all the bullets cuz I'm lazy

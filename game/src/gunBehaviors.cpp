@@ -28,6 +28,9 @@ void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) 
 		bulletBehavior.getBehaviorFunction()	// Callback to define behavior
 	);
 
+	// Set the shooter so doesn't collide with self
+	newBullet.setShooter(owner.get());
+
 	// Apply each bullet modifier in sequence // Todo: Later add a flag for specified order
 	for (auto& modifier : bulletModifiers) {
 		modifier->modifyBullet(newBullet, gun, bulletBehavior);

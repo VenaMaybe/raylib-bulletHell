@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <memory>
 #include "com_comps.h"
 #include "entity.h"
 
@@ -21,6 +22,9 @@ public:
 	void setPriorPos(Pos pos);
 	Position getPriorPos() const; // Returns pos 1 tick ago
 
+	void setShooter(Entity* shooterPtr);
+	bool isShooter(Entity* shooterInQuestion);
+
 private:
 	Position priorPos;
 	float maxAge;
@@ -36,4 +40,9 @@ private:
 
 	// Function to control the bullet's behavior with inputs bullet and dt
 	std::function<void(Bullet&, float)> behavior; // Maybe someday abstract this to all entities lol
+
+	// Non-owning reference to the shooter
+	const Entity* shooter;
+
+	// Todo: Add flag so certain enemies can't shoot certain other enemies
 };

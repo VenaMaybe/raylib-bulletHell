@@ -3,6 +3,8 @@
 #include "raymath.h"
 #include "com_comps.h"
 
+// Todo: give all entities a name
+
 // Abstract class for all Entities
 class Entity {
 public:
