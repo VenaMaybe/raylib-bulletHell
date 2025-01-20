@@ -32,13 +32,10 @@ void Enemy::update(float deltaTime) {
 
 	// Get vector from player to mouse
 //	dir = Vector2Normalize(Vector2Subtract(mousePos, pos));
-
 	setDir(vel);
-
 	//move 
 	pos.x += getScaledVel().dx * deltaTime;
 	pos.y += getScaledVel().dy * deltaTime;
-
 	ownedGun->update(deltaTime);
 }
 

@@ -22,3 +22,8 @@ private:
 	AudioBit onShootSound;
 };
 
+class BloomOnHitEffect : public IGunEffect {
+public:
+	BloomOnHitEffect();
+	void apply(Gun& gun) override;
+};

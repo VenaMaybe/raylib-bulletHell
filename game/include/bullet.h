@@ -5,6 +5,9 @@
 #include "com_comps.h"
 #include "entity.h"
 
+//forward declaration for enemy
+class Enemy;
+
 struct Bullet : Entity {
 public:
 	Bullet(Position pos, Velocity vel, float speed, float maxAge,
@@ -18,10 +21,8 @@ public:
 	void setMaxAge(float maxAge);
 	float getMaxAge() const;
 	float getAge() const;
-	
 	void setPriorPos(Pos pos);
 	Position getPriorPos() const; // Returns pos 1 tick ago
-
 	void setShooter(Entity* shooterPtr);
 	bool isShooter(Entity* shooterInQuestion);
 

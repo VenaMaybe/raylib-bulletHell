@@ -78,12 +78,13 @@ void EntityManager::giveEnemiesAGun() {
 	for (auto& enemy : enemies) {
 		// create a specific gun
 		auto gunBehavior = std::make_unique<SingleShotShooting>();
-		auto bulletBehavior = std::make_unique<StraightBulletBehavior>();
+		//gunBehavior.setSpeed()
+		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(200.f);
 		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
 
-		gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
+		//gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
 
-		gunBehavior->addEffect(std::make_unique<RecoilEffect>(1.f));
+		//gunBehavior->addEffect(std::make_unique<RecoilEffect>(5.f));
 //		gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>()); // Gets really annoying cuz happening all at once
 
 
@@ -109,8 +110,12 @@ void EntityManager::updateEntities(float dt) {
 	// This is really bad, eventually use grid partitioning for better performance
 	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
 	for (auto& bullet : bullets) {
+		if(!bullet.isShooter(player) && checkPlayerCollide(bullet)){
+			player->hitBy(bullet);
+			bullet.markForDeletion();
+		}
 		for (auto& enemy : enemies) {
-			if (checkCollide(bullet, *enemy) && !bullet.isShooter(enemy.get())) {
+			if (!bullet.isShooter(enemy.get()) && checkCollide(bullet, *enemy)) {
 				// Mark the bullet hitting for deletion
 
 				// Enemies getting hit by their own bullets
@@ -154,4 +159,8 @@ void EntityManager::initializeEntities() {
 
 bool EntityManager::checkCollide(const Bullet& bullet, const Enemy& enemy) const {
 	return CheckCollisionPointCircle(bullet.getPos(), enemy.getPos(), enemy.getRadius());
+}
+
+bool EntityManager::checkPlayerCollide(const Bullet& bullet){
+	return CheckCollisionPointCircle(player->getPos(), bullet.getPos(), 20);
 }

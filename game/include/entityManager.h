@@ -28,11 +28,11 @@ public:
 	void addEnemy(std::shared_ptr<Enemy> enemy);
 	bool checkCollide(const Bullet& bullet, const Enemy& enemy) const;
 	std::vector<Bullet>& getBullets();
-
+	bool checkPlayerCollide(const Bullet&);
 	void renderBullets();
 	void renderPlayer();
 	void renderEnemies();
-
+	
 	void initializeEntities();
 
 private:

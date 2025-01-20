@@ -17,6 +17,7 @@ message("\t\t MEOW CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
 
 # Platform-specific configuration for linking RayLib
 if(WIN32)
+    add_compile_options(/W0)
     # Windows-specific settings
     include_directories(${CMAKE_SOURCE_DIR}/../raylib-5.5_win64_msvc16/include)
     link_directories(${CMAKE_SOURCE_DIR}/../raylib-5.5_win64_msvc16/lib)

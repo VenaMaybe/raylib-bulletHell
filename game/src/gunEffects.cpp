@@ -1,5 +1,6 @@
 #include "gunEffects.h"
 #include "gun.h"
+#include "raylib.h"
 
 RecoilEffect::RecoilEffect(float recoilPercent)
 	: recoilPercent(recoilPercent) {}
@@ -28,4 +29,12 @@ SoundOnShootEffect::SoundOnShootEffect()
 
 void SoundOnShootEffect::apply(Gun& gun) {
 	onShootSound.playSound();
+}
+
+BloomOnHitEffect::BloomOnHitEffect()
+{}
+
+void BloomOnHitEffect::apply(Gun& gun){
+	std::cout << "meow" << std::endl;
+	DrawCircleV({333.f, 333.f}, 20.f, PINK);
 }

@@ -35,7 +35,7 @@ int main() {
 	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
 
 	gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
-
+	gunBehavior->addEffect(std::make_unique<BloomOnHitEffect>());
 	gunBehavior->addEffect(std::make_unique<RecoilEffect>(2.f));
 	gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>());
 

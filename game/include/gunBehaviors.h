@@ -11,7 +11,7 @@
 class SingleShotShooting : public IGunBehavior {
 public:
 	SingleShotShooting();
-		
+	 
 	void shoot(Gun& gun, const IBulletBehavior& bulletBehavior) override;
 private:
 

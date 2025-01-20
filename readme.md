@@ -26,3 +26,10 @@ Player Hp
 
 Dash
 Train cars
+
+
+Gun visual effects
+Triggered when:
+	Bullet is shot
+	as bullet is being rendered
+	when bullet hits

@@ -1,13 +1,18 @@
 #include "player.h"
 #include "raymath.h"
 
-Player::Player() : Entity(Pos(100, 100), Vel(0, 0), 250, Dir{0, 0}) {}
+Player::Player() : Entity(Pos(100, 100), Vel(0, 0), 250, Dir{0, 0}), hp(10) {}
 
 void Player::render() {
 	DrawCircleV(pos, 10, RAYWHITE);
 	DrawLineEx(pos, Vector2Add(pos, Vector2Scale(dir, 100) ), 4, GREEN); // Debugging for now
 }
-
+int Player::getHp(){
+	return hp;
+}
+void Player::hitBy(Bullet b){
+	hp -= 1;
+}
 void Player::update(float dt) {
 	// Get mouse pos
 	Position mousePos = GetMousePosition();
