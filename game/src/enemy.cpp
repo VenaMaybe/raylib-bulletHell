@@ -4,7 +4,10 @@
 #include <iostream>
 #include "com_comps.h"
 #include "player.h"
-
+#include "gunBehaviors.h"
+#include "bulletBehaviors.h"
+#include "ammoBehaviors.h"
+#include "bulletModifiers.h"
 // Constructor
 Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color startColor, Acl startAcelleration)
 	:   EntityWithAcelleration(startPosition, startVelocity, 100.0f, startVelocity, startAcelleration),
@@ -16,8 +19,11 @@ Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color star
 		movementChangeCounter(0), 
 		movementState("ccw"),
 		markedForDeletion(false),
-		enemyHit("game/sounds/enemyHit1.wav")
-	{}
+		enemyHit("game/sounds/enemyHit1.wav"),
+		hp(3)
+	{
+
+	}
 
 // Update the Enemy's position based on its velocity
 void Enemy::update(float deltaTime) {
@@ -76,16 +82,16 @@ void Enemy::ChangeDirection() {
 	angleVector.y = sin(angle);
 	
 	if (movementState == "in") {
-		vel = Velocity(angleVector.x, angleVector.y);
+		vel = ( vel * 5.0f + Velocity(angleVector.x, angleVector.y))/6;
 	}
 	if (movementState == "out") {
-		vel = Velocity(-angleVector.x , -angleVector.y );
+		vel = (vel * 5.0f + Velocity(-angleVector.x , -angleVector.y ))/6;
 	}
 	if (movementState == "cw") {
-		vel = Velocity(angleVector.y , -angleVector.x );
+		vel = (vel * 5.0f + Velocity(angleVector.y , -angleVector.x ))/6;
 	}
 	if (movementState == "ccw") {
-		vel = Velocity(-angleVector.y , angleVector.x );
+		vel = (vel * 5.0f + Velocity(-angleVector.y , angleVector.x ))/6;
 	}
 }
 
@@ -101,3 +107,9 @@ void Enemy::ChangeColor(Color color) {
 float Enemy::getRadius() const {
 	return radius;
 };
+void Enemy::hitBy(Bullet other){
+	hp -=1;
+	if(hp <= 0) markedForDeletion = true;
+	vel.dx += 14*other.getVel().dx;
+   	vel.dy += 14*other.getVel().dy;
+}

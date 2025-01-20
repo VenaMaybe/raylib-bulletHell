@@ -77,8 +77,10 @@ void EntityManager::updateEntities(float dt) {
 			if (checkCollide(bullet, *enemy)) {
 				// Mark the bullet hitting for deletion
 				bullet.markForDeletion();
+				
 				bullet.setPos(enemy->getPos()); // Update pos so line segment drawn correctly
 				enemy->playHitSound();
+				enemy->hitBy(bullet);
 			}
 		}
 		bullet.update(dt);
@@ -103,12 +105,12 @@ void EntityManager::updateEntities(float dt) {
 }
 
 void EntityManager::initializeEntities() {
-	addEnemy(std::make_unique<Enemy>(Pos(100, 100), Vel(40, 40), 20, RED, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(200, 200), Vel(40, 40), 20, BLUE, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(300, 300), Vel(40, 40), 20, GREEN, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(155, 100), Vel(40, 40), 20, PURPLE, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(255, 200), Vel(40, 40), 20, ORANGE, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(355, 300), Vel(40, 40), 20, YELLOW, Acl(0,0)));
+	addEnemy(std::make_unique<Enemy>(Pos(100, 100), Vel(0, 0), 20, RED, Acl(0,0)));
+	addEnemy(std::make_unique<Enemy>(Pos(200, 200), Vel(0, 0), 20, BLUE, Acl(0,0)));
+	addEnemy(std::make_unique<Enemy>(Pos(300, 300), Vel(0, 0), 20, GREEN, Acl(0,0)));
+	addEnemy(std::make_unique<Enemy>(Pos(155, 100), Vel(0, 0), 20, PURPLE, Acl(0,0)));
+	addEnemy(std::make_unique<Enemy>(Pos(255, 200), Vel(0, 0), 20, ORANGE, Acl(0,0)));
+	addEnemy(std::make_unique<Enemy>(Pos(355, 300), Vel(0, 0), 20, YELLOW, Acl(0,0)));
 }
 
 bool EntityManager::checkCollide(const Bullet& bullet, const Enemy& enemy) const {

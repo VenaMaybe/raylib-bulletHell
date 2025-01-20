@@ -1,7 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include <string>
-
+#include "bullet.h"
 #include "com_comps.h"
 #include "audioBit.h"
 #include "entity.h"
@@ -24,10 +24,11 @@ public:
 	Position GetPlayerPos();
 	void ChangeColor( Color color);
 	bool markedForDeletion;
-	
-	float getRadius() const;
 
+	float getRadius() const;
+	void hitBy(Bullet other);
 private:
+	float hp;
 	float radius;
 	Color color;
 	float engageRange;
