@@ -10,7 +10,7 @@
 #include "bulletModifiers.h"
 // Constructor
 Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color startColor, Acl startAcelleration)
-	:   EntityWithAcelleration(startPosition, startVelocity, 100.0f, startVelocity, startAcelleration),
+	:   EntityWithAcceleration(startPosition, startVelocity, 100.0f, startVelocity, startAcelleration),
 		radius(startRadius), 
 		color(startColor), 
 		engageRange(200), 
@@ -30,6 +30,13 @@ void Enemy::update(float deltaTime) {
 	//move 
 	pos.x += getScaledVel().dx * deltaTime;
 	pos.y += getScaledVel().dy * deltaTime;
+
+	// Set the direction
+	setDir(getVel());
+
+	ownedGun->update(deltaTime);
+//	std::cout << "meow MEELEKJFHGLKSDFHG\n";
+
 }
 
 void Enemy::avoidEnemy(Enemy* other){
@@ -56,6 +63,8 @@ Position Enemy::GetPlayerPos() {
 // Draw the Enemy
 void Enemy::render()  {
 	DrawCircleV(pos, radius, color);
+
+	ownedGun->render();
 }
 
 void Enemy::UpdateMovement() {
@@ -106,10 +115,23 @@ void Enemy::ChangeColor(Color color) {
 
 float Enemy::getRadius() const {
 	return radius;
-};
+}
+
 void Enemy::hitBy(Bullet other){
 	hp -=1;
 	if(hp <= 0) markedForDeletion = true;
 	vel.dx += 14*other.getVel().dx;
    	vel.dy += 14*other.getVel().dy;
+}
+
+void Enemy::giveGun(std::shared_ptr<Gun> gunToBeGiven) {
+
+	// Try doing std::move() later
+	ownedGun = gunToBeGiven;
+
+//	if(ownedGun.expired()) {
+//		std::cout << "RAAAAAAAAAAAAAAAA\n";
+//	}
+
+	std::cout << gunToBeGiven->posMuzzle.x << std::endl;
 }

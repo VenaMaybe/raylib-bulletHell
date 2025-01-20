@@ -52,6 +52,7 @@
 		"MAKESILENT",
 		"raylib",
 		"RAYWHITE",
+		"triggerable",
 		"WASD"
 	]
 }

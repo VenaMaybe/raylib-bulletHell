@@ -50,6 +50,7 @@ int main() {
 	em.setPlayer(player.get());
 	em.setPlayerGun(&playerGun);
 	em.initializeEntities();
+	em.giveEnemiesAGun();
 
 	//
 	//	Shader for trails

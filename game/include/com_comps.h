@@ -6,14 +6,14 @@
 // forward declaration
 struct Position;
 struct Velocity;
-struct Acelleration;
+struct Acceleration;
 using Direction = Vector2;
 
 // Just used to make constructors simpler
 using Pos = Position;
 using Vel = Velocity;
 using Dir = Direction;
-using Acl = Acelleration;
+using Acl = Acceleration;
 using Vec2 = Vector2;
 
 
@@ -127,18 +127,18 @@ struct Velocity {
 };
 
 
-struct Acelleration {
+struct Acceleration {
 	float ddx;
 	float ddy;
 
 	// Default constructor
-	Acelleration() : ddx(0.), ddy(0.) {}
+	Acceleration() : ddx(0.), ddy(0.) {}
 
 	// Default constructor with inputs
-	Acelleration(float ddx, float ddy) : ddx(ddx), ddy(ddy) {};
+	Acceleration(float ddx, float ddy) : ddx(ddx), ddy(ddy) {};
 
 	// Constructor to convert
-	Acelleration(const Vector2& vec) : ddx(vec.x), ddy(vec.y) {}
+	Acceleration(const Vector2& vec) : ddx(vec.x), ddy(vec.y) {}
 
 	// Overload conversion operator, i.e. "Vector2 vec = vel"
 	operator Vector2() const {
@@ -146,7 +146,7 @@ struct Acelleration {
 	}
 
 	// Overload assignment operator
-	Acelleration& operator=(const Vector2& other) {
+	Acceleration& operator=(const Vector2& other) {
 		this->ddx = other.x;
 		this->ddy = other.y;
 		return *this; // return current obj for chaning stupid
@@ -159,20 +159,20 @@ struct Acelleration {
 	}
 
 	// Generic comparisons
-	bool operator==(const Acelleration& other) const { return ddx == other.ddx && ddy == other.ddy; }
-	bool operator!=(const Acelleration& other) const { return !(*this == other); }
+	bool operator==(const Acceleration& other) const { return ddx == other.ddx && ddy == other.ddy; }
+	bool operator!=(const Acceleration& other) const { return !(*this == other); }
 
 	// Scale it by a float scalar
-	Acelleration operator*(float scalar) const { return Acelleration(ddx * scalar, ddy * scalar); }
-	Acelleration& operator*=(float scalar);
+	Acceleration operator*(float scalar) const { return Acceleration(ddx * scalar, ddy * scalar); }
+	Acceleration& operator*=(float scalar);
 
 	// Common operations bla bla, lazy, move these to cpp later
-	Acelleration operator+(const Acelleration other) const { return Acelleration(ddx + other.ddx, ddy + other.ddy); }
-	Acelleration operator-(const Acelleration other) const { return Acelleration(ddx - other.ddx, ddy - other.ddy); }
-	// Unary operator overload, inverts Acelleration direction
-	Acelleration operator-() const { return Acelleration(-ddx, -ddy); } 
+	Acceleration operator+(const Acceleration other) const { return Acceleration(ddx + other.ddx, ddy + other.ddy); }
+	Acceleration operator-(const Acceleration other) const { return Acceleration(ddx - other.ddx, ddy - other.ddy); }
+	// Unary operator overload, inverts Acceleration direction
+	Acceleration operator-() const { return Acceleration(-ddx, -ddy); } 
 
 	// Useful
-	Acelleration& operator+=(const Acelleration& other);
-	Acelleration& operator-=(const Acelleration& other);
+	Acceleration& operator+=(const Acceleration& other);
+	Acceleration& operator-=(const Acceleration& other);
 };

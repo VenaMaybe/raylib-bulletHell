@@ -41,13 +41,13 @@ inline void Entity::setDir(const Direction &dir){ this->dir = Vector2Normalize(d
 inline void Entity::setSpeed(float speed) 		{ this->speed = speed; }
 
 
-class EntityWithAcelleration : public Entity{
+class EntityWithAcceleration : public Entity{
 public:
-	EntityWithAcelleration(Position p, Velocity v, float speed, Direction d, Acelleration a);
-	Acelleration getAcl() const;
+	EntityWithAcceleration(Position p, Velocity v, float speed, Direction d, Acceleration a);
+	Acceleration getAcl() const;
 protected:
-	Acelleration acl;
+	Acceleration acl;
 };
-inline Acelleration EntityWithAcelleration::getAcl() const	{ return acl; }
-inline EntityWithAcelleration::EntityWithAcelleration(Position p, Velocity v, float speed, Direction d, Acelleration a)
+inline Acceleration EntityWithAcceleration::getAcl() const	{ return acl; }
+inline EntityWithAcceleration::EntityWithAcceleration(Position p, Velocity v, float speed, Direction d, Acceleration a)
 	: Entity( p, v, speed, d), acl(a) {};

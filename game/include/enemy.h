@@ -1,13 +1,15 @@
 #pragma once
 #include "raylib.h"
 #include <string>
-#include "bullet.h"
+#include <memory>
 #include "com_comps.h"
-#include "audioBit.h"
 #include "entity.h"
+#include "gun.h"
+#include "bullet.h"
+#include "audioBit.h"
 #include "player.h"
 
-class Enemy : public EntityWithAcelleration {
+class Enemy : public EntityWithAcceleration {
 public:
 	// Constructor
 	Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color startColor, Acl startAcelleration);
@@ -27,6 +29,9 @@ public:
 
 	float getRadius() const;
 	void hitBy(Bullet other);
+
+	void giveGun(std::shared_ptr<Gun> gunToBeGiven);
+
 private:
 	float hp;
 	float radius;
@@ -39,4 +44,7 @@ private:
 	// Store a pointer to the focused player
 	Player* focusedPlayer;
 	AudioBit enemyHit;
+
+	// weak_ptr to a gun (i.e. maybe it has a gun, maybe it doesn't)
+	std::shared_ptr<Gun> ownedGun;
 };

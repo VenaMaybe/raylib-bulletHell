@@ -1,19 +1,22 @@
 #pragma once
 
-/*
- *	From:
- *		https://gameprogrammingpatterns.com/command.html
- * 
- **/
-
-#include "audioManager.h"
-
+// Represents a triggerable game command
 class Command {
 public:
 	virtual ~Command() = default;
+
+	// We want this to take in something
 	virtual void execute() = 0;
 };
 
 //
-//	Maybe use later, smt to think about
-//
+
+class ShootCommand : public Command {
+public:
+	// 
+	virtual void execute();
+};
+
+void ShootCommand::execute() {
+	// Shoot() pew pew
+}

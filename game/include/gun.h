@@ -22,8 +22,7 @@ public:
 		std::unique_ptr<IBulletBehavior> bulletBehavior,
 		std::unique_ptr<IAmmoBehavior> ammoBehavior,
 		std::shared_ptr<Entity> ownedByEntity,
-		std::vector<Bullet>* bullets,
-		std::unique_ptr<IReloadBehavior> reloadBehavior = nullptr	// Has a default behavior?
+		std::vector<Bullet>* bullets
 	);
 
 	void render();
@@ -35,7 +34,6 @@ public:
 	// Getters for the behaviors
 	IGunBehavior* getGunBehavior() const;
 	IBulletBehavior* getBulletBehavior() const;
-	IReloadBehavior* getReloadBehavior() const;
 	IAmmoBehavior* getAmmoBehavior() const;
 
 	Position posMuzzle; // Distance from posBase in dir by some scalar, where bullets come from
@@ -49,6 +47,5 @@ private:
 	// Polymorphic pointer to the chosen behavior
 	std::unique_ptr<IGunBehavior> gunBehavior;
 	std::unique_ptr<IBulletBehavior> bulletBehavior;
-	std::unique_ptr<IReloadBehavior> reloadBehavior;
 	std::unique_ptr<IAmmoBehavior> ammoBehavior;
 };

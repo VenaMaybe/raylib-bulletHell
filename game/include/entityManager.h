@@ -16,10 +16,16 @@ public:
 
 	void setPlayer(Player* player);
 	void setPlayerGun(Gun* gun);
+
+	//
+	void giveEnemiesAGun();
+	//
+
+
 	void updateEntities(float dt);
 	void deleteEntitiesMarked();
 
-	void addEnemy(std::unique_ptr<Enemy> enemy);
+	void addEnemy(std::shared_ptr<Enemy> enemy);
 	bool checkCollide(const Bullet& bullet, const Enemy& enemy) const;
 	std::vector<Bullet>& getBullets();
 
@@ -33,5 +39,5 @@ private:
 	Player* player;
 	Gun* playerGun;
 	std::vector<Bullet> bullets;
-	std::vector<std::unique_ptr<Enemy>> enemies;
+	std::vector<std::shared_ptr<Enemy>> enemies;
 };

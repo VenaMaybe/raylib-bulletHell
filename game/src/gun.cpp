@@ -7,8 +7,7 @@ Gun::Gun(
 		std::unique_ptr<IBulletBehavior> bulletBehavior,
 		std::unique_ptr<IAmmoBehavior> ammoBehavior,
 		std::shared_ptr<Entity> ownedByEntity,
-		std::vector<Bullet>* bullets,
-		std::unique_ptr<IReloadBehavior> reloadBehavior
+		std::vector<Bullet>* bullets
 	):
 		gunBehavior(std::move(gunBehavior)), 
 			// behavior is now empty and its contents are moved into gunBehavior
@@ -16,35 +15,36 @@ Gun::Gun(
 		bulletBehavior(std::move(bulletBehavior)),
 		ammoBehavior(std::move(ammoBehavior)),
 		owner(ownedByEntity),
-		bullets(bullets),
-		reloadBehavior(std::move(reloadBehavior))
+		bullets(bullets)
 {}
 
 void Gun::render() {
+	DrawCircleV(getOwner()->getPos(), 30, BROWN);
 	DrawLineEx(getOwner()->getPos(), posMuzzle, 10, RAYWHITE);
 
-	// Lmao Eventually move this somewhere else
 
-	AmmoInfo ammoInfo = ammoBehavior->getAmmoInfo();
-	Position drawPos {0 , 30};
-	Position offset {0, 12};
-
-	for (const auto& info : ammoInfo) {
-		DrawText(info.ammoTypeName.c_str(), drawPos.x, drawPos.y, 10, RAYWHITE);
-		drawPos += offset;
-
-		std::string ammoCount = std::to_string(info.currentAmmo) + "/" + std::to_string(info.maxAmmo);
-		DrawText(ammoCount.c_str(), drawPos.x, drawPos.y, 10, RAYWHITE);
-		drawPos += offset;
-	}
-
-	DrawText("[R-Mouse] shoot", drawPos.x, drawPos.y, 10, RAYWHITE);
-	drawPos += offset;
-	DrawText("[R] reload", drawPos.x, drawPos.y, 10, RAYWHITE);
-	drawPos += offset;
-	DrawText("[WASD] move", drawPos.x, drawPos.y, 10, RAYWHITE);
-	drawPos += offset;
-	DrawText("[Esc] close", drawPos.x, drawPos.y, 10, RAYWHITE);
+//	// Lmao Eventually move this somewhere else
+//
+//	AmmoInfo ammoInfo = ammoBehavior->getAmmoInfo();
+//	Position drawPos {0 , 30};
+//	Position offset {0, 12};
+//
+//	for (const auto& info : ammoInfo) {
+//		DrawText(info.ammoTypeName.c_str(), drawPos.x, drawPos.y, 10, RAYWHITE);
+//		drawPos += offset;
+//
+//		std::string ammoCount = std::to_string(info.currentAmmo) + "/" + std::to_string(info.maxAmmo);
+//		DrawText(ammoCount.c_str(), drawPos.x, drawPos.y, 10, RAYWHITE);
+//		drawPos += offset;
+//	}
+//
+//	DrawText("[R-Mouse] shoot", drawPos.x, drawPos.y, 10, RAYWHITE);
+//	drawPos += offset;
+//	DrawText("[R] reload", drawPos.x, drawPos.y, 10, RAYWHITE);
+//	drawPos += offset;
+//	DrawText("[WASD] move", drawPos.x, drawPos.y, 10, RAYWHITE);
+//	drawPos += offset;
+//	DrawText("[Esc] close", drawPos.x, drawPos.y, 10, RAYWHITE);
 
 
 }
@@ -84,5 +84,4 @@ std::shared_ptr<Entity> Gun::getOwner() {
 
 IGunBehavior* Gun::getGunBehavior() const { return gunBehavior.get(); }
 IBulletBehavior* Gun::getBulletBehavior() const { return bulletBehavior.get(); }
-IReloadBehavior* Gun::getReloadBehavior() const { return reloadBehavior.get(); }
 IAmmoBehavior* Gun::getAmmoBehavior() const { return ammoBehavior.get(); }

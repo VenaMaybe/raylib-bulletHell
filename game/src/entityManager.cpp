@@ -5,6 +5,14 @@
 #include "bullet.h"
 #include "enemy.h"
 #include <iostream>
+
+// For Enemy Guns:
+#include "gunBehaviors.h"
+#include "bulletBehaviors.h"
+#include "ammoBehaviors.h"
+#include "bulletModifiers.h"
+#include "gunEffects.h"
+
 EntityManager::EntityManager() {}
 
 void EntityManager::setPlayer(Player* player) {
@@ -15,7 +23,7 @@ void EntityManager::setPlayerGun(Gun* gun){
 	this->playerGun = gun; 
 }
 
-void EntityManager::addEnemy(std::unique_ptr<Enemy> enemy) {
+void EntityManager::addEnemy(std::shared_ptr<Enemy> enemy) {
 	enemies.push_back(std::move(enemy));
 	enemies.back()->focusPlayer(player);
 }
@@ -47,7 +55,7 @@ void EntityManager::deleteEntitiesMarked() {
 		std::remove_if(
 			enemies.begin(),
 			enemies.end(),
-			[](const std::unique_ptr<Enemy>& enemy) {
+			[](const std::shared_ptr<Enemy>& enemy) {
 				return enemy->markedForDeletion;
 			}
 		),
@@ -65,6 +73,39 @@ void EntityManager::deleteEntitiesMarked() {
 		bullets.end()
 	);
 }
+
+void EntityManager::giveEnemiesAGun() {
+
+	std::cout << "\t\tMEOWMEOWMEOWMEWMO\n";
+
+
+
+	for (auto& enemy : enemies) {
+		// create a specific gun
+		auto gunBehavior = std::make_unique<SingleShotShooting>();
+		auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>();
+		auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
+
+		gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
+
+		gunBehavior->addEffect(std::make_unique<RecoilEffect>(2.f));
+		gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>());
+
+
+		std::shared_ptr<Gun> gunForEnemies = std::make_shared<Gun>(
+			std::move(gunBehavior),
+			std::move(bulletBehavior),
+			std::move(ammoBehavior),
+			enemy,
+			&getBullets()
+		);
+
+		std::cout << "\t\tmeow\n";
+
+		enemy->giveGun(gunForEnemies);
+	}
+}
+
 
 void EntityManager::updateEntities(float dt) {
 	player->update(dt);
@@ -102,15 +143,16 @@ void EntityManager::updateEntities(float dt) {
 
 	// Deletes all the entities that have been marked for deletion
 	deleteEntitiesMarked();
+
 }
 
 void EntityManager::initializeEntities() {
-	addEnemy(std::make_unique<Enemy>(Pos(100, 100), Vel(0, 0), 20, RED, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(200, 200), Vel(0, 0), 20, BLUE, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(300, 300), Vel(0, 0), 20, GREEN, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(155, 100), Vel(0, 0), 20, PURPLE, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(255, 200), Vel(0, 0), 20, ORANGE, Acl(0,0)));
-	addEnemy(std::make_unique<Enemy>(Pos(355, 300), Vel(0, 0), 20, YELLOW, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(100, 100), Vel(0, 0), 20, RED, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(200, 200), Vel(0, 0), 20, BLUE, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(300, 300), Vel(0, 0), 20, GREEN, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(155, 100), Vel(0, 0), 20, PURPLE, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(255, 200), Vel(0, 0), 20, ORANGE, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(355, 300), Vel(0, 0), 20, YELLOW, Acl(0,0)));
 }
 
 bool EntityManager::checkCollide(const Bullet& bullet, const Enemy& enemy) const {

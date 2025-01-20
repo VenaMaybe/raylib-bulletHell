@@ -24,13 +24,13 @@ void Bullet::update(float dt) {
 	currentColor = ColorLerp(colorInit, colorFinal, colorMixAmount * dt);
 	colorMixAmount += colorTransferRate;
 
+	// Should probably get moved to behavior or another callback at somepoint
 	if (age > maxAge) {
 		markedForDeletion = true;
-		std::cout << "Bullet marked for deletion\n";
 	}
 
+	// Implements the behavior of the bullet
 	behavior(*this, dt);
-//	pos += vel * speed * dt; // Part of the behavior
 }
 
 void Bullet::markForDeletion() {
