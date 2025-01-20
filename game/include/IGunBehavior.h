@@ -12,11 +12,13 @@ class Gun;
 class IGunBehavior {
 public:
 	virtual ~IGunBehavior() = default;
+
+	// From a certain gun shoots a bullet with a certain behavior
+	virtual void shoot(Gun& gun, const IBulletBehavior& bulletBehavior) = 0; 
+
 	// Add a modifier to this behavior // Todo: Have remove methods
 	virtual void addModifier(std::unique_ptr<IBulletModifier> modifier);
 	virtual void addEffect(std::unique_ptr<IGunEffect> effect);
-	// From a certain gun shoots a bullet with a certain behavior
-	virtual void shoot(Gun& gun, const IBulletBehavior& bulletBehavior) = 0; 
 
 protected:
 	// Stores all the modifiers
@@ -32,3 +34,10 @@ inline void IGunBehavior::addModifier(std::unique_ptr<IBulletModifier> modifier)
 inline void IGunBehavior::addEffect(std::unique_ptr<IGunEffect> effect) {
 	effects.push_back(std::move(effect));
 }
+
+/*
+
+On Shoot : Muzzle Flash			- Gun Behavior
+
+
+*/

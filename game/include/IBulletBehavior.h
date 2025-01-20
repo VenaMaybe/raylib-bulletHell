@@ -29,3 +29,10 @@ private:
 	float bulletSpeed;
 	float maxBulletAge;
 };
+
+/*
+
+On Hit	 : Explosion			- Bullet Behavior
+Bullet   : How it is drawn		- Bullet Behavior
+
+*/
