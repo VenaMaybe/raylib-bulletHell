@@ -28,8 +28,8 @@ int main() {
 	auto player = std::make_shared<Player>();	// should be moved to em
 
 	// create a specific gun
-	auto gunBehavior = std::make_unique<PistolBehavior>();
-	auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>();
+	auto gunBehavior = std::make_unique<SingleShotShooting>();
+	auto bulletBehavior = std::make_unique<StraightBulletBehavior>();
 	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
 	Gun playerGun(
 		std::move(gunBehavior),

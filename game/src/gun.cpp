@@ -43,6 +43,8 @@ void Gun::render() {
 	DrawText("[R] reload", drawPos.x, drawPos.y, 10, RAYWHITE);
 	drawPos += offset;
 	DrawText("[WASD] move", drawPos.x, drawPos.y, 10, RAYWHITE);
+	drawPos += offset;
+	DrawText("[Esc] close", drawPos.x, drawPos.y, 10, RAYWHITE);
 
 
 }

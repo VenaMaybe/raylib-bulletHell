@@ -5,18 +5,34 @@
 
 /////////////////////////////////////////
 
+SingleShotShooting::SingleShotShooting() {}
+
 void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) {
 	// Get a possibly existing pointer to ammo behavior
 	IAmmoBehavior* ammoBehavior = gun.getAmmoBehavior();
+
+	// We get the owner to apply recoil
+	const auto& owner = gun.getOwner();
 
 	// If this behavior is implemented, use it
 	if (ammoBehavior) {
 		// Can fire
 		if (ammoBehavior->canFire(gun)) {
-			ammoBehavior->consumeAmmo(gun, 1); // Consumes 1 bullet, change to variable amount later
 
+			// Initial Bullet Velocity
+			Velocity bulletVel = (owner->getDir()) + (owner->getVel() * percentOfOwnerVelocity);
 
+			// Add the bullet to be simulated to list of bullets
+			gun.bullets->emplace_back(
+				gun.posMuzzle,	// Spawn Location
+				bulletVel,		// Velocity
+				bulletBehavior.getBulletSpeed(),		// Speed of bullet
+				bulletBehavior.getMaxBulletAge(),		// Duration of Bullet
+				bulletBehavior.getBehaviorFunction()	// Callback to define behavior
+			);
 
+			// Consume 1 ammo
+			ammoBehavior->consumeAmmo(gun, 1);
 		} else {
 		// Can't fire
 
