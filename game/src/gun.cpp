@@ -67,8 +67,6 @@ void Gun::update(float dt) {
 // This should spawn the bullets and add to entity manager
 // 		Todo: Make it use a command architecture 
 void Gun::processClick() {
-	std::cout << "Using Bullet Behavior: " <<  bulletBehavior->name() << std::endl;
-
 	if (gunBehavior) {
 		gunBehavior->shoot(*this, *bulletBehavior.get()); // Shoot itself
 	} else {
@@ -85,5 +83,6 @@ std::shared_ptr<Entity> Gun::getOwner() {
 }
 
 IGunBehavior* Gun::getGunBehavior() const { return gunBehavior.get(); }
+IBulletBehavior* Gun::getBulletBehavior() const { return bulletBehavior.get(); }
 IReloadBehavior* Gun::getReloadBehavior() const { return reloadBehavior.get(); }
 IAmmoBehavior* Gun::getAmmoBehavior() const { return ammoBehavior.get(); }

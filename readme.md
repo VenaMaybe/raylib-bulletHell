@@ -9,9 +9,9 @@ Added sound effects	- Done, scuffed destructor
 Fix sound effects	- Done, made entity manager use smart pointers
 Fix trail gaps		- Done, by filling with spline between pts
 Fix Gun Structure	- Done, Strategy pattern
+Bullet Magazine		- Done, Redesigned to be modular
 
 
-Bullet Magazine
 Add raylib ImGui from: https://github.com/raylib-extras/rlImGui
 Make bullet's percentOfOwnerVelocity depend on speed of bullet too
 Fix Window Resizing / ShaderTextureResizing

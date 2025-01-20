@@ -39,8 +39,11 @@ void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) 
 	// Consume 1 ammo
 	ammoBehavior->consumeAmmo(gun, 1);
 
-
-
+	// Todo: Also move this to it's own thing that happens after!
+	// Apply each effect in sequence // Todo: Later also add flag for ordering
+	for (auto& effect : effects) {
+		effect->apply(gun);
+	}
 }
 
 //	void MultiShotShooting::shoot(Gun& gun) {

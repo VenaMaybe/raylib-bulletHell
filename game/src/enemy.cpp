@@ -20,7 +20,7 @@ Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color star
 		movementState("ccw"),
 		markedForDeletion(false),
 		enemyHit("game/sounds/enemyHit1.wav"),
-		hp(3)
+		hp(300000)
 	{
 
 	}

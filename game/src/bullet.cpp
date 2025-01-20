@@ -5,11 +5,13 @@ Bullet::Bullet(Position pos, Velocity vel, float speed, float maxAge,
 	:	Entity(pos, vel, speed, vel),
 		maxAge(maxAge),
 		behavior(std::move(behavior))
-	{}
+	{
+		currentColor = currentColor;
+	}
 
 void Bullet::render() {
-	DrawCircleV(pos, radius, colorInit);
-	DrawSplineSegmentLinear(pos, priorPos, radius, colorInit);
+	DrawCircleV(pos, radius, currentColor);
+	DrawSplineSegmentLinear(pos, priorPos, radius, currentColor);
 
 }
 
@@ -18,9 +20,10 @@ void Bullet::update(float dt) {
 	setPriorPos(pos);
 	age += dt;
 
-	colorInit = ColorLerp(colorInit, colorFinal, .001);
+	// Mixing colors
+	currentColor = ColorLerp(colorInit, colorFinal, colorMixAmount * dt);
+	colorMixAmount += colorTransferRate;
 
-	// std::cout << "Age: " << age << ", MaxAge: " << maxAge << "\n";
 	if (age > maxAge) {
 		markedForDeletion = true;
 		std::cout << "Bullet marked for deletion\n";

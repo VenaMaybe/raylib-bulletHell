@@ -34,6 +34,7 @@ public:
 
 	// Getters for the behaviors
 	IGunBehavior* getGunBehavior() const;
+	IBulletBehavior* getBulletBehavior() const;
 	IReloadBehavior* getReloadBehavior() const;
 	IAmmoBehavior* getAmmoBehavior() const;
 

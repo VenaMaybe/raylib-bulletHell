@@ -10,6 +10,7 @@
 #include "bulletBehaviors.h"
 #include "ammoBehaviors.h"
 #include "bulletModifiers.h"
+#include "gunEffects.h"
 
 int main() {
 	const int screenWidth = 800;
@@ -34,6 +35,9 @@ int main() {
 	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
 
 	gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
+
+	gunBehavior->addEffect(std::make_unique<RecoilEffect>(2.f));
+	gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>());
 
 	Gun playerGun(
 		std::move(gunBehavior),
