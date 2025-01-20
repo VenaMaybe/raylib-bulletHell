@@ -10,37 +10,37 @@ SingleShotShooting::SingleShotShooting() {}
 void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) {
 	// Get a possibly existing pointer to ammo behavior
 	IAmmoBehavior* ammoBehavior = gun.getAmmoBehavior();
+	if (!ammoBehavior || !ammoBehavior->canFire(gun)) { return; }
 
 	// We get the owner to apply recoil
 	const auto& owner = gun.getOwner();
+	if (!owner) { return; }
 
-	// If this behavior is implemented, use it
-	if (ammoBehavior) {
-		// Can fire
-		if (ammoBehavior->canFire(gun)) {
+	// Initial bullet velocity in direction of owner
+	Velocity baseVel = owner->getDir();
 
-			// Initial Bullet Velocity
-			Velocity bulletVel = (owner->getDir()) + (owner->getVel() * percentOfOwnerVelocity);
+	// Add the bullet to be simulated to list of bullets
+	Bullet newBullet (
+		gun.posMuzzle,	// Spawn Location
+		baseVel,		// Velocity
+		bulletBehavior.getBulletSpeed(),		// Speed of bullet
+		bulletBehavior.getMaxBulletAge(),		// Duration of Bullet
+		bulletBehavior.getBehaviorFunction()	// Callback to define behavior
+	);
 
-			// Add the bullet to be simulated to list of bullets
-			gun.bullets->emplace_back(
-				gun.posMuzzle,	// Spawn Location
-				bulletVel,		// Velocity
-				bulletBehavior.getBulletSpeed(),		// Speed of bullet
-				bulletBehavior.getMaxBulletAge(),		// Duration of Bullet
-				bulletBehavior.getBehaviorFunction()	// Callback to define behavior
-			);
-
-			// Consume 1 ammo
-			ammoBehavior->consumeAmmo(gun, 1);
-		} else {
-		// Can't fire
-
-		}		
-	} else {
-	// Not implemented so can fire
-
+	// Apply each bullet modifier in sequence // Todo: Later add a flag for specified order
+	for (auto& modifier : bulletModifiers) {
+		modifier->modifyBullet(newBullet, gun, bulletBehavior);
 	}
+
+	// Add bullet to the gun's bullets list
+	gun.bullets->push_back(std::move(newBullet));
+
+	// Consume 1 ammo
+	ammoBehavior->consumeAmmo(gun, 1);
+
+
+
 }
 
 //	void MultiShotShooting::shoot(Gun& gun) {

@@ -9,6 +9,7 @@
 #include "gunBehaviors.h"
 #include "bulletBehaviors.h"
 #include "ammoBehaviors.h"
+#include "bulletModifiers.h"
 
 int main() {
 	const int screenWidth = 800;
@@ -29,8 +30,11 @@ int main() {
 
 	// create a specific gun
 	auto gunBehavior = std::make_unique<SingleShotShooting>();
-	auto bulletBehavior = std::make_unique<StraightBulletBehavior>();
+	auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>();
 	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
+
+	gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
+
 	Gun playerGun(
 		std::move(gunBehavior),
 		std::move(bulletBehavior), 
