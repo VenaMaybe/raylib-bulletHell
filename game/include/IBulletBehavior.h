@@ -19,7 +19,8 @@ public:
 	// An identification method
 	virtual const char* name() const { return behaviorName; }
 
-protected:
+protected: // Move up so gets are protected
+
 	// Forcing these variables to be initalized or else
 	IBulletBehavior(const char* name, float speed, float ageLimit)
 		: behaviorName(name), bulletSpeed(speed), maxBulletAge(ageLimit) {}
@@ -29,3 +30,4 @@ private:
 	float bulletSpeed;
 	float maxBulletAge;
 };
+

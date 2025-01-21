@@ -82,7 +82,7 @@ void EntityManager::giveEnemiesAGun() {
 		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(600.f);
 		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
 
-		//gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
+		//gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
 
 		//gunBehavior->addEffect(std::make_unique<RecoilEffect>(5.f));
 //		gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>()); // Gets really annoying cuz happening all at once
@@ -111,14 +111,16 @@ void EntityManager::updateEntities(float dt) {
 	// This is really bad, eventually use grid partitioning for better performance
 	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
 	for (auto& bullet : bullets) {
+		// If we hit the player
 		if(!bullet.isShooter(player) && checkPlayerCollide(bullet)){
 			player->hitBy(bullet);
 			bullet.markForDeletion();
+			std::cout << "Player hit" << std::endl;
 		}
-		
 
 		for (auto& enemy : enemies) {
-			if (!bullet.isShooter(enemy.get()) && checkCollide(bullet, *enemy) && bullet.isShooter(player)) {
+			//if (!bullet.isShooter(enemy.get()) && checkCollide(bullet, *enemy)) {
+			if (bullet.isShooter(player) && checkCollide(bullet, *enemy)) {
 				// Mark the bullet hitting for deletion
 
 				// Enemies getting hit by their own bullets
@@ -127,8 +129,10 @@ void EntityManager::updateEntities(float dt) {
 				bullet.setPos(enemy->getPos()); // Update pos so line segment drawn correctly
 				enemy->playHitSound();
 				enemy->hitBy(bullet);
+				std::cout << "An Enemy was hit" << std::endl;
 			}
 		}
+
 		bullet.update(dt);
 	}
 
@@ -152,12 +156,12 @@ void EntityManager::updateEntities(float dt) {
 }
 
 void EntityManager::initializeEntities() {
-	addEnemy(std::make_shared<Enemy>(Pos(100, 100), Vel(0, 0), 20, RED, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(200, 200), Vel(0, 0), 20, BLUE, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(300, 300), Vel(0, 0), 20, GREEN, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(155, 100), Vel(0, 0), 20, PURPLE, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(255, 200), Vel(0, 0), 20, ORANGE, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(355, 300), Vel(0, 0), 20, YELLOW, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(100, 100), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(200, 200), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(300, 300), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(155, 100), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(255, 200), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(355, 300), Vel(0, 0), 10, PINK, Acl(0,0)));
 }
 
 bool EntityManager::checkCollide(const Bullet& bullet, const Enemy& enemy) const {

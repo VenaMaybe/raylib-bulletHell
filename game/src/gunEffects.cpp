@@ -35,6 +35,6 @@ BloomOnHitEffect::BloomOnHitEffect()
 {}
 
 void BloomOnHitEffect::apply(Gun& gun){
-	std::cout << "meow" << std::endl;
+	// std::cout << "meow" << std::endl;
 	DrawCircleV({333.f, 333.f}, 20.f, PINK);
 }
