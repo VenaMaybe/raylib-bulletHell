@@ -149,12 +149,12 @@ void EntityManager::updateEntities(float dt) {
 }
 
 void EntityManager::initializeEntities() {
-	addEnemy(std::make_shared<Enemy>(Pos(100, 100), Vel(0, 0), 10, RED, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(200, 200), Vel(0, 0), 10, BLUE, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(300, 300), Vel(0, 0), 10, GREEN, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(155, 100), Vel(0, 0), 10, PURPLE, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(255, 200), Vel(0, 0), 10, ORANGE, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(355, 300), Vel(0, 0), 10, YELLOW, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(100, 100), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(200, 200), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(300, 300), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(155, 100), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(255, 200), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(355, 300), Vel(0, 0), 10, PINK, Acl(0,0)));
 }
 
 bool EntityManager::checkCollide(const Bullet& bullet, const Enemy& enemy) const {

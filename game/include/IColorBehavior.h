@@ -29,6 +29,7 @@ public:
 	virtual std::vector<Color> getVectorOfColors() const;
 
 protected:
+	// Use to store color inputs so they can be accessed generally
 	std::vector<Color> colors;
 };
 

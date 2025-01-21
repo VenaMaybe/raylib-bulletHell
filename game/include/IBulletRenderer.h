@@ -23,7 +23,6 @@ public:
 		this->colorBehavior = std::move(colorBehavior);
 	}
 
-protected:
 	IColorBehavior& getColorBehavior() const {
 		if (!colorBehavior) { throw std::runtime_error("colorBehavior is not set"); }
 		return *colorBehavior;

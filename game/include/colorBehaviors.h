@@ -1,13 +1,6 @@
 #pragma once
 
-#include <stdexcept>
 #include "IColorBehavior.h"
-
-/*
-
-BIG WIP!!!
-
-*/
 
 class StaticColorBehavior : public IColorBehavior {
 public:
@@ -18,15 +11,21 @@ public:
 
 };
 
-inline StaticColorBehavior::StaticColorBehavior(Color color) {
-	colors.push_back(color);
-}
+/////////////////////////////////////////
 
-inline Color StaticColorBehavior::getColor() const {
-	if (colors.size() > 1) { throw std::runtime_error("Something weird with colors happening"); }
-	return colors[0];
-}
+// Forms a gradient over time
+class GradientOverTime : public IColorBehavior {
+public:
+	GradientOverTime(Color initialColor, Color finalColor, float colorTransferRate, float colorMixAmount = 0.f);
+	Color getColor() const override;
+	void update(float dt) override;
 
-inline void StaticColorBehavior::update(float dt) {
+private:
+	float colorMixAmount;
+	float colorTransferRate;
+	Color outputColor;
 
-}
+};
+
+/////////////////////////////////////////
+// If you want a color dependent on the bullet itself, just pass in a reference in the constructor

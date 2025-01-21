@@ -27,13 +27,19 @@ void Bullet::render() {
 }
 
 void Bullet::update(float dt) {
-	setDir(vel); // Not sure if needed
+	// Initial stuff on update
+	setDir(vel);
 	setPriorPos(pos);
 	age += dt;
 
+	// Update the renderer's color component if required
+	renderer->getColorBehavior().update(dt); // Perhaps later make it so only does this if color component requires it
+
+
+
 	// Mixing colors
-	currentColor = ColorLerp(colorInit, colorFinal, colorMixAmount * dt);
-	colorMixAmount += colorTransferRate;
+//	currentColor = ColorLerp(colorInit, colorFinal, colorMixAmount * dt);
+//	colorMixAmount += colorTransferRate;
 
 	// Should probably get moved to behavior or another callback at somepoint
 	if (age > maxAge) {

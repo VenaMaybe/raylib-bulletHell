@@ -25,8 +25,8 @@ void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) 
 	// Rendering we want for the bullet
 	std::shared_ptr<IBulletRenderer> bulletRenderer = std::make_shared<BasicCircleRenderer>();
 
-	// Set the color behavior for this renderer
-	bulletRenderer->setColorBehavior(std::make_shared<StaticColorBehavior>(RAYWHITE));
+	// Set the color behavior for this renderer, you could make a function to set this conveniently
+	bulletRenderer->setColorBehavior(std::make_shared<GradientOverTime>(RAYWHITE, PINK, 1.f));
 
 	// Add the bullet to be simulated to list of bullets
 	Bullet newBullet (
