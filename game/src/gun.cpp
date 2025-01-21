@@ -53,7 +53,7 @@ void Gun::update(float dt) {
 	posMuzzle = Vector2Add(getOwner()->getPos(), Vector2Scale(getOwner()->getDir(), 16));
 
 	// Uh here cuz funnnn
-	if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
+	if (false) {
 		processClick();
 	}
 

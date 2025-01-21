@@ -6,7 +6,7 @@
 #include "entity.h"
 
 //forward declaration for enemy
-class Enemy;
+
 
 struct Bullet : Entity {
 public:
@@ -25,6 +25,7 @@ public:
 	Position getPriorPos() const; // Returns pos 1 tick ago
 	void setShooter(Entity* shooterPtr);
 	bool isShooter(Entity* shooterInQuestion);
+	bool isShooterEnemy();
 
 private:
 	Position priorPos;
@@ -43,7 +44,7 @@ private:
 	std::function<void(Bullet&, float)> behavior; // Maybe someday abstract this to all entities lol
 
 	// Non-owning reference to the shooter
-	const Entity* shooter;
+	Entity* shooter;
 
 	// Todo: Add flag so certain enemies can't shoot certain other enemies
 };

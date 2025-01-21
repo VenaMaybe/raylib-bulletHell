@@ -79,7 +79,7 @@ void EntityManager::giveEnemiesAGun() {
 		// create a specific gun
 		auto gunBehavior = std::make_unique<SingleShotShooting>();
 		//gunBehavior.setSpeed()
-		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(200.f);
+		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(600.f);
 		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
 
 		//gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
@@ -106,7 +106,8 @@ void EntityManager::giveEnemiesAGun() {
 void EntityManager::updateEntities(float dt) {
 	player->update(dt);
 	playerGun->update(dt);
-	
+	if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+	playerGun->processClick();
 	// This is really bad, eventually use grid partitioning for better performance
 	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
 	for (auto& bullet : bullets) {
@@ -114,8 +115,10 @@ void EntityManager::updateEntities(float dt) {
 			player->hitBy(bullet);
 			bullet.markForDeletion();
 		}
+		
+
 		for (auto& enemy : enemies) {
-			if (!bullet.isShooter(enemy.get()) && checkCollide(bullet, *enemy)) {
+			if (!bullet.isShooter(enemy.get()) && checkCollide(bullet, *enemy) && bullet.isShooter(player)) {
 				// Mark the bullet hitting for deletion
 
 				// Enemies getting hit by their own bullets

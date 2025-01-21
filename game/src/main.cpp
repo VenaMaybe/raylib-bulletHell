@@ -11,6 +11,8 @@
 #include "ammoBehaviors.h"
 #include "bulletModifiers.h"
 #include "gunEffects.h"
+#include <typeinfo>
+
 
 int main() {
 	const int screenWidth = 800;

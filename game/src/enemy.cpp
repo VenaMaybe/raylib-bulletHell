@@ -20,7 +20,8 @@ Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color star
 		movementState("ccw"),
 		markedForDeletion(false),
 		enemyHit("game/sounds/enemyHit1.wav"),
-		hp(300000)
+		hp(4),
+		attackTimer(0)
 	{
 
 	}
@@ -32,16 +33,22 @@ void Enemy::update(float deltaTime) {
 
 	// Get vector from player to mouse
 //	dir = Vector2Normalize(Vector2Subtract(mousePos, pos));
-	setDir(vel);
+
 	//move 
 	pos.x += getScaledVel().dx * deltaTime;
 	pos.y += getScaledVel().dy * deltaTime;
 	ownedGun->update(deltaTime);
+	attackTimer+=1;
+	if(attackTimer == 45){
+		ownedGun->processClick();
+		attackTimer = 0;
+	}
+	
 }
 
 void Enemy::avoidEnemy(Enemy* other){
 	float accelerationConst = 1;
-	float range = 45;
+	float range = 125;
 	float dist = sqrt((pos.x-other->pos.x)*(pos.x-other->pos.x) + (pos.y-other->pos.y)*(pos.y-other->pos.y));
 	if(dist < range){
    		pos.x += (range-dist)*(-other->pos.x + pos.x)/(dist*accelerationConst);
@@ -89,18 +96,21 @@ void Enemy::ChangeDirection() {
 	Vector2 angleVector;
 	angleVector.x = cos(angle);
 	angleVector.y = sin(angle);
-	
+	setDir(Velocity(angleVector.x, angleVector.y));
 	if (movementState == "in") {
-		vel = ( vel * 5.0f + Velocity(angleVector.x, angleVector.y))/6;
+		vel = ( vel * 5.0f + Velocity(angleVector.x, angleVector.y)*2.0f)/6;
+		
 	}
 	if (movementState == "out") {
-		vel = (vel * 5.0f + Velocity(-angleVector.x , -angleVector.y ))/6;
+		vel = (vel * 5.0f + Velocity(-angleVector.x , -angleVector.y )*2.0f)/6;
+		
 	}
 	if (movementState == "cw") {
-		vel = (vel * 5.0f + Velocity(angleVector.y , -angleVector.x ))/6;
+		vel = (vel * 5.0f + Velocity(angleVector.y , -angleVector.x )*4.0f)/6;
+		
 	}
 	if (movementState == "ccw") {
-		vel = (vel * 5.0f + Velocity(-angleVector.y , angleVector.x ))/6;
+		vel = (vel * 5.0f + Velocity(-angleVector.y , angleVector.x )*2.0f)/6;
 	}
 }
 

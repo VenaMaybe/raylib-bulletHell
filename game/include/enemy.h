@@ -29,10 +29,11 @@ public:
 
 	float getRadius() const;
 	void hitBy(Bullet other);
-
+	
 	void giveGun(std::shared_ptr<Gun> gunToBeGiven);
 
 private:
+	int attackTimer;
 	float hp;
 	float radius;
 	Color color;

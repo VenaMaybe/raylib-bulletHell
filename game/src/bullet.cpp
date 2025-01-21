@@ -1,4 +1,8 @@
 #include "bullet.h"
+#include "enemy.h"
+#include <typeinfo>
+
+#include <cassert>
 
 Bullet::Bullet(Position pos, Velocity vel, float speed, float maxAge,
 			std::function<void(Bullet&, float)> behavior) 
@@ -72,6 +76,18 @@ bool Bullet::isShooter(Entity* shooterInQuestion) {
 	}
 
 	return (shooter == shooterInQuestion) ? true : false;
+}
+
+bool Bullet::isShooterEnemy() {
+	if (shooter) {
+		Enemy* enemyPtr = dynamic_cast<Enemy*>(shooter);
+		if (enemyPtr != nullptr) {
+		return true;
+		} else {
+		return false;
+		}
+	}
+	return false;
 }
 
 
