@@ -1,8 +1,10 @@
+#include <memory>
+#include <iostream>
 #include "gun.h"
 #include "gunBehaviors.h"
 #include "IAmmoBehavior.h"
 #include "IBulletRenderer.h"
-#include <iostream>
+#include "colorBehaviors.h"
 
 /////////////////////////////////////////
 
@@ -21,7 +23,10 @@ void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) 
 	Velocity baseVel = owner->getDir();
 
 	// Rendering we want for the bullet
-	std::shared_ptr<IBulletRenderer> basicCircleRenderer = std::make_shared<BasicCircleRenderer>();
+	std::shared_ptr<IBulletRenderer> bulletRenderer = std::make_shared<BasicCircleRenderer>();
+
+	// Set the color behavior for this renderer
+	bulletRenderer->setColorBehavior(std::make_shared<StaticColorBehavior>(RAYWHITE));
 
 	// Add the bullet to be simulated to list of bullets
 	Bullet newBullet (
@@ -30,7 +35,7 @@ void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) 
 		bulletBehavior.getBulletSpeed(),		// Speed of bullet
 		bulletBehavior.getMaxBulletAge(),		// Duration of Bullet
 		bulletBehavior.getBehaviorFunction(),	// Callback to define behavior
-		basicCircleRenderer // Maybe move to bulletBehavior
+		bulletRenderer // Maybe move to bulletBehavior
 	);
 
 	// Set the shooter so doesn't collide with self

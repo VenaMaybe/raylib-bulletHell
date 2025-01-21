@@ -1,7 +1,5 @@
 #include "bullet.h"
 
-#include <cassert>
-
 Bullet::Bullet(
 	Position pos,
 	Velocity vel,
@@ -20,9 +18,7 @@ Bullet::Bullet(
 }
 
 void Bullet::render() {
-	assert(renderer.get());
 	if (!renderer.get()) { return; }
-
 
 	renderer->render(*this);
 
@@ -49,8 +45,6 @@ void Bullet::update(float dt) {
 }
 
 void Bullet::markForDeletion() {
-
-
 	markedForDeletion = true;
 }
 

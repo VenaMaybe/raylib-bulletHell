@@ -9,7 +9,7 @@
 //forward declaration for enemy
 class Enemy;
 
-struct Bullet : Entity {
+class Bullet : public Entity {
 public:
 	Bullet(
 		Position pos,
