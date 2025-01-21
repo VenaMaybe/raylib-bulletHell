@@ -23,7 +23,7 @@ void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) 
 	Velocity baseVel = owner->getDir();
 
 	// Rendering we want for the bullet
-	std::shared_ptr<IBulletRenderer> bulletRenderer = std::make_shared<BasicCircleRenderer>();
+	std::shared_ptr<IBulletRenderer> bulletRenderer = std::make_shared<BasicCircleAndSplineRenderer>();
 
 	// Set the color behavior for this renderer, you could make a function to set this conveniently
 	bulletRenderer->setColorBehavior(std::make_shared<GradientOverTime>(RAYWHITE, PINK, 1.f));

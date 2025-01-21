@@ -1,17 +1,21 @@
 #include "player.h"
 #include "raymath.h"
-
+#include <string>
 Player::Player() : Entity(Pos(100, 100), Vel(0, 0), 250, Dir{0, 0}), hp(10) {}
 
 void Player::render() {
 	DrawCircleV(pos, 10, RAYWHITE);
 	DrawLineEx(pos, Vector2Add(pos, Vector2Scale(dir, 100) ), 4, GREEN); // Debugging for now
+	DrawText(std::to_string(hp).c_str(), 500, 40, 50, RAYWHITE);
 }
 int Player::getHp(){
 	return hp;
 }
 void Player::hitBy(Bullet b){
 	hp -= 1;
+	if (hp <= 0) {
+		throw std::runtime_error("You lose");
+	}
 }
 void Player::update(float dt) {
 	// Get mouse pos

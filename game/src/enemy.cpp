@@ -13,7 +13,7 @@ Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color star
 	:   EntityWithAcceleration(startPosition, startVelocity, 100.0f, startVelocity, startAcelleration),
 		radius(startRadius), 
 		color(startColor), 
-		engageRange(200), 
+		engageRange(500), 
 		inRange(false), 
 		engageTolerance(50), 
 		movementChangeCounter(0), 

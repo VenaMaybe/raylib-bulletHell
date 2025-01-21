@@ -15,8 +15,8 @@
 
 
 int main() {
-	const int screenWidth = 800;
-	const int screenHeight = 600;
+	const int screenWidth = 1200;
+	const int screenHeight = 1000;
 	Vector2 screenRes = { (float)screenWidth, (float)screenHeight };
 
 	// Initialize the window and set up raylib
@@ -32,7 +32,7 @@ int main() {
 	auto player = std::make_shared<Player>();	// should be moved to em
 
 	// create a specific gun
-	auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>();
+	auto bulletBehavior = std::make_unique<StraightBulletBehavior>();
 	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
 
 	auto gunBehavior = std::make_unique<SingleShotShooting>();

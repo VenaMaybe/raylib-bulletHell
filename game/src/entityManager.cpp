@@ -79,7 +79,7 @@ void EntityManager::giveEnemiesAGun() {
 		// create a specific gun
 		auto gunBehavior = std::make_unique<SingleShotShooting>();
 		//gunBehavior.setSpeed()
-		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(600.f);
+		auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>(600.f);
 		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
 
 		//gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
@@ -149,6 +149,7 @@ void EntityManager::updateEntities(float dt) {
 	} else {
 		// std::cout << "Enemies vector is empty!" << std::endl;
 	}
+
 
 	// Deletes all the entities that have been marked for deletion
 	deleteEntitiesMarked();
