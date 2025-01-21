@@ -37,6 +37,7 @@ public:
 
 	void setShooter(Entity* shooterPtr);
 	bool isShooter(Entity* shooterInQuestion);
+	bool isShooterAnEnemy();
 
 private:
 	Position priorPos;

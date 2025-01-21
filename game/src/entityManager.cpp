@@ -110,12 +110,16 @@ void EntityManager::updateEntities(float dt) {
 	// This is really bad, eventually use grid partitioning for better performance
 	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
 	for (auto& bullet : bullets) {
+		// If we hit the player
 		if(!bullet.isShooter(player) && checkPlayerCollide(bullet)){
 			player->hitBy(bullet);
 			bullet.markForDeletion();
+			std::cout << "Player hit" << std::endl;
 		}
+
 		for (auto& enemy : enemies) {
-			if (!bullet.isShooter(enemy.get()) && checkCollide(bullet, *enemy)) {
+			//if (!bullet.isShooter(enemy.get()) && checkCollide(bullet, *enemy)) {
+			if (bullet.isShooter(player) && checkCollide(bullet, *enemy)) {
 				// Mark the bullet hitting for deletion
 
 				// Enemies getting hit by their own bullets
@@ -124,8 +128,10 @@ void EntityManager::updateEntities(float dt) {
 				bullet.setPos(enemy->getPos()); // Update pos so line segment drawn correctly
 				enemy->playHitSound();
 				enemy->hitBy(bullet);
+				std::cout << "An Enemy was hit" << std::endl;
 			}
 		}
+
 		bullet.update(dt);
 	}
 

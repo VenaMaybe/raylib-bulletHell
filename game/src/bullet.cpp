@@ -96,4 +96,6 @@ bool Bullet::isShooter(Entity* shooterInQuestion) {
 	return (shooter == shooterInQuestion) ? true : false;
 }
 
-
+bool Bullet::isShooterAnEnemy() {
+	return true;
+}
