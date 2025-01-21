@@ -1,6 +1,7 @@
 #include "gun.h"
 #include "gunBehaviors.h"
 #include "IAmmoBehavior.h"
+#include "IBulletRenderer.h"
 #include <iostream>
 
 /////////////////////////////////////////
@@ -19,13 +20,17 @@ void SingleShotShooting::shoot(Gun& gun, const IBulletBehavior& bulletBehavior) 
 	// Initial bullet velocity in direction of owner
 	Velocity baseVel = owner->getDir();
 
+	// Rendering we want for the bullet
+	std::shared_ptr<IBulletRenderer> basicCircleRenderer = std::make_shared<BasicCircleRenderer>();
+
 	// Add the bullet to be simulated to list of bullets
 	Bullet newBullet (
 		gun.posMuzzle,	// Spawn Location
 		baseVel,		// Velocity
 		bulletBehavior.getBulletSpeed(),		// Speed of bullet
 		bulletBehavior.getMaxBulletAge(),		// Duration of Bullet
-		bulletBehavior.getBehaviorFunction()	// Callback to define behavior
+		bulletBehavior.getBehaviorFunction(),	// Callback to define behavior
+		basicCircleRenderer // Maybe move to bulletBehavior
 	);
 
 	// Set the shooter so doesn't collide with self

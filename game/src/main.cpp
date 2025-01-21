@@ -30,11 +30,11 @@ int main() {
 	auto player = std::make_shared<Player>();	// should be moved to em
 
 	// create a specific gun
-	auto gunBehavior = std::make_unique<SingleShotShooting>();
 	auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>();
 	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
 
-	gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
+	auto gunBehavior = std::make_unique<SingleShotShooting>();
+	gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
 	gunBehavior->addEffect(std::make_unique<BloomOnHitEffect>());
 	gunBehavior->addEffect(std::make_unique<RecoilEffect>(2.f));
 	gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>());

@@ -1,18 +1,33 @@
 #include "bullet.h"
 
-Bullet::Bullet(Position pos, Velocity vel, float speed, float maxAge,
-			std::function<void(Bullet&, float)> behavior) 
-	:	Entity(pos, vel, speed, vel),
-		maxAge(maxAge),
-		behavior(std::move(behavior)),
-		priorPos(pos)
-	{
-		currentColor = currentColor;
-	}
+#include <cassert>
+
+Bullet::Bullet(
+	Position pos,
+	Velocity vel,
+	float speed,
+	float maxAge,
+	std::function<void(Bullet&, float)> behavior,
+	std::shared_ptr<IBulletRenderer> renderer
+):	
+	Entity(pos, vel, speed, vel),
+	maxAge(maxAge),
+	behavior(std::move(behavior)),
+	renderer(renderer),
+	priorPos(pos)
+{
+	currentColor = currentColor;
+}
 
 void Bullet::render() {
-	DrawCircleV(pos, radius, currentColor);
-	DrawSplineSegmentLinear(pos, priorPos, radius, currentColor);
+	assert(renderer.get());
+	if (!renderer.get()) { return; }
+
+
+	renderer->render(*this);
+
+//	DrawCircleV(pos, radius, currentColor);
+//	DrawSplineSegmentLinear(pos, priorPos, radius, currentColor);
 }
 
 void Bullet::update(float dt) {
@@ -34,12 +49,19 @@ void Bullet::update(float dt) {
 }
 
 void Bullet::markForDeletion() {
+
+
 	markedForDeletion = true;
 }
 
 bool Bullet::isMarkedForDeletion() const {
 	return markedForDeletion;
 }
+
+Color Bullet::getCurrentColor() const {
+	return this->currentColor;
+}
+
 
 void Bullet::setMaxAge(float maxAge) {
 	this->maxAge = maxAge;

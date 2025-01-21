@@ -82,7 +82,7 @@ void EntityManager::giveEnemiesAGun() {
 		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(200.f);
 		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
 
-		//gunBehavior->addModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
+		//gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
 
 		//gunBehavior->addEffect(std::make_unique<RecoilEffect>(5.f));
 //		gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>()); // Gets really annoying cuz happening all at once

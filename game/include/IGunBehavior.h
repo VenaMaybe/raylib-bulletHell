@@ -17,7 +17,7 @@ public:
 	virtual void shoot(Gun& gun, const IBulletBehavior& bulletBehavior) = 0; 
 
 	// Add a modifier to this behavior // Todo: Have remove methods
-	virtual void addModifier(std::unique_ptr<IBulletModifier> modifier);
+	virtual void addBulletModifier(std::unique_ptr<IBulletModifier> modifier);
 	virtual void addEffect(std::unique_ptr<IGunEffect> effect);
 
 protected:
@@ -27,7 +27,7 @@ protected:
 	std::vector<std::unique_ptr<IGunEffect>> effects;
 };
 
-inline void IGunBehavior::addModifier(std::unique_ptr<IBulletModifier> modifier) {
+inline void IGunBehavior::addBulletModifier(std::unique_ptr<IBulletModifier> modifier) {
 	bulletModifiers.push_back(std::move(modifier));
 }
 
