@@ -105,29 +105,30 @@ void EntityManager::giveEnemiesAGun() {
 void EntityManager::playerScreenWrap(){
 	int playerX = (int)player->getPos().x;
 	int playerY = (int)player->getPos().y;
-	if(playerX >= GetScreenWidth()*0.65){
-		player->setPos({GetScreenWidth()*0.65f, player->getPos().y});
-	}
-	if(playerY >= GetScreenHeight()*0.65){
-		player->setPos({player->getPos().x, GetScreenHeight()*0.65f});
-	}
 	float width = (float)(GetScreenWidth());
 	float height = (float)(GetScreenHeight());
-	if(playerX <= GetScreenWidth()*0.3){
-		player->setPos({width*0.3f, player->getPos().y});
+	if(playerX >= GetScreenWidth()){
+		player->setPos({width, player->getPos().y});
 	}
-	if(playerY <= GetScreenHeight()*0.3){
-		player->setPos({player->getPos().x, height*0.3f});
+	if(playerY >= GetScreenHeight()){
+		player->setPos({player->getPos().x, height});
+	}
+
+	if(playerX <= 0){
+		player->setPos({0, player->getPos().y});
+	}
+	if(playerY <= 0){
+		player->setPos({player->getPos().x, 0});
 	}
 
 
 }
 void EntityManager::updateEntities(float dt) {
-	//playerScreenWrap();
+	playerScreenWrap();
 	player->update(dt);
 	playerGun->update(dt);
 	tempThing += 1;
-	tempThing = tempThing%15;
+	tempThing = tempThing%10;
 	if(tempThing == 0)
 	if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 	playerGun->processClick();
