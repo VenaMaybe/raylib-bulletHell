@@ -32,8 +32,11 @@ public:
 	void renderBullets();
 	void renderPlayer();
 	void renderEnemies();
-	
+	void playerScreenWrap();
 	void initializeEntities();
+	int difficulty;
+	int score;
+	int tempThing;
 
 private:
 	Player* player;

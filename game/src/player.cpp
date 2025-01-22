@@ -1,7 +1,7 @@
 #include "player.h"
 #include "raymath.h"
 #include <string>
-Player::Player() : Entity(Pos(100, 100), Vel(0, 0), 250, Dir{0, 0}), hp(10) {}
+Player::Player() : Entity(Pos(GetRenderWidth()*0.5f, GetRenderHeight()*0.5f), Vel(0, 0), 250, Dir{0, 0}), hp(10) {}
 
 void Player::render() {
 	DrawCircleV(pos, 10, RAYWHITE);

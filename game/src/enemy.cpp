@@ -13,15 +13,15 @@ Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color star
 	:   EntityWithAcceleration(startPosition, startVelocity, 100.0f, startVelocity, startAcelleration),
 		radius(startRadius), 
 		color(startColor), 
-		engageRange(500), 
+		engageRange(355), 
 		inRange(false), 
 		engageTolerance(50), 
 		movementChangeCounter(0), 
 		movementState("ccw"),
 		markedForDeletion(false),
 		enemyHit("game/sounds/enemyHit1.wav"),
-		hp(4),
-		attackTimer(0)
+		hp(3),
+		attackTimer(GetRandomValue(0, 111))
 	{
 
 	}
@@ -32,14 +32,14 @@ void Enemy::update(float deltaTime) {
 //	Position mousePos = GetMousePosition();
 
 	// Get vector from player to mouse
-//	dir = Vector2Normalize(Vector2Subtract(mousePos, pos));
+//	dir = Vector2Normalize(Vector2Subtract(mousePosaa, pos));
 
 	//move 
 	pos.x += getScaledVel().dx * deltaTime;
 	pos.y += getScaledVel().dy * deltaTime;
 	ownedGun->update(deltaTime);
 	attackTimer+=1;
-	if(attackTimer == 45){
+	if(attackTimer == 111){
 		ownedGun->processClick();
 		attackTimer = 0;
 	}
@@ -48,11 +48,11 @@ void Enemy::update(float deltaTime) {
 
 void Enemy::avoidEnemy(Enemy* other){
 	float accelerationConst = 1;
-	float range = 125;
+	float range = radius*0.9;
 	float dist = sqrt((pos.x-other->pos.x)*(pos.x-other->pos.x) + (pos.y-other->pos.y)*(pos.y-other->pos.y));
 	if(dist < range){
-   		pos.x += (range-dist)*(-other->pos.x + pos.x)/(dist*accelerationConst);
-   		pos.y += (range-dist)*(-other->pos.y + pos.y)/(dist*accelerationConst);
+   		other->pos.x -= (range-dist)*(-other->pos.x + pos.x)/(dist*accelerationConst);
+   		other->pos.y -= (range-dist)*(-other->pos.y + pos.y)/(dist*accelerationConst);
     }
 }
 
@@ -83,7 +83,11 @@ void Enemy::UpdateMovement() {
 		movementState = "out";
 	}
 	if (dist < engageRange + engageTolerance/2 && dist > engageRange - engageTolerance/2) {
+		if(movementState == "in" || movementState == "out")
+		if(GetRandomValue(0,1)==1)
 		movementState = "ccw";
+		else 
+		movementState = "cw";
 	}
 }
 
@@ -97,6 +101,7 @@ void Enemy::ChangeDirection() {
 	angleVector.x = cos(angle);
 	angleVector.y = sin(angle);
 	setDir(Velocity(angleVector.x, angleVector.y));
+	float moveSpdMod = 1.0f;
 	if (movementState == "in") {
 		vel = ( vel * 5.0f + Velocity(angleVector.x, angleVector.y)*2.0f)/6;
 		
@@ -106,11 +111,11 @@ void Enemy::ChangeDirection() {
 		
 	}
 	if (movementState == "cw") {
-		vel = (vel * 5.0f + Velocity(angleVector.y , -angleVector.x )*4.0f)/6;
+		vel = (vel * 5.0f + Velocity(angleVector.y , -angleVector.x )*3.0f*moveSpdMod)/6;
 		
 	}
 	if (movementState == "ccw") {
-		vel = (vel * 5.0f + Velocity(-angleVector.y , angleVector.x )*2.0f)/6;
+		vel = (vel * 5.0f + Velocity(-angleVector.y , angleVector.x )*3.0f*moveSpdMod)/6;
 	}
 }
 

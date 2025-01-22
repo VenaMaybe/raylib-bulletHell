@@ -32,13 +32,13 @@ int main() {
 	auto player = std::make_shared<Player>();	// should be moved to em
 
 	// create a specific gun
-	auto bulletBehavior = std::make_unique<StraightBulletBehavior>();
-	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(30, 30);
+	auto bulletBehavior = std::make_unique<StraightBulletBehavior>(2000.f);
+	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(444, 444);
 
 	auto gunBehavior = std::make_unique<SingleShotShooting>();
 	gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
 	gunBehavior->addEffect(std::make_unique<BloomOnHitEffect>());
-	gunBehavior->addEffect(std::make_unique<RecoilEffect>(2.f));
+	gunBehavior->addEffect(std::make_unique<RecoilEffect>(1.f));
 	gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>());
 
 	Gun playerGun(
@@ -112,9 +112,8 @@ int main() {
 		// Draw
 		BeginDrawing();
 			ClearBackground(BLACK);
-
+			//DrawRectangleLines(GetRenderWidth()*0.3, GetRenderHeight()*0.3, GetRenderWidth()*0.35, GetRenderHeight()*0.35, RAYWHITE  );
 			DrawCircleV({200, 500}, 100, RED);
-
 			BeginShaderMode(trailShader);
 				SetShaderValueTexture(trailShader, bufferLoc_Image, dstTex->texture);
 				// Texture the shader is getting drawn on

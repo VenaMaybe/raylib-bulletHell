@@ -1,7 +1,7 @@
 #version 460 core
 
 // Constants
-#define TRAIL_LENGTH 0.11 // Larger = shorter
+#define TRAIL_LENGTH 0.02 // Larger = shorter
 
 // Input vertex attributes (from vertex shader)
 in vec2 fragTexCoord; // Already normalized, aka uv

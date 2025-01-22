@@ -13,7 +13,7 @@
 #include "bulletModifiers.h"
 #include "gunEffects.h"
 
-EntityManager::EntityManager() {}
+EntityManager::EntityManager():score(0), difficulty(1), tempThing(0) {}
 
 void EntityManager::setPlayer(Player* player) {
 	this->player = player;
@@ -79,7 +79,7 @@ void EntityManager::giveEnemiesAGun() {
 		// create a specific gun
 		auto gunBehavior = std::make_unique<SingleShotShooting>();
 		//gunBehavior.setSpeed()
-		auto bulletBehavior = std::make_unique<ZigzagBulletBehavior>(600.f);
+		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(333.f);
 		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
 
 		//gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
@@ -96,18 +96,48 @@ void EntityManager::giveEnemiesAGun() {
 			&getBullets()
 		);
 
-		std::cout << "\t\tmeow\n";
+		
 
 		enemy->giveGun(gunForEnemies);
 	}
 }
 
+void EntityManager::playerScreenWrap(){
+	int playerX = (int)player->getPos().x;
+	int playerY = (int)player->getPos().y;
+	if(playerX >= GetScreenWidth()*0.65){
+		player->setPos({GetScreenWidth()*0.65f, player->getPos().y});
+	}
+	if(playerY >= GetScreenHeight()*0.65){
+		player->setPos({player->getPos().x, GetScreenHeight()*0.65f});
+	}
+	float width = (float)(GetScreenWidth());
+	float height = (float)(GetScreenHeight());
+	if(playerX <= GetScreenWidth()*0.3){
+		player->setPos({width*0.3f, player->getPos().y});
+	}
+	if(playerY <= GetScreenHeight()*0.3){
+		player->setPos({player->getPos().x, height*0.3f});
+	}
 
+
+}
 void EntityManager::updateEntities(float dt) {
+	//playerScreenWrap();
 	player->update(dt);
 	playerGun->update(dt);
-	if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+	tempThing += 1;
+	tempThing = tempThing%15;
+	if(tempThing == 0)
+	if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 	playerGun->processClick();
+	int bob = GetRandomValue(0, 200);
+	if(bob == 0){
+		int newEnemyX = GetRandomValue(0, GetRenderWidth());
+		int newEnemyY = GetRandomValue(0, GetRenderHeight());
+		addEnemy(std::make_shared<Enemy>(Pos(newEnemyX, newEnemyY), Vel(0, 0), 25, PINK, Acl(0,0)));
+		giveEnemiesAGun();
+	}
 	// This is really bad, eventually use grid partitioning for better performance
 	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
 	for (auto& bullet : bullets) {
@@ -117,7 +147,7 @@ void EntityManager::updateEntities(float dt) {
 			bullet.markForDeletion();
 			std::cout << "Player hit" << std::endl;
 		}
-
+		
 		for (auto& enemy : enemies) {
 			//if (!bullet.isShooter(enemy.get()) && checkCollide(bullet, *enemy)) {
 			if (bullet.isShooter(player) && checkCollide(bullet, *enemy)) {
@@ -147,22 +177,27 @@ void EntityManager::updateEntities(float dt) {
 			enemy->update(dt);
 		}
 	} else {
-		// std::cout << "Enemies vector is empty!" << std::endl;
+		initializeEntities();
+		giveEnemiesAGun();
 	}
-
-
+	giveEnemiesAGun();
+	
 	// Deletes all the entities that have been marked for deletion
 	deleteEntitiesMarked();
-
+	
 }
 
 void EntityManager::initializeEntities() {
-	addEnemy(std::make_shared<Enemy>(Pos(100, 100), Vel(0, 0), 10, PINK, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(200, 200), Vel(0, 0), 10, PINK, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(300, 300), Vel(0, 0), 10, PINK, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(155, 100), Vel(0, 0), 10, PINK, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(255, 200), Vel(0, 0), 10, PINK, Acl(0,0)));
-	addEnemy(std::make_shared<Enemy>(Pos(355, 300), Vel(0, 0), 10, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(400, 100), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(800, 100), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(200, 500), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(1000, 500), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(400, 900), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(800, 900), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(600, 300), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(600, 700), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(200, 900), Vel(0, 0), 25, PINK, Acl(0,0)));
+	addEnemy(std::make_shared<Enemy>(Pos(1000, 900), Vel(0, 0), 25, PINK, Acl(0,0)));
 }
 
 bool EntityManager::checkCollide(const Bullet& bullet, const Enemy& enemy) const {

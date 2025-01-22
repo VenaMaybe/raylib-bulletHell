@@ -20,8 +20,9 @@ Gun::Gun(
 
 void Gun::render() {
 	// DrawCircleV(getOwner()->getPos(), 30, BROWN); // For Debugging
+	posMuzzle = Vector2Add(getOwner()->getPos(), Vector2Scale(getOwner()->getDir(), 16));
 	DrawLineEx(getOwner()->getPos(), posMuzzle, 10, RAYWHITE);
-
+	std::cout << getOwner()->getPos().x<<std::endl;
 
 	// Lmao Eventually move this somewhere else
 
