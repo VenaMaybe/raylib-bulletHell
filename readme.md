@@ -10,22 +10,21 @@ Fix sound effects	- Done, made entity manager use smart pointers
 Fix trail gaps		- Done, by filling with spline between pts
 Fix Gun Structure	- Done, Strategy pattern
 Bullet Magazine		- Done, Redesigned to be modular
-Add raylib ImGui from: https://github.com/raylib-extras/rlImGui - Done 
+Raylib ImGui 		- Done, from: https://github.com/raylib-extras/rlImGui
+Settings singleton	- Done
 
-Add settings singleton - Wip
 
 Shader Manager
 Clean up main
 Abstract stuff into IGunBehavior
 Make automatic gun behavior
-Fix no sound playing on final enemy hit
-
 
 Make random pixels in trail shader go to alpha 0!!!! (Like image Gev sent)
-
-
 Make bullet's percentOfOwnerVelocity depend on speed of bullet too
-Fix Window Resizing / ShaderTextureResizing
+
+FIX: -> Gun timing not based on dt so doesn't slow correctly (For both player and enemies)
+FIX: -> No sound playing on final enemy hit
+FIX: -> Window Resizing / ShaderTextureResizing
 
 
 	Todo Jaguar:

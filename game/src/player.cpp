@@ -6,6 +6,7 @@
 
 
 Player::Player() : Entity(Pos(GetRenderWidth()*0.5f, GetRenderHeight()*0.5f), Vel(0, 0), 250, Dir{0, 0}), hp(1000) {
+	// Set the setting to point to hp
 	Settings::getInstance().setPlayerHpPointer(&hp);
 }
 

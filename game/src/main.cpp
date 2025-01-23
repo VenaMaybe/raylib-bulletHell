@@ -17,9 +17,7 @@
 #include "bulletModifiers.h"
 #include "gunEffects.h"
 
-int main() {
-	// Move to settings later
-	
+int main() {	
 	// Settings singleton
 	Settings& settings = Settings::getInstance();
 
@@ -89,7 +87,7 @@ int main() {
 
 	// Begin the frame
 	while (!WindowShouldClose()) {
-		float dt = GetFrameTime();
+		float dt = GetFrameTime() * settings.getPhysicsSpeed();
 		em.updateEntities(dt); // Player, Gun, Bullet, Enemy
 
 		if (frame % 2 == 0) {
@@ -129,8 +127,8 @@ int main() {
 
 			em.renderPlayer();
 
+			// Renders all the ImGui settings
 			renderSettingsUI(settings);
-
 
 			DrawFPS(10, 10);
 		EndDrawing();

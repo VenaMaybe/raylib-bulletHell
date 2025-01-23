@@ -11,9 +11,11 @@ private:
 	/*	Some settings can be stored in settings itself
 	 *
 	***/
-	const int screenWidth = 1200;
-	const int screenHeight = 1000;
-	const ScreenSize screenRes = { screenWidth, screenHeight };
+	const int _screenWidth = 1200;
+	const int _screenHeight = 1000;
+	const ScreenSize _screenRes = { _screenWidth, _screenHeight };
+
+	float _physicsSpeed = 1.f;
 
 	/*	But for most, rather than holding the value itself in the singleton, the singleton can instead be the manager
 	 *		of pointers to values to be "watched" which have been created elsewhere.
@@ -23,15 +25,16 @@ private:
 
 public:
 	// Simple Settings Getters
-	ScreenSize getScreenSize() const { return screenRes; }
+	ScreenSize getScreenSize() const { return _screenRes; }
+	float& getPhysicsSpeed() { return _physicsSpeed; }
 
 	// Da reference getters, expects whatever to be gotten to be initalized correctly
 	int& getPlayerHp() {
-		if (_playerHp == nullptr) {
-			throw std::runtime_error("Player Hp pointer is null stupid");
-		} 
+		if (_playerHp == nullptr) { throw std::runtime_error("Player Hp pointer is null stupid"); } 
 		return *_playerHp;
 	}
+
+
 
 	// Call in constructor of holding class
 	void setPlayerHpPointer(int* hpPtr) { _playerHp = hpPtr; }
