@@ -13,19 +13,30 @@ Bullet Magazine		- Done, Redesigned to be modular
 
 
 Add raylib ImGui from: https://github.com/raylib-extras/rlImGui
+Shader Manager
+Clean up main
+Abstract stuff into IGunBehavior
+Make automatic gun behavior
+
+
+
+
 Make bullet's percentOfOwnerVelocity depend on speed of bullet too
 Fix Window Resizing / ShaderTextureResizing
 
+
 	Todo Jaguar:
-Enemies Shooting Things
-Enemies Hp + Dying
-Player Hp
+Enemies Shooting Things	- Done
+Enemies Hp + Dying		- Done
+Player Hp				- Done
 
 
-	Thoughts:
+	Vena Thoughts:
 
 Dash
 Train cars
+Interesting power up circle / level up circle that teleports around and you have to go to
+
 
 
 Gun visual effects
