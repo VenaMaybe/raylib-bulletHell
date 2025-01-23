@@ -11,7 +11,10 @@
 #include "ammoBehaviors.h"
 #include "bulletModifiers.h"
 #include "gunEffects.h"
-#include <typeinfo>
+//#include <typeinfo>
+
+#include "rlImGui.h"
+#include "imgui.h"
 
 
 int main() {
@@ -24,6 +27,9 @@ int main() {
 	InitWindow(screenWidth, screenHeight, "Game");
 	InitAudioDevice();
 	SetTargetFPS(90);
+
+	// Initialize rlImGui
+	rlImGuiSetup(true);
 
 	// Entity Manager
 	EntityManager em;
@@ -58,7 +64,7 @@ int main() {
 	//	Shader for trails
 	//
 
-	/* GOAL: Move all this to a rendering manager!!! */
+	// GOAL: Move all this to a rendering manager!!!
 	// Have a flag if something is to be rendered with a trail or not
 
 	// Load the final grabber
@@ -122,6 +128,16 @@ int main() {
 
 			em.renderPlayer();
 
+			// Messing with ImGui
+			rlImGuiBegin();
+
+				ImGui::Begin("Example Window");
+				ImGui::Text("Meow");
+				ImGui::End();
+
+			rlImGuiEnd();
+
+
 			DrawFPS(10, 10);
 		EndDrawing();
 		frame++;
@@ -133,6 +149,7 @@ int main() {
 	UnloadRenderTexture(bufferA_Texture2D_Pong);
 	UnloadTexture(whiteTexture);
 
+	rlImGuiShutdown(); // Cleanup
 	CloseWindow(); // Close the window
 	return 0;
 }

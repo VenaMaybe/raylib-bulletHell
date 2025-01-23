@@ -18,7 +18,7 @@ Clean up main
 Abstract stuff into IGunBehavior
 Make automatic gun behavior
 
-
+Make random pixels in trail shader go to alpha 0!!!! (Like image Gev sent)
 
 
 Make bullet's percentOfOwnerVelocity depend on speed of bullet too

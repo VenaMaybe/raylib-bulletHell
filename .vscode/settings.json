@@ -71,10 +71,13 @@
 		"xloctime": "cpp"
 	},
 	"cSpell.words": [
+		"IMGUI",
 		"MAKESILENT",
+		"msvc",
 		"raylib",
 		"RAYWHITE",
 		"triggerable",
-		"WASD"
+		"WASD",
+		"winmm"
 	]
 }

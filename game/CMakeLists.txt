@@ -29,8 +29,19 @@ else()
     message(FATAL_ERROR "Unsupported platform!")
 endif()
 
+# Add ImGui and rlImGui files
+file(GLOB IMGUI_SRC_FILES
+    "${CMAKE_SOURCE_DIR}/../imgui/*.cpp"
+    "${CMAKE_SOURCE_DIR}/../rlImGui/rlImGui.cpp"
+)
+
+include_directories(
+    "${CMAKE_SOURCE_DIR}/../imgui/"
+    "${CMAKE_SOURCE_DIR}/../rlImGui/"
+)
+
 # Add an executable target
-add_executable(game ${SRC_FILES} ${HEADER_FILES})
+add_executable(game ${SRC_FILES} ${HEADER_FILES} ${IMGUI_SRC_FILES})
 
 # Include additional directories if needed
 target_include_directories(game PRIVATE include)

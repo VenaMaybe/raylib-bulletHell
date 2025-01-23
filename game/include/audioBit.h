@@ -23,8 +23,8 @@ inline AudioBit::~AudioBit() {
 
 inline void AudioBit::playSound() {
 	int random = GetRandomValue(0, 100);
-	float val = random/500.0f + 0.90f ;
-	SetSoundPitch(soundToPlay,  1.0f+val);
+	float val = (random / 500.f) + 0.9f;
+	SetSoundPitch(soundToPlay, 1.0f + val);
 	PlaySound(soundToPlay);
 } 
 
