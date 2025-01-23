@@ -7,6 +7,7 @@
 struct Position;
 struct Velocity;
 struct Acceleration;
+struct WidthHeight;
 using Direction = Vector2;
 
 // Just used to make constructors simpler
@@ -15,7 +16,7 @@ using Vel = Velocity;
 using Dir = Direction;
 using Acl = Acceleration;
 using Vec2 = Vector2;
-
+using ScreenSize = WidthHeight;
 
 // Lerp between two vectors -- oops already implemented 
 //void mixVectorsByReference(Vector2& v1, Vector2& v2, float percentOfFirst) {
@@ -27,6 +28,11 @@ using Vec2 = Vector2;
 inline void printVector2(Vector2 v) {
 	std::cout << v.x << "\t" << v.y << std::endl;
 }
+
+struct WidthHeight {
+	int width;
+	int height;
+};
 
 // Practice with operator overloading again
 struct Position { // has a...

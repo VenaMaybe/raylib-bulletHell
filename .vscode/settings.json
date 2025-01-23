@@ -71,9 +71,11 @@
 		"xloctime": "cpp"
 	},
 	"cSpell.words": [
+		"cloneable",
 		"IMGUI",
 		"MAKESILENT",
 		"msvc",
+		"oopsies",
 		"raylib",
 		"RAYWHITE",
 		"triggerable",

@@ -1,8 +1,13 @@
+#include <iostream>
 #include "raylib.h"
 #include "raymath.h"
 #include "rlgl.h"
-#include <iostream>
+#include "rlImGui.h"
+#include "imgui.h"
+
 #include "entityManager.h"
+#include "settings.h"
+#include "settingsRenderer.h"
 #include "player.h"
 #include "enemy.h"
 #include "gun.h"
@@ -11,20 +16,16 @@
 #include "ammoBehaviors.h"
 #include "bulletModifiers.h"
 #include "gunEffects.h"
-//#include <typeinfo>
-
-#include "rlImGui.h"
-#include "imgui.h"
-
 
 int main() {
-	const int screenWidth = 1200;
-	const int screenHeight = 1000;
-	Vector2 screenRes = { (float)screenWidth, (float)screenHeight };
+	// Move to settings later
+	
+	// Settings singleton
+	Settings& settings = Settings::getInstance();
 
 	// Initialize the window and set up raylib
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-	InitWindow(screenWidth, screenHeight, "Game");
+	InitWindow(settings.getScreenSize().width, settings.getScreenSize().height, "Game");
 	InitAudioDevice();
 	SetTargetFPS(90);
 
@@ -72,11 +73,11 @@ int main() {
 		int bufferLoc_Image = GetShaderLocation(trailShader, "bufferA");
 	Shader trailBufferA = LoadShader(nullptr, "game/shaders/trailBufferA.fs");
 
-	Vector2 const resolutionScreen = { (float)screenWidth, (float)screenHeight };
-	RenderTexture2D bufferA_Texture2D_Ping = LoadRenderTexture(resolutionScreen.x, resolutionScreen.y);
-	RenderTexture2D bufferA_Texture2D_Pong = LoadRenderTexture(resolutionScreen.x, resolutionScreen.y);
+	WidthHeight const renderTexBufferSize = { settings.getScreenSize().width, settings.getScreenSize().height };
+	RenderTexture2D bufferA_Texture2D_Ping = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);
+	RenderTexture2D bufferA_Texture2D_Pong = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);
 
-	Image whiteImage = GenImageColor(resolutionScreen.x, resolutionScreen.y, ORANGE);
+	Image whiteImage = GenImageColor(renderTexBufferSize.width, renderTexBufferSize.height, ORANGE);
 	Texture2D whiteTexture = LoadTextureFromImage(whiteImage);
 	UnloadImage(whiteImage);
 
@@ -128,14 +129,7 @@ int main() {
 
 			em.renderPlayer();
 
-			// Messing with ImGui
-			rlImGuiBegin();
-
-				ImGui::Begin("Example Window");
-				ImGui::Text("Meow");
-				ImGui::End();
-
-			rlImGuiEnd();
+			renderSettingsUI(settings);
 
 
 			DrawFPS(10, 10);

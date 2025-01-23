@@ -10,13 +10,16 @@ Fix sound effects	- Done, made entity manager use smart pointers
 Fix trail gaps		- Done, by filling with spline between pts
 Fix Gun Structure	- Done, Strategy pattern
 Bullet Magazine		- Done, Redesigned to be modular
+Add raylib ImGui from: https://github.com/raylib-extras/rlImGui - Done 
 
+Add settings singleton - Wip
 
-Add raylib ImGui from: https://github.com/raylib-extras/rlImGui
 Shader Manager
 Clean up main
 Abstract stuff into IGunBehavior
 Make automatic gun behavior
+Fix no sound playing on final enemy hit
+
 
 Make random pixels in trail shader go to alpha 0!!!! (Like image Gev sent)
 
@@ -37,6 +40,7 @@ Dash
 Train cars
 Interesting power up circle / level up circle that teleports around and you have to go to
 
+Maybe add Gamma for real time audio mods/synthesis
 
 
 Gun visual effects
