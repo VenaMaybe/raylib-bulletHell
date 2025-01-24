@@ -47,8 +47,11 @@ void ShaderBuffer::reinit(ScreenSize s) {
 	srcTex = &bufferA_Texture2D_Ping;
 	dstTex = &bufferA_Texture2D_Pong;
 
+
 	if (priorFrameSave.data != nullptr) {
-		ImageResizeCanvas(&priorFrameSave, s.width, s.height, 0, 0, BLANK);
+		int offsetY = (s.height - priorFrameSave.height); // Bottom alignment
+		std::cout << offsetY << std::endl;
+		ImageResizeCanvas(&priorFrameSave, s.width, s.height, 0, offsetY, BLANK);
 
 		UpdateTexture(srcTex->texture, priorFrameSave.data);
 		UnloadImage(priorFrameSave);
