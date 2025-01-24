@@ -3,6 +3,12 @@
 #include "com_comps.h"
 #include <stdexcept>
 
+/*
+
+	Make screen size auto update
+
+*/
+
 
 // This will be a centralized setting and debug class [ Not thread safe, no mutex ]
 // Singleton moment *gulp*
@@ -13,7 +19,7 @@ private:
 	***/
 	const int _screenWidth = 1200;
 	const int _screenHeight = 1000;
-	const ScreenSize _screenRes = { _screenWidth, _screenHeight };
+	const ScreenSize _screenRes = { _screenWidth, _screenHeight }; // Todo: Should this be const? idk
 
 	float _physicsSpeed = 1.f;
 

@@ -13,13 +13,13 @@
 #include "bulletModifiers.h"
 #include "gunEffects.h"
 
-EntityManager::EntityManager():score(0), difficulty(1), tempThing(0) {}
+EntityManager::EntityManager() : score(0), difficulty(1), tempThing(0) {}
 
 void EntityManager::setPlayer(Player* player) {
 	this->player = player;
 }
 
-void EntityManager::setPlayerGun(Gun* gun){
+void EntityManager::setPlayerGun(Gun* gun) {
 	this->playerGun = gun; 
 }
 
@@ -102,7 +102,7 @@ void EntityManager::giveEnemiesAGun() {
 	}
 }
 
-void EntityManager::playerScreenWrap(){
+void EntityManager::playerScreenWrap() {
 	int playerX = (int)player->getPos().x;
 	int playerY = (int)player->getPos().y;
 	float width = (float)(GetScreenWidth());

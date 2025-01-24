@@ -8,6 +8,7 @@
 #include "entityManager.h"
 #include "settings.h"
 #include "settingsRenderer.h"
+#include "shaderBuffer.h"
 #include "player.h"
 #include "enemy.h"
 #include "gun.h"
@@ -71,56 +72,66 @@ int main() {
 		int bufferLoc_Image = GetShaderLocation(trailShader, "bufferA");
 	Shader trailBufferA = LoadShader(nullptr, "shaders/trailBufferA.fs");
 
-	WidthHeight const renderTexBufferSize = { settings.getScreenSize().width, settings.getScreenSize().height };
-	RenderTexture2D bufferA_Texture2D_Ping = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);
-	RenderTexture2D bufferA_Texture2D_Pong = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);
+	ShaderBuffer bufferA;
+	bufferA.init();
 
-	Image whiteImage = GenImageColor(renderTexBufferSize.width, renderTexBufferSize.height, ORANGE);
+//	const WidthHeight renderTexBufferSize = { settings.getScreenSize().width, settings.getScreenSize().height };
+//	RenderTexture2D bufferA_Texture2D_Ping = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);
+//	RenderTexture2D bufferA_Texture2D_Pong = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);
+
+	Image whiteImage = GenImageColor(bufferA.getSize().width, bufferA.getSize().height, ORANGE);
 	Texture2D whiteTexture = LoadTextureFromImage(whiteImage);
 	UnloadImage(whiteImage);
 
 	// Ping pong buffer
-	RenderTexture2D* srcTex = nullptr; // Source
-	RenderTexture2D* dstTex = nullptr; // Destination
+//	RenderTexture2D* srcTex = nullptr; // Source
+//	RenderTexture2D* dstTex = nullptr; // Destination
 
-	int frame = 0;
+//	int frame = 0;
 
 	// Begin the frame
 	while (!WindowShouldClose()) {
 		float dt = GetFrameTime() * settings.getPhysicsSpeed();
 		em.updateEntities(dt); // Player, Gun, Bullet, Enemy
 
-		if (frame % 2 == 0) {
-			srcTex = &bufferA_Texture2D_Ping;
-			dstTex = &bufferA_Texture2D_Pong;
-		} else {
-			srcTex = &bufferA_Texture2D_Pong;
-			dstTex = &bufferA_Texture2D_Ping;
-		}
+		bufferA.update();
+
+//		if (frame % 2 == 0) {
+//			srcTex = &bufferA_Texture2D_Ping;
+//			dstTex = &bufferA_Texture2D_Pong;
+//		} else {
+//			srcTex = &bufferA_Texture2D_Pong;
+//			dstTex = &bufferA_Texture2D_Ping;
+//		}
 
 		// Render the buffer
-		BeginBlendMode(BLEND_ALPHA_PREMULTIPLY); // Blending mode so alpha doesn't get fucked
-		BeginTextureMode(*dstTex);
+//		BeginBlendMode(BLEND_ALPHA_PREMULTIPLY); // Blending mode so alpha doesn't get fucked
+//		BeginTextureMode(*dstTex);
+
+		bufferA.beginBufferMode();
 		 	ClearBackground(BLANK);
 
-			if(!IsMouseButtonDown(MOUSE_BUTTON_EXTRA)) { // For debugging
+			//if(!IsMouseButtonDown(MOUSE_BUTTON_EXTRA)) { // For debugging
 			BeginShaderMode(trailBufferA);	// Enable custom shader for next shapes
 				// Feed it back into itself, it auto reads to bufferA
-				DrawTexture(srcTex->texture, 0, 0, ORANGE);
-			EndShaderMode(); }
+				DrawTexture(bufferA.getPriorFrameTexture(), 0, 0, ORANGE);
+			EndShaderMode(); 
+			//}
 			// Draw onto the destination so that they're all darkened evenly
 			em.renderBullets();
 			em.renderEnemies();
-		EndTextureMode();
-		EndBlendMode();
+		bufferA.endBufferMode();
+//		EndTextureMode();
+//		EndBlendMode();
 
 		// Draw
 		BeginDrawing();
 			ClearBackground(BLACK);
 			//DrawRectangleLines(GetRenderWidth()*0.3, GetRenderHeight()*0.3, GetRenderWidth()*0.35, GetRenderHeight()*0.35, RAYWHITE  );
 			DrawCircleV({200, 500}, 100, RED);
+			
 			BeginShaderMode(trailShader);
-				SetShaderValueTexture(trailShader, bufferLoc_Image, dstTex->texture);
+				SetShaderValueTexture(trailShader, bufferLoc_Image, bufferA.getCurrentFrameTexture());
 				// Texture the shader is getting drawn on
 				DrawTexture(whiteTexture, 0, 0, ORANGE);
 		 	EndShaderMode();
@@ -132,13 +143,14 @@ int main() {
 
 			DrawFPS(10, 10);
 		EndDrawing();
-		frame++;
+//		frame++;
 	}
 
 	UnloadShader(trailShader);
 	UnloadShader(trailBufferA);
-	UnloadRenderTexture(bufferA_Texture2D_Ping);
-	UnloadRenderTexture(bufferA_Texture2D_Pong);
+	bufferA.unloadBuffer();
+//	UnloadRenderTexture(bufferA_Texture2D_Ping);
+//	UnloadRenderTexture(bufferA_Texture2D_Pong);
 	UnloadTexture(whiteTexture);
 
 	rlImGuiShutdown(); // Cleanup
