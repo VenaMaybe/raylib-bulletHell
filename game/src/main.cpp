@@ -75,54 +75,44 @@ int main() {
 	ShaderBuffer bufferA;
 	bufferA.init();
 
-//	const WidthHeight renderTexBufferSize = { settings.getScreenSize().width, settings.getScreenSize().height };
-//	RenderTexture2D bufferA_Texture2D_Ping = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);
-//	RenderTexture2D bufferA_Texture2D_Pong = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);
-
 	Image whiteImage = GenImageColor(bufferA.getSize().width, bufferA.getSize().height, ORANGE);
 	Texture2D whiteTexture = LoadTextureFromImage(whiteImage);
 	UnloadImage(whiteImage);
 
-	// Ping pong buffer
-//	RenderTexture2D* srcTex = nullptr; // Source
-//	RenderTexture2D* dstTex = nullptr; // Destination
-
-//	int frame = 0;
-
 	// Begin the frame
 	while (!WindowShouldClose()) {
+		if (IsWindowResized()) {
+			std::cout << "Window Resizing" << std::endl;
+			// Make sure to update this before referencing it's size!!!
+			bufferA.checkAndHandleWindowResizing();
+			// Recreate the white texture the shader is getting drawn to
+			//		Todo: move this into shader manager when it's done
+			Image whiteImageNew = GenImageColor(bufferA.getSize().width, bufferA.getSize().height, ORANGE);
+			Texture2D whiteTextureNew = LoadTextureFromImage(whiteImageNew);
+			UnloadImage(whiteImageNew);
+
+			UnloadTexture(whiteTexture);
+			whiteTexture = whiteTextureNew;
+		}
+
+
 		float dt = GetFrameTime() * settings.getPhysicsSpeed();
 		em.updateEntities(dt); // Player, Gun, Bullet, Enemy
 
 		bufferA.update();
-
-//		if (frame % 2 == 0) {
-//			srcTex = &bufferA_Texture2D_Ping;
-//			dstTex = &bufferA_Texture2D_Pong;
-//		} else {
-//			srcTex = &bufferA_Texture2D_Pong;
-//			dstTex = &bufferA_Texture2D_Ping;
-//		}
-
-		// Render the buffer
-//		BeginBlendMode(BLEND_ALPHA_PREMULTIPLY); // Blending mode so alpha doesn't get fucked
-//		BeginTextureMode(*dstTex);
-
 		bufferA.beginBufferMode();
 		 	ClearBackground(BLANK);
 
-			//if(!IsMouseButtonDown(MOUSE_BUTTON_EXTRA)) { // For debugging
+			if(!IsMouseButtonDown(MOUSE_BUTTON_EXTRA)) { // For debugging
 			BeginShaderMode(trailBufferA);	// Enable custom shader for next shapes
 				// Feed it back into itself, it auto reads to bufferA
 				DrawTexture(bufferA.getPriorFrameTexture(), 0, 0, ORANGE);
-			EndShaderMode(); 
-			//}
+			EndShaderMode(); }
+
 			// Draw onto the destination so that they're all darkened evenly
 			em.renderBullets();
 			em.renderEnemies();
 		bufferA.endBufferMode();
-//		EndTextureMode();
-//		EndBlendMode();
 
 		// Draw
 		BeginDrawing();
@@ -143,14 +133,11 @@ int main() {
 
 			DrawFPS(10, 10);
 		EndDrawing();
-//		frame++;
 	}
 
 	UnloadShader(trailShader);
 	UnloadShader(trailBufferA);
 	bufferA.unloadBuffer();
-//	UnloadRenderTexture(bufferA_Texture2D_Ping);
-//	UnloadRenderTexture(bufferA_Texture2D_Pong);
 	UnloadTexture(whiteTexture);
 
 	rlImGuiShutdown(); // Cleanup

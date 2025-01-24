@@ -146,7 +146,7 @@ void EntityManager::updateEntities(float dt) {
 		if(!bullet.isShooter(player) && checkPlayerCollide(bullet)){
 			player->hitBy(bullet);
 			bullet.markForDeletion();
-			std::cout << "Player hit" << std::endl;
+			//std::cout << "Player hit" << std::endl;
 		}
 		
 		for (auto& enemy : enemies) {
@@ -160,7 +160,7 @@ void EntityManager::updateEntities(float dt) {
 				bullet.setPos(enemy->getPos()); // Update pos so line segment drawn correctly
 				enemy->playHitSound();
 				enemy->hitBy(bullet);
-				std::cout << "An Enemy was hit" << std::endl;
+				//std::cout << "An Enemy was hit" << std::endl;
 			}
 		}
 

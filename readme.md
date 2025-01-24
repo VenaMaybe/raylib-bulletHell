@@ -12,10 +12,13 @@ Fix Gun Structure	- Done, Strategy pattern
 Bullet Magazine		- Done, Redesigned to be modular
 Raylib ImGui 		- Done, from: https://github.com/raylib-extras/rlImGui
 Settings singleton	- Done
+FIX: -> Window Resizing / ShaderTextureResizing		- Done
 
 
-Shader Manager
-Clean up main
+Shader Manager		- WIP
+Clean up main		- WIP
+
+
 Abstract stuff into IGunBehavior
 Make automatic gun behavior
 
@@ -25,7 +28,6 @@ Make bullet's percentOfOwnerVelocity depend on speed of bullet too
 FIX: -> Enemy spawn timers don't seem to be scaled by dt
 FIX: -> Gun timing not based on dt so doesn't slow correctly (For both player and enemies)
 FIX: -> No sound playing on final enemy hit
-FIX: -> Window Resizing / ShaderTextureResizing
 
 
 	Todo Jaguar:
