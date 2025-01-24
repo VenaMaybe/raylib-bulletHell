@@ -22,6 +22,7 @@ Make automatic gun behavior
 Make random pixels in trail shader go to alpha 0!!!! (Like image Gev sent)
 Make bullet's percentOfOwnerVelocity depend on speed of bullet too
 
+FIX: -> Enemy spawn timers don't seem to be scaled by dt
 FIX: -> Gun timing not based on dt so doesn't slow correctly (For both player and enemies)
 FIX: -> No sound playing on final enemy hit
 FIX: -> Window Resizing / ShaderTextureResizing

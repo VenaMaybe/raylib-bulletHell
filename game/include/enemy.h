@@ -12,7 +12,7 @@
 class Enemy : public EntityWithAcceleration {
 public:
 	// Constructor
-	Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color startColor, Acl startAcelleration);
+	Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color startColor, Acl startAcceleration);
 
 	// Draw the Enemy
 	void render();

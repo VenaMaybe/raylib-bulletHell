@@ -67,9 +67,9 @@ int main() {
 	// Have a flag if something is to be rendered with a trail or not
 
 	// Load the final grabber
-	Shader trailShader = LoadShader(nullptr, "game/shaders/trailImage.fs");
+	Shader trailShader = LoadShader(nullptr, "shaders/trailImage.fs");
 		int bufferLoc_Image = GetShaderLocation(trailShader, "bufferA");
-	Shader trailBufferA = LoadShader(nullptr, "game/shaders/trailBufferA.fs");
+	Shader trailBufferA = LoadShader(nullptr, "shaders/trailBufferA.fs");
 
 	WidthHeight const renderTexBufferSize = { settings.getScreenSize().width, settings.getScreenSize().height };
 	RenderTexture2D bufferA_Texture2D_Ping = LoadRenderTexture(renderTexBufferSize.width, renderTexBufferSize.height);

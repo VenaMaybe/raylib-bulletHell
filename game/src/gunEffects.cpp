@@ -24,7 +24,7 @@ void RecoilEffect::apply(Gun& gun) {
 /////////////////////////////////
 
 SoundOnShootEffect::SoundOnShootEffect()
-	: onShootSound("game/sounds/gunEx1.wav")
+	: onShootSound("sounds/gunEx1.wav")
 {}
 
 void SoundOnShootEffect::apply(Gun& gun) {

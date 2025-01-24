@@ -19,7 +19,7 @@ Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color star
 		movementChangeCounter(0), 
 		movementState("ccw"),
 		markedForDeletion(false),
-		enemyHit("game/sounds/enemyHit1.wav"),
+		enemyHit("sounds/enemyHit1.wav"),
 		hp(3),
 		attackTimer(GetRandomValue(0, 111))
 	{

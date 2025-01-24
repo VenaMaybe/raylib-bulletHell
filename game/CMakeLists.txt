@@ -40,6 +40,9 @@ include_directories(
     "${CMAKE_SOURCE_DIR}/../rlImGui/"
 )
 
+# Set the output directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+
 # Add an executable target
 add_executable(game ${SRC_FILES} ${HEADER_FILES} ${IMGUI_SRC_FILES})
 
@@ -53,3 +56,16 @@ target_link_libraries(game PRIVATE raylib)
 if(WIN32)
     target_link_libraries(game PRIVATE winmm)
 endif()
+
+# Copies all the resources 
+add_custom_command(
+	TARGET game
+	POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+		"${CMAKE_SOURCE_DIR}/shaders"
+		"$<TARGET_FILE_DIR:game>/shaders"
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+		"${CMAKE_SOURCE_DIR}/sounds"
+		"$<TARGET_FILE_DIR:game>/sounds"
+	COMMENT "Copying shaders and sounds to output directory"
+)

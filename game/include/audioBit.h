@@ -27,25 +27,3 @@ inline void AudioBit::playSound() {
 	SetSoundPitch(soundToPlay, 1.0f + val);
 	PlaySound(soundToPlay);
 } 
-
-//
-//
-//
-
-/*
-class AudioManager {
-public:
-	void loadSounds();
-	void playGunEx1();
-private:
-	Sound gunEx1;
-};
-
-inline void AudioManager::loadSounds() {
-	gunEx1 = LoadSound("game/sounds/gunEx1.wav");
-}
-
-inline void AudioManager::playGunEx1() {
-	PlaySound(gunEx1);
-}
-*/
