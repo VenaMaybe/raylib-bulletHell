@@ -1,33 +1,35 @@
 {
 	"nodes":[
 		{"id":"a4a836727409d1a1","type":"group","x":-1420,"y":120,"width":560,"height":500,"label":"`main`"},
+		{"id":"61c44f827c049824","type":"text","text":"* Manage Window Creation / Deletion","x":-1405,"y":520,"width":525,"height":60},
+		{"id":"b04c2e484b044ea1","type":"text","text":"`gamestateManager`\n* Control current state / scene of the game\n* Load and Unload all other managers","x":-1405,"y":140,"width":525,"height":180},
+		{"id":"c19b56d3a2277527","type":"text","text":"`main`","x":-1267,"y":420,"width":250,"height":60,"color":"1"},
+		{"id":"7d181b1e7c0d9cf6","type":"text","text":"Get list of entities and decide how to render them","x":-1340,"y":-440,"width":312,"height":60,"color":"#8c8c8c"},
+		{"id":"04b63bf15762848d","type":"text","text":"`AddOwnerVelocity`","x":-3080,"y":-60,"width":250,"height":60},
+		{"id":"15b41df282f913dc","type":"text","text":"`SoundOnShoot`","x":-3080,"y":20,"width":250,"height":60},
+		{"id":"07971e406377418a","type":"text","text":"`audioBit`","x":-3420,"y":20,"width":250,"height":60},
+		{"id":"4a7c8fdf4532cd75","type":"text","text":"`entityManager`\n* Own all entities\n* Manage their state & aspects / modules\n* Update all entities per frame","x":-1655,"y":-300,"width":500,"height":220},
+		{"id":"d93869d34c5faf15","type":"text","text":"`renderManager`\n* Decide order of objects & entities to be rendered (z-axis)\n* Decide what shaders & shader effects they each should have\n* Render all entities which are renderable\n* Render settings","x":-1140,"y":-340,"width":500,"height":260},
 		{"id":"5fab917e093cb47f","type":"text","text":"`shaderBufferA`","x":380,"y":-300,"width":250,"height":60},
 		{"id":"a290ef68cd96d9a2","type":"text","text":"`shaderBufferB`","x":380,"y":-220,"width":250,"height":60},
 		{"id":"d1f2aa2548e44739","type":"text","text":"`shaderA`","x":40,"y":-300,"width":250,"height":60},
 		{"id":"4ca6bdb4a6ac63d2","type":"text","text":"`shaderB`","x":40,"y":-160,"width":250,"height":60},
-		{"id":"61c44f827c049824","type":"text","text":"* Manage Window Creation / Deletion","x":-1405,"y":520,"width":525,"height":60},
-		{"id":"b04c2e484b044ea1","type":"text","text":"`gamestateManager`\n* Control current state / scene of the game\n* Load and Unload all other managers","x":-1405,"y":140,"width":525,"height":180},
-		{"id":"1e0e4ed20824c393","type":"text","text":"Everything, Singleton","x":-520,"y":340,"width":280,"height":60,"color":"5"},
-		{"id":"c19b56d3a2277527","type":"text","text":"`main`","x":-1267,"y":420,"width":250,"height":60,"color":"1"},
-		{"id":"7d181b1e7c0d9cf6","type":"text","text":"Get list of entities and decide how to render them","x":-1340,"y":-440,"width":312,"height":60,"color":"#8c8c8c"},
-		{"id":"04b63bf15762848d","type":"text","text":"`AddOwnerVelocity`","x":-3080,"y":-60,"width":250,"height":60},
 		{"id":"b9c9ac633abb70eb","type":"text","text":"`gunBulletModifier`","x":-2740,"y":-60,"width":250,"height":60},
-		{"id":"15b41df282f913dc","type":"text","text":"`SoundOnShoot`","x":-3080,"y":20,"width":250,"height":60},
 		{"id":"330b9a978bdd0c60","type":"text","text":"`gunEffects`","x":-2740,"y":20,"width":250,"height":60},
 		{"id":"04ad1fa01a307996","type":"text","text":"`RecoilEffect`","x":-3080,"y":100,"width":250,"height":60},
-		{"id":"07971e406377418a","type":"text","text":"`audioBit`","x":-3420,"y":20,"width":250,"height":60},
 		{"id":"e6b75ee3bacead5b","type":"text","text":"`entityA`","x":-2280,"y":-300,"width":250,"height":60},
 		{"id":"d963cf3dec1045c4","type":"text","text":"`bulletBehaviorA`","x":-2740,"y":-220,"width":250,"height":60},
-		{"id":"556e35f4af5a9f16","type":"text","text":"`gunA`","x":-2280,"y":-220,"width":250,"height":60},
 		{"id":"e3902f86fc90ad1d","type":"text","text":"`ammoBehaviorA`","x":-2740,"y":-140,"width":250,"height":60},
+		{"id":"1e0e4ed20824c393","type":"text","text":"Everything, Singleton","x":-520,"y":340,"width":280,"height":60,"color":"5"},
+		{"id":"556e35f4af5a9f16","type":"text","text":"`gunA`","x":-2280,"y":-220,"width":250,"height":60},
 		{"id":"a1ed81db8009463a","type":"text","text":"`entityB`","x":-2280,"y":-140,"width":250,"height":60},
-		{"id":"4a7c8fdf4532cd75","type":"text","text":"`entityManager`\n* Own all entities\n* Manage their state & aspects / modules\n* Update all entities per frame","x":-1655,"y":-300,"width":500,"height":220},
 		{"id":"667948b3d2b8bcfc","type":"text","text":"Call begin/end draw for shaders and effects","x":-776,"y":-440,"width":312,"height":60,"color":"#8c8c8c"},
 		{"id":"df73271b65b2f4e5","type":"text","text":"`controlSystem`","x":-2760,"y":-320,"width":270,"height":80},
 		{"id":"ba8c868c21a349fb","type":"text","text":"`settings`","x":-520,"y":240,"width":280,"height":60},
 		{"id":"7f3b246f7e7fbd51","type":"text","text":"`com_comps`","x":-200,"y":240,"width":280,"height":60},
-		{"id":"d93869d34c5faf15","type":"text","text":"`renderManager`\n* Decide order of objects & entities to be rendered (z-axis)\n* Decide what shaders & shader effects they each should have\n* Render all entities which are renderable\n* Render settings","x":-1140,"y":-340,"width":500,"height":260},
-		{"id":"da16d6ab7f9212d9","type":"text","text":"`shaderManager`\n* List of shaders\n* Provide access to drawing to a shader / applying an effect\n","x":-620,"y":-300,"width":580,"height":220}
+		{"id":"da16d6ab7f9212d9","type":"text","text":"`shaderManager`\n* List of shaders\n* Provide access to drawing to a shader / applying an effect\n","x":-620,"y":-300,"width":580,"height":220},
+		{"id":"df2fdf0200af7aa1","type":"text","text":"Make a more abstract updatable and renderable interface","x":-1070,"y":-600,"width":360,"height":80,"color":"5"},
+		{"id":"c7741fc763743bb5","type":"text","text":"Goals:","x":-1015,"y":-690,"width":250,"height":50}
 	],
 	"edges":[
 		{"id":"587f03495eabe4b9","fromNode":"da16d6ab7f9212d9","fromSide":"right","toNode":"d1f2aa2548e44739","toSide":"left"},
@@ -56,6 +58,7 @@
 		{"id":"62d5453631737f29","fromNode":"d93869d34c5faf15","fromSide":"top","toNode":"667948b3d2b8bcfc","toSide":"left"},
 		{"id":"9be2209f6cbb7d48","fromNode":"667948b3d2b8bcfc","fromSide":"right","toNode":"da16d6ab7f9212d9","toSide":"top"},
 		{"id":"4e93b24b8fa72b2f","fromNode":"e6b75ee3bacead5b","fromSide":"left","toNode":"df73271b65b2f4e5","toSide":"right"},
-		{"id":"fdd10b4aff7e8824","fromNode":"7f3b246f7e7fbd51","fromSide":"bottom","toNode":"1e0e4ed20824c393","toSide":"right"}
+		{"id":"fdd10b4aff7e8824","fromNode":"7f3b246f7e7fbd51","fromSide":"bottom","toNode":"1e0e4ed20824c393","toSide":"right"},
+		{"id":"fcdbd76327548dd3","fromNode":"c7741fc763743bb5","fromSide":"bottom","toNode":"df2fdf0200af7aa1","toSide":"top"}
 	]
 }
