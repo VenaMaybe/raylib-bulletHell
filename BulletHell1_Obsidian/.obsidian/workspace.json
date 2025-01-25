@@ -15,9 +15,9 @@
               "state": {
                 "file": "Game.canvas",
                 "viewState": {
-                  "x": -641.4978184883978,
-                  "y": -65.01982769510514,
-                  "zoom": -1
+                  "x": -1395,
+                  "y": 90,
+                  "zoom": -1.566620864731647
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -165,7 +165,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bb346b0e1d9da17d",
+  "active": "bdb32104524c2392",
   "lastOpenFiles": [
     "Welcome.md",
     "Game.canvas",
