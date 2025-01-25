@@ -28,6 +28,7 @@ Make bullet's percentOfOwnerVelocity depend on speed of bullet too
 FIX: -> Enemy spawn timers don't seem to be scaled by dt
 FIX: -> Gun timing not based on dt so doesn't slow correctly (For both player and enemies)
 FIX: -> No sound playing on final enemy hit
+FIX: -> Drawing screen down 
 
 
 	Todo Jaguar:
@@ -50,3 +51,30 @@ Triggered when:
 	Bullet is shot
 	as bullet is being rendered
 	when bullet hits
+
+
+
+>
+	Bird Thoughts:
+
+Change color of enemies depending on "environment" or how many you killed
+
+
+
+
+
+
+
+
+
+
+```
+Cool:
+Texture2D whiteTexture;
+	// Citrine scope trick
+	{
+		Image whiteImage = GenImageColor(bufferA.getSize().width, bufferA.getSize().height, ORANGE);
+		whiteTexture = LoadTextureFromImage(whiteImage);
+		UnloadImage(whiteImage);
+	}
+```

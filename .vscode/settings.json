@@ -68,7 +68,8 @@
 		"xlocbuf": "cpp",
 		"xlocmes": "cpp",
 		"xlocmon": "cpp",
-		"xloctime": "cpp"
+		"xloctime": "cpp",
+		"map": "cpp"
 	},
 	"cSpell.words": [
 		"cloneable",

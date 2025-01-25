@@ -1,0 +1,175 @@
+{
+  "main": {
+    "id": "a6bf907bd48949cd",
+    "type": "split",
+    "children": [
+      {
+        "id": "578037d2c728d2a9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bdb32104524c2392",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Game.canvas",
+                "viewState": {
+                  "x": -641.4978184883978,
+                  "y": -65.01982769510514,
+                  "zoom": -1
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Game"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4dd266b69b285bdc",
+    "type": "split",
+    "children": [
+      {
+        "id": "2b3c7a68d4b85840",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bb346b0e1d9da17d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "25203e9a18a4368b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "d27f27e19355c1f2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8ae1bdd8e9803c90",
+    "type": "split",
+    "children": [
+      {
+        "id": "44d3aa3a5a61746e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8a5ef46d6ef19b8f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Game.canvas",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Game"
+            }
+          },
+          {
+            "id": "5b5d0faec80c6dc1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Game.canvas",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Game"
+            }
+          },
+          {
+            "id": "c8e1359cd334431b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "683d98630c1afd0d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Game.canvas"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Game"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "bb346b0e1d9da17d",
+  "lastOpenFiles": [
+    "Welcome.md",
+    "Game.canvas",
+    "2025-01-25.md",
+    "create a link.md"
+  ]
+}
