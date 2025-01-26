@@ -4,20 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "578037d2c728d2a9",
+        "id": "ee13a7b087ac39b7",
         "type": "tabs",
         "children": [
           {
-            "id": "bdb32104524c2392",
+            "id": "6889967659a36a9e",
             "type": "leaf",
             "state": {
               "type": "canvas",
               "state": {
                 "file": "Game.canvas",
                 "viewState": {
-                  "x": -784.8583949852203,
-                  "y": -561.0022638999019,
-                  "zoom": -0.20000000000000007
+                  "x": -1096.8063522025564,
+                  "y": 20.40026219864574,
+                  "zoom": -1.2000000000000006
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -165,10 +165,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bdb32104524c2392",
+  "active": "6889967659a36a9e",
   "lastOpenFiles": [
-    "Welcome.md",
+    "Notes.md",
     "Game.canvas",
+    "Welcome.md",
+    "Meow.md",
     "2025-01-25.md",
     "create a link.md"
   ]
