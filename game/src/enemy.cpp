@@ -20,7 +20,7 @@ Enemy::Enemy(Pos startPosition, Vel startVelocity, float startRadius, Color star
 		movementState("ccw"),
 		markedForDeletion(false),
 		enemyHit("sounds/enemyHit1.wav"),
-		hp(3),
+		hp(1),
 		attackTimer(GetRandomValue(0, 111))
 	{
 
@@ -38,11 +38,7 @@ void Enemy::update(float deltaTime) {
 	pos.x += getScaledVel().dx * deltaTime;
 	pos.y += getScaledVel().dy * deltaTime;
 	ownedGun->update(deltaTime);
-	attackTimer+=1;
-	if(attackTimer == 111){
-		ownedGun->processClick();
-		attackTimer = 0;
-	}
+	ownedGun->processClick();
 	
 }
 

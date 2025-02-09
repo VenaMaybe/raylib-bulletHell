@@ -6,16 +6,21 @@ Gun::Gun(
 		std::unique_ptr<IGunBehavior> gunBehavior,
 		std::unique_ptr<IBulletBehavior> bulletBehavior,
 		std::unique_ptr<IAmmoBehavior> ammoBehavior,
+		std::unique_ptr<IShootBehaviour> shootBehaviour,
 		std::shared_ptr<Entity> ownedByEntity,
-		std::vector<Bullet>* bullets
+		std::vector<Bullet>* bullets,
+		float attackTime
 	):
 		gunBehavior(std::move(gunBehavior)), 
 			// behavior is now empty and its contents are moved into gunBehavior
 			// without std::move, the compiler tries to copy behavior but std::unique_ptr isn't copyable
 		bulletBehavior(std::move(bulletBehavior)),
 		ammoBehavior(std::move(ammoBehavior)),
+		shootBehaviour(std::move(shootBehaviour)),
 		owner(ownedByEntity),
-		bullets(bullets)
+		bullets(bullets),
+		attackTime(attackTime),
+		attackTimer(0.0f+ GetRandomValue(0,100)/100.0f*attackTime) 
 {}
 
 void Gun::render() {
@@ -51,7 +56,7 @@ void Gun::render() {
 void Gun::update(float dt) {
 	// Update the position of the Muzzle
 	posMuzzle = Vector2Add(getOwner()->getPos(), Vector2Scale(getOwner()->getDir(), 16));
-
+	attackTimer += dt;
 	// Uh here cuz funnnn
 	if (false) {
 		processClick();
@@ -65,10 +70,14 @@ void Gun::update(float dt) {
 // This should spawn the bullets and add to entity manager
 // 		Todo: Make it use a command architecture 
 void Gun::processClick() {
+	
+	if(attackTimer >= attackTime){
+	attackTimer = 0;
 	if (gunBehavior) {
 		gunBehavior->shoot(*this, *bulletBehavior.get()); // Shoot itself
 	} else {
 		throw std::runtime_error("Gun shot that doesn't have behavior");
+	}
 	}
 }
 
@@ -83,3 +92,5 @@ std::shared_ptr<Entity> Gun::getOwner() {
 IGunBehavior* Gun::getGunBehavior() const { return gunBehavior.get(); }
 IBulletBehavior* Gun::getBulletBehavior() const { return bulletBehavior.get(); }
 IAmmoBehavior* Gun::getAmmoBehavior() const { return ammoBehavior.get(); }
+IShootBehaviour* Gun::getShootBehaviour() const { return shootBehaviour.get(); }
+bool Gun::getIsAuto() const {return shootBehaviour->isAuto();}

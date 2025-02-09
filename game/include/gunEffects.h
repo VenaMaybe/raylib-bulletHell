@@ -13,7 +13,6 @@ private:
 };
 
 
-
 class SoundOnShootEffect : public IGunEffect {
 public:
 	SoundOnShootEffect();

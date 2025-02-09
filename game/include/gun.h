@@ -14,6 +14,7 @@
 #include "IBulletBehavior.h"
 #include "IAmmoBehavior.h"
 #include "gunBehaviors.h"
+#include "IShootBehaviour.h"
 
 class Gun {
 public:
@@ -21,8 +22,10 @@ public:
 		std::unique_ptr<IGunBehavior> gunBehavior,
 		std::unique_ptr<IBulletBehavior> bulletBehavior,
 		std::unique_ptr<IAmmoBehavior> ammoBehavior,
+		std::unique_ptr<IShootBehaviour> shootBehaviour,
 		std::shared_ptr<Entity> ownedByEntity,
-		std::vector<Bullet>* bullets
+		std::vector<Bullet>* bullets,
+		float attackTime
 	);
 
 	void render();
@@ -35,7 +38,8 @@ public:
 	IGunBehavior* getGunBehavior() const;
 	IBulletBehavior* getBulletBehavior() const;
 	IAmmoBehavior* getAmmoBehavior() const;
-
+	IShootBehaviour* getShootBehaviour() const;
+	bool getIsAuto() const;
 	Position posMuzzle; // Distance from posBase in dir by some scalar, where bullets come from
 	
 	// TODO: Bullets themselves should be a component later lol
@@ -48,4 +52,7 @@ private:
 	std::unique_ptr<IGunBehavior> gunBehavior;
 	std::unique_ptr<IBulletBehavior> bulletBehavior;
 	std::unique_ptr<IAmmoBehavior> ammoBehavior;
+	std::unique_ptr<IShootBehaviour> shootBehaviour;
+	float attackTimer;
+	float attackTime;
 };

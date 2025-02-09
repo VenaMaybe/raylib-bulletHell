@@ -11,6 +11,7 @@
 #include "bulletBehaviors.h"
 #include "ammoBehaviors.h"
 #include "bulletModifiers.h"
+#include  "shootBehaviours.h"
 #include "gunEffects.h"
 
 EntityManager::EntityManager() : score(0), difficulty(1), tempThing(0) {}
@@ -24,6 +25,31 @@ void EntityManager::setPlayerGun(Gun* gun) {
 }
 
 void EntityManager::addEnemy(std::shared_ptr<Enemy> enemy) {
+	
+		auto gunBehavior = std::make_unique<SingleShotSpreadShooting>();
+		//gunBehavior.setSpeed()
+		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(444.f);
+		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
+		auto shootBehaviour = std::make_unique<AutoShootBehaviour>();
+		//gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
+
+		//gunBehavior->addEffect(std::make_unique<RecoilEffect>(5.f));
+//		gunBehavior->addEffect(std::make_unique<SoundOnShootEffect>()); // Gets really annoying cuz happening all at once
+
+
+		std::shared_ptr<Gun> gunForEnemies = std::make_shared<Gun>(
+			std::move(gunBehavior),
+			std::move(bulletBehavior),
+			std::move(ammoBehavior),
+			std::move(shootBehaviour),
+			enemy,
+			&getBullets(),
+			0.9f
+		);
+
+		
+
+		enemy->giveGun(gunForEnemies);
 	enemies.push_back(std::move(enemy));
 	enemies.back()->focusPlayer(player);
 }
@@ -77,11 +103,11 @@ void EntityManager::deleteEntitiesMarked() {
 void EntityManager::giveEnemiesAGun() {
 	for (auto& enemy : enemies) {
 		// create a specific gun
-		auto gunBehavior = std::make_unique<SingleShotShooting>();
+		auto gunBehavior = std::make_unique<SingleShotSpreadShooting>();
 		//gunBehavior.setSpeed()
 		auto bulletBehavior = std::make_unique<StraightBulletBehavior>(333.f);
 		auto ammoBehavior = std::make_unique<UnlimitedAmmoBehavior>();
-
+		auto shootBehaviour = std::make_unique<AutoShootBehaviour>();
 		//gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(-0.8f));
 
 		//gunBehavior->addEffect(std::make_unique<RecoilEffect>(5.f));
@@ -92,8 +118,10 @@ void EntityManager::giveEnemiesAGun() {
 			std::move(gunBehavior),
 			std::move(bulletBehavior),
 			std::move(ammoBehavior),
+			std::move(shootBehaviour),
 			enemy,
-			&getBullets()
+			&getBullets(),
+			1.2f
 		);
 
 		
@@ -127,17 +155,14 @@ void EntityManager::updateEntities(float dt) {
 	playerScreenWrap();
 	player->update(dt);
 	playerGun->update(dt);
-	tempThing += 1;
-	tempThing = tempThing%10;
-	if(tempThing == 0)
-	if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+	if(playerGun->getIsAuto() && IsMouseButtonDown(MOUSE_RIGHT_BUTTON) || IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
 	playerGun->processClick();
 	int bob = GetRandomValue(0, 200);
 	if(bob == 0){
 		int newEnemyX = GetRandomValue(0, GetRenderWidth());
 		int newEnemyY = GetRandomValue(0, GetRenderHeight());
 		addEnemy(std::make_shared<Enemy>(Pos(newEnemyX, newEnemyY), Vel(0, 0), 25, PINK, Acl(0,0)));
-		giveEnemiesAGun();
+		
 	}
 	// This is really bad, eventually use grid partitioning for better performance
 	// For ever bullet, check every enemy to see if they're colliding, ideally we only check nearby enemies
@@ -177,11 +202,8 @@ void EntityManager::updateEntities(float dt) {
 			}
 			enemy->update(dt);
 		}
-	} else {
-		initializeEntities();
-		giveEnemiesAGun();
+	} else { initializeEntities();
 	}
-	giveEnemiesAGun();
 	
 	// Deletes all the entities that have been marked for deletion
 	deleteEntitiesMarked();

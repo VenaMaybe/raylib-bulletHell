@@ -15,8 +15,10 @@
 #include "gunBehaviors.h"
 #include "bulletBehaviors.h"
 #include "ammoBehaviors.h"
+#include "shootBehaviours.h"
 #include "bulletModifiers.h"
 #include "gunEffects.h"
+
 
 int main() {	
 	// Settings singleton
@@ -40,8 +42,8 @@ int main() {
 	// create a specific gun
 	auto bulletBehavior = std::make_unique<StraightBulletBehavior>(2000.f);
 	auto ammoBehavior = std::make_unique<StandardAmmoBehavior>(444, 444);
-
 	auto gunBehavior = std::make_unique<SingleShotShooting>();
+	auto shootBehaviour = std::make_unique<ManualShootBehaviour>();
 	gunBehavior->addBulletModifier(std::make_unique<AddOwnerVelocityModifier>(0.15f));
 	gunBehavior->addEffect(std::make_unique<BloomOnHitEffect>());
 	gunBehavior->addEffect(std::make_unique<RecoilEffect>(1.f));
@@ -51,8 +53,10 @@ int main() {
 		std::move(gunBehavior),
 		std::move(bulletBehavior), 
 		std::move(ammoBehavior),
+		std::move(shootBehaviour),
 		player, 
-		&em.getBullets()
+		&em.getBullets(),
+		0.1f
 	);
 
 	em.setPlayer(player.get());

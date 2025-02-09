@@ -25,5 +25,6 @@ inline void AudioBit::playSound() {
 	int random = GetRandomValue(0, 100);
 	float val = (random / 500.f) + 0.9f;
 	SetSoundPitch(soundToPlay, 1.0f + val);
+			std::cout<<GetRandomValue(0,100)<<std::endl;
 	PlaySound(soundToPlay);
 } 
